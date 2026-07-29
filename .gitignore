@@ -17,6 +17,9 @@
 *.so
 *.dylib
 
+# Output files
+tmp/
+
 # Test binary, built with `go test -c`
 *.test
 

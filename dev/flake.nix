@@ -14,6 +14,7 @@
       default = pkgs.mkShell {
         packages = with pkgs; [
           go
+          air  # hot reloading go server
         ];
 
         shellHook = let
@@ -23,6 +24,7 @@
         in ''
           echo -e "\
           ${red_text}go version: ${green_text}$(go version)
+          ${red_text}air version: ${green_text}$(air -v)
           ${reset_formatting}"'';
       };
     };
