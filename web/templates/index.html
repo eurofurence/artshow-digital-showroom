@@ -1,0 +1,14 @@
+{{define "title"}}Home{{end}}
+
+{{define "content"}}
+<h1>Welcome!</h1>
+
+<button
+    hx-get="/hello"
+    hx-target="#content"
+    hx-swap="innerHTML">
+  Say Hello
+</button>
+
+<div id="content"></div>
+{{end}}

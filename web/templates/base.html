@@ -1,0 +1,25 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{block "title" .}}My App{{end}}</title>
+
+    <script src="https://unpkg.com/htmx.org@2.0.7"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  </head>
+  <body>
+
+    {{template "header" .}}
+
+    <main>
+      {{block "content" .}}{{end}}
+    </main>
+
+    {{template "statusbar" .}}
+
+  </body>
+</html>
+{{end}}
