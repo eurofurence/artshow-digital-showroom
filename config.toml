@@ -1,0 +1,33 @@
+[media-interface]
+title = "Art Show Media Interface"
+
+[playout-machine]
+path = "123.123.123.123"
+port = 1234
+
+[[media-item]]
+  creator = "Foo"
+  title = "Video 1"
+  path = "video1.mp4"
+  description = """
+  Multi line entry.
+  More content.
+  """
+
+[[media-item]]
+  creator = "Bar"
+  title = "My Title 2"
+  path = "video1.mp4"
+  description = """
+  Multi line entry.
+  More content.
+  """
+
+[[media-item]]
+  creator = "Baz"
+  title = "Something else"
+  path = "video1.mp4"
+  description = """
+  Multi line entry.
+  More content.
+  """
