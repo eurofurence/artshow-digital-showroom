@@ -17,5 +17,7 @@ func Load(path string) (*Config, error) {
 		return nil, err
 	}
 
+	// log.Println(cfg)
+
 	return &cfg, nil
 }
