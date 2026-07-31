@@ -8,7 +8,7 @@ Some additional user interaction on the webpage is enabled through HTMX (not yet
 # Dependencies
 
 To run please install a compatible version of `go`.
-See the file [go.mod](../go.mod)
+See the version in the file [go.mod](../go.mod).
 
 ## Installing dependencies with nix
 
