@@ -12,7 +12,8 @@ title = "Video 1"
 path = "video1.mp4"
 description = """
 Multi line entry.
-More content."""
+More content. Here is more text in a really long line. This will contain line breaks.
+More lines here."""
 
 [[media-item]]
 creator = "Bar"
