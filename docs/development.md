@@ -40,7 +40,7 @@ See the config in [.air.toml](../.air.toml).
 
 # Code style
 
-Basic indent style can be set in the file `.editorconfig`.
+Basic indent style can be set in the file [.editorconfig](../.editorconfig).
 Most IDEs and advanced editors will respect this config by default.
 
 After making changes to the `go` code, use the included formatter
