@@ -3,6 +3,33 @@ body {
     margin: 2rem;
 }
 
+.site-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-logo {
+    justify-self: start;
+}
+
+.header-logo img {
+    height: 48px;
+    width: auto;
+}
+
+.header-title {
+    justify-self: center;
+    margin: 0;
+    font-size: 2rem;
+}
+
+.header-spacer {
+    justify-self: end;
+}
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
