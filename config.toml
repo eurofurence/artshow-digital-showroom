@@ -29,3 +29,83 @@ path = "video1.mp4"
 description = """
 Multi line entry.
 More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
+
+[[media-item]]
+creator = "Baz"
+title = "Something else"
+path = "video1.mp4"
+description = """
+Multi line entry.
+More content."""
