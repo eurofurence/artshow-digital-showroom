@@ -13,6 +13,7 @@ body {
 
 .header-logo {
     justify-self: start;
+    padding-left: 2rem;
 }
 
 .header-logo img {
