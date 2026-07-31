@@ -7,6 +7,7 @@ type Config struct {
 }
 
 type MediaInterfaceConfig struct {
+	Port  string `toml:"port"`
 	Title string `toml:"title"`
 }
 

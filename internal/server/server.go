@@ -3,15 +3,17 @@ package server
 import (
 	"net/http"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/handlers"
 )
 
 type Server struct {
-	addr string
+	config *config.Config
+	addr   string
 }
 
-func New(addr string) *Server {
-	return &Server{addr: addr}
+func New(config *config.Config) *Server {
+	return &Server{config: config, addr: config.MediaInterface.Port}
 }
 
 func (s *Server) Start() error {
