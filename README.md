@@ -6,6 +6,11 @@
 See the folder in [Nextcloud](https://cloud.eurofurence.org/index.php/f/3048954)
 
 
-## Development Environment
+## Developing & Contributing
 
-See the main document under [development.md](docs/development.md)
+See [development.md](docs/development.md)
+
+
+## Running the application
+
+See [running.md](docs/running.md)
