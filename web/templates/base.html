@@ -6,6 +6,7 @@
     <title>{{block "title" .}}My App{{end}}</title>
 
     <script src="https://unpkg.com/htmx.org@2.0.9"></script>
+    <script src="/static/js/dialog.js" defer></script>
 
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -17,5 +18,6 @@
     </main>
     {{template "statusbar" .}}
   </body>
+  {{template "dialog" .}}
 </html>
 {{end}}
