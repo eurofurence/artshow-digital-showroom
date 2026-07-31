@@ -43,6 +43,27 @@ body {
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
+
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card h2 {
+    margin-top: 0;
 }
 
 .description {

@@ -22,4 +22,7 @@ type MediaItem struct {
 	Title       string `toml:"title"`
 	Path        string `toml:"path"`
 	Description string `toml:"description"`
+
+	// Not from TOML
+	Thumbnail string `toml:"-"`
 }

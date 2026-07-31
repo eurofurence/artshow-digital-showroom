@@ -17,7 +17,7 @@ func New(config *config.Config) *Handler {
 	return &Handler{config: config}
 }
 
-type PageData struct {
+type HomePageData struct {
 	Title   string
 	Columns int
 	Entries []config.MediaItem
@@ -34,10 +34,16 @@ var templates = template.Must(
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	log.Println("got request for", r.Method, r.URL.Path)
 
-	data := PageData{
+	entries := make([]config.MediaItem, len(h.config.MediaItems))
+	copy(entries, h.config.MediaItems)
+	for i := range entries {
+		entries[i].Thumbnail = thumbnailFor(entries[i].Path)
+	}
+
+	data := HomePageData{
 		Title:   h.config.MediaInterface.Title,
 		Columns: h.config.MediaInterface.Columns,
-		Entries: h.config.MediaItems,
+		Entries: entries,
 	}
 
 	err := templates.ExecuteTemplate(w, "base", data)
@@ -53,4 +59,14 @@ func (h *Handler) Hello(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+}
+
+func thumbnailFor(path string) string {
+	/*
+	if fileExists(path) {
+		generate preview image
+	}
+	*/
+
+	return "/static/fallback-lyca-shocked-bw.png"
 }

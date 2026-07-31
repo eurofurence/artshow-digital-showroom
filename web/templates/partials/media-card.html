@@ -1,8 +1,12 @@
 {{define "media-card"}}
 <div class="card">
-  <h2>{{.Title}}</h2>
-  <p><strong>{{.Creator}}</strong></p>
-  <p class="description">{{.Description}}</p>
-  <small>{{.Path}}</small>
+  <div class="card-body">
+    <h2>{{.Title}}</h2>
+
+    <img class="card-image"
+         src="{{.Thumbnail}}"
+         alt="{{.Title}}">
+    <p><strong>{{.Creator}}</strong></p>
+  </div>
 </div>
 {{end}}
