@@ -13,7 +13,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Println(cfg)
+	// log.Println(cfg)
 
 	srv := server.New(cfg)
 
