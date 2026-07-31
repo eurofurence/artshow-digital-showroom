@@ -10,7 +10,7 @@ Some additional user interaction on the webpage is enabled through HTMX (not yet
 To run please install a compatible version of `go`.
 See the version in the file [go.mod](../go.mod).
 
-## Installing dependencies with nix
+### Installing dependencies with nix
 
 If you have `nix` running on your server then you can install dependencies with the following steps:
 
@@ -20,6 +20,7 @@ If you have `nix` running on your server then you can install dependencies with 
 
 You can skip having to type `nix develop dev/` for each new shell by using `direnv`.
 Run `direnv allow` in the repository.
+
 The file `.envrc` will instruct `direnv` to enter the dev shell of the flake as long as you stay inside any folder of the repository.
 
 
