@@ -1,5 +1,13 @@
 {{define "header"}}
-<header>
-  {{.Title}}
+<header class="site-header">
+  <div class="header-logo">
+    <img src="/static/lyca.svg" alt="Lyca">
+  </div>
+
+  <h1 class="header-title">
+    {{.Title}}
+  </h1>
+
+  <div class="header-spacer"></div>
 </header>
 {{end}}
