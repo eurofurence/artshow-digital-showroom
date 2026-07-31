@@ -48,3 +48,25 @@ body {
 .description {
     white-space: pre-line;
 }
+
+main {
+    padding-bottom: 3rem; /* Add space after cards for statusbar */
+}
+
+.statusbar {
+    position: fixed;
+
+    width: min(70vw, 900px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    bottom: 1rem;
+
+    padding: 0.75rem 1rem;
+
+    background: rgba(255, 155, 255, 0.95);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+
+    z-index: 1000;
+}
