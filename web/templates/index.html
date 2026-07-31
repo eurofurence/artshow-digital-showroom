@@ -1,14 +1,9 @@
-{{define "title"}}Home{{end}}
-
 {{define "content"}}
-<h1>Welcome!</h1>
+<div class="card-container">
+    {{range .Entries}}
+        {{template "media-card" .}}
+    {{end}}
+</div>
 
-<button
-    hx-get="/hello"
-    hx-target="#content"
-    hx-swap="innerHTML">
-  Say Hello
-</button>
-
-<div id="content"></div>
+{{template "statusbar" .}}
 {{end}}

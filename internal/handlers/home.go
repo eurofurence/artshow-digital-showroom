@@ -18,7 +18,8 @@ func New(config *config.Config) *Handler {
 }
 
 type PageData struct {
-	Title string
+	Title   string
+	Entries []config.MediaItem
 }
 
 var templates = template.Must(
@@ -30,10 +31,11 @@ var templates = template.Must(
 )
 
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
-	log.Println("HOME:", r.Method, r.URL.Path)
+	log.Println("got request for", r.Method, r.URL.Path)
 
 	data := PageData{
-		Title: h.config.MediaInterface.Title,
+		Title:   h.config.MediaInterface.Title,
+		Entries: h.config.MediaItems,
 	}
 
 	err := templates.ExecuteTemplate(w, "base", data)
