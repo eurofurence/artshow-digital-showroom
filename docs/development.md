@@ -26,10 +26,16 @@ The file `.envrc` will instruct `direnv` to enter the dev shell of the flake as 
 
 # Running the server
 
-Use `go run cmd/main.go` to compile and start the server.
+To compile and start the server use:
 
-For hot reloading on any change use `https://github.com/air-verse/air` and run `air` from the repository root.
-Now the server is updated whenever you change a file. See the config in (.air.toml)[../.air.toml].
+    go run cmd/main.go
+
+For hot reloading on any change use [https://github.com/air-verse/air] and just run
+
+    air
+
+Now the server is updated whenever you change a file.
+See the config in (.air.toml)[../.air.toml].
 
 
 # Code style
@@ -37,4 +43,6 @@ Now the server is updated whenever you change a file. See the config in (.air.to
 Basic indent style can be set in the file `.editorconfig`.
 Most IDEs and advanced editors will respect this config by default.
 
-After making changes to the `go` code, use the included formatter `go fmt ./...`.
+After making changes to the `go` code, use the included formatter
+
+    go fmt ./...
