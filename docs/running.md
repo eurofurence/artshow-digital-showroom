@@ -1,3 +1,8 @@
+# Configuring the application
+
+Adjust the file [config.toml](../config.toml) as needed.
+
+
 # Running the server
 
 ## Running from source
@@ -14,15 +19,10 @@ Ensure that the other files are available:
 
     your-working-directory/
     ├── start-server
-    ├── [config.toml](../config.toml)
+    ├── config.toml
     └── media/
         ├── video1.mp4
         ├── ...
         └── other-video.webp
 
 Run the binary `start-server`
-
-
-# Configuring the server
-
-Adjust the file [config.toml](../config.toml) as needed.
