@@ -19,9 +19,12 @@ func New(config *config.Config) *Server {
 func (s *Server) Start() error {
 	mux := http.NewServeMux()
 
+	// Handlers
+	h := handlers.New(s.config)
+
 	// Pages
-	mux.HandleFunc("/", handlers.Home)
-	mux.HandleFunc("/hello", handlers.Hello)
+	mux.HandleFunc("/", h.Home)
+	mux.HandleFunc("/hello", h.Hello)
 
 	// Static files
 	fs := http.FileServer(http.Dir("./web/static"))
