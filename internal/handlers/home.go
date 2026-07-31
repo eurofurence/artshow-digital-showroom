@@ -63,9 +63,9 @@ func (h *Handler) Hello(w http.ResponseWriter, r *http.Request) {
 
 func thumbnailFor(path string) string {
 	/*
-	if fileExists(path) {
-		generate preview image
-	}
+		if fileExists(path) {
+			generate preview image
+		}
 	*/
 
 	return "/static/fallback-lyca-shocked-bw.png"
