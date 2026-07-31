@@ -7,8 +7,9 @@ type Config struct {
 }
 
 type MediaInterfaceConfig struct {
-	Port  string `toml:"port"`
-	Title string `toml:"title"`
+	Port    string `toml:"port"`
+	Title   string `toml:"title"`
+	Columns int    `toml:"columns"`
 }
 
 type PlayoutMachineConfig struct {

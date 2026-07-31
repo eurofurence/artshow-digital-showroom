@@ -19,6 +19,7 @@ func New(config *config.Config) *Handler {
 
 type PageData struct {
 	Title   string
+	Columns int
 	Entries []config.MediaItem
 }
 
@@ -35,6 +36,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 
 	data := PageData{
 		Title:   h.config.MediaInterface.Title,
+		Columns: h.config.MediaInterface.Columns,
 		Entries: h.config.MediaItems,
 	}
 

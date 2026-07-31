@@ -32,7 +32,7 @@ body {
 }
 
 .card-container {
-    column-count: 3;
+    column-count: var(--columns);
     column-gap: 1.5rem;
 }
 

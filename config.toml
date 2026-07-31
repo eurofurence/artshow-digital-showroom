@@ -1,6 +1,7 @@
 [media-interface]
 port = ":8080"
 title = "Art Show Media Interface"
+columns = 3
 
 [playout-machine]
 path = "123.123.123.123"
