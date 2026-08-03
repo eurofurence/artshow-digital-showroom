@@ -1,3 +1,6 @@
+# do not commit large files
+Media/
+
 # env file
 .env
 
