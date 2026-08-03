@@ -2,6 +2,8 @@ package config
 
 import (
 	"os"
+	"log"
+	"encoding/json"
 
 	"github.com/pelletier/go-toml/v2"
 )
@@ -17,7 +19,8 @@ func Load(path string) (*Config, error) {
 		return nil, err
 	}
 
-	// log.Println(cfg)
+	s, _ := json.MarshalIndent(cfg, "", "\t")
+	log.Println(string(s))
 
 	return &cfg, nil
 }
