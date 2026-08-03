@@ -34,7 +34,7 @@ For hot reloading on any change use [https://github.com/air-verse/air] and just 
 
     air
 
-Now the server is updated whenever you change a file.
+Now the server is updated and restarted whenever you change a file.
 See the config in [.air.toml](../.air.toml).
 
 
