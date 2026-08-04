@@ -1,6 +1,9 @@
 # Configuring the application
 
-Adjust the file [config.toml](../config.toml) as needed.
+Adjust the file [config.toml](../MediaExample/config.toml) as needed or provide your own.
+
+The application reads the config and Videos from a folder `Media` if it exists
+and otherwise falls back to `MediaExample`.
 
 
 # Running the server
