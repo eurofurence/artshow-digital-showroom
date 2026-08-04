@@ -18,7 +18,7 @@ type PlayoutConfig struct {
 }
 
 type Video struct {
-	Status      string `toml"status"`
+	Status      string `toml:"status"`
 	File        string `toml:"file"`
 	Artist      string `toml:"artist"`
 	Title       string `toml:"title"`

@@ -9,10 +9,25 @@ import (
 )
 
 func Get() (*Config, error) {
-	return Load("Media/config.toml")
+	_, _ = findConfig()
+	return load("Media/config.toml")
 }
 
-func Load(path string) (*Config, error) {
+func findConfig() (string, error) {
+	_, err := os.Stat("Media/config.toml")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return "", nil
+
+}
+
+func load(path string) (*Config, error) {
+	_, err := os.Stat("Media/config.toml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
