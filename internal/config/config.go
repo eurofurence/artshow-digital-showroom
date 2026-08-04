@@ -31,4 +31,5 @@ type Video struct {
 	// Not from TOML
 	Thumbnail string `toml:"-"`
 	Video     string `toml:"-"`
+	VideoType string `toml:"-"`
 }

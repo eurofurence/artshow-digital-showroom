@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"log"
+	"mime"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -10,9 +11,13 @@ import (
 
 func preProcess(cfg *Config) {
 	for i := range cfg.Videos {
-		videoFile := filepath.Join(cfg.Folder, cfg.Videos[i].File)
-		cfg.Videos[i].Thumbnail = thumbnailFor(videoFile)
-		cfg.Videos[i].Video = "media/" + cfg.Videos[i].File
+		item := &cfg.Videos[i]
+
+		videoFile := filepath.Join(cfg.Folder, item.File)
+
+		item.Thumbnail = thumbnailFor(videoFile)
+		item.Video = "media/" + item.File
+		item.VideoType = mime.TypeByExtension(filepath.Ext(item.File))
 	}
 }
 
