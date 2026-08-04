@@ -16,15 +16,21 @@ func preProcess(cfg *Config) {
 }
 
 func thumbnailFor(path string) string {
+	_, err := os.Stat(path)
+	if err != nil {
+		log.Println("the video "+path+" was not found")
+		return "/static/fallback-lyca-shocked-bw.png"
+	}
+
 	filePath, fileRoute := thumbnailName(path)
 
-	_, err := os.Stat(filePath)
+	_, err = os.Stat(filePath)
 	if err == nil {
 		// thumbnail already exists
 	} else {
 		err = createThumbnail(path, filePath)
 		if err != nil {
-			log.Printf("Thumbnail failed to generate: %f\n", err)
+			log.Println("Thumbnail failed to generate: %s\n", err)
 			return "/static/fallback-lyca-shocked-bw.png"
 		}
 		// thumbnail was generated
