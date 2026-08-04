@@ -24,6 +24,7 @@ func (s *Server) Start() error {
 
 	// Pages
 	mux.HandleFunc("/", h.Home)
+	mux.HandleFunc("/play", h.PlayHandler)
 
 	// Static files
 	fs := http.FileServer(http.Dir("./web/static"))

@@ -7,7 +7,11 @@ const description = document.getElementById("dialog-description");
 const video = document.getElementById("dialog-video");
 const source = document.getElementById("dialog-video-source");
 
+let currentVideo = "";
+
 function openMediaDialog(card) {
+    currentVideo = card.dataset.video;
+
     title.textContent = card.dataset.title;
     creator.textContent = card.dataset.creator;
     description.textContent = card.dataset.description;
@@ -25,6 +29,18 @@ function openMediaDialog(card) {
     // Autoplay after loading
     video.play().catch(() => {
         // Autoplay may be blocked by the browser.
+    });
+}
+
+async function playCurrentVideo() {
+    await fetch("/play", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            video: currentVideo
+        })
     });
 }
 
