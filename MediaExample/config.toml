@@ -3,11 +3,22 @@ port = ":8080"
 title = "Art Show Media Interface"
 columns = 3
 
-[playout-machine]
+[playout]
 path = "123.123.123.123"
 port = 1234
 
-[[media-item]]
+# Example entry, remove leading "# " from each row and fill content
+# [[video]]
+# status = "enable" / "disable"
+# file = "video.mp4"
+# artist = "Artist"
+# title = "Title"
+# info = """
+# the info text can be
+# on multiple lines"""
+# contact =
+
+[[video]]
 creator = "Creator 1"
 title = "cool title 1"
 path = "video1.mp4"
@@ -16,7 +27,7 @@ Multi line entry.
 More content. Here is more text in a really long line. This will contain line breaks.
 More lines here."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 2"
 title = "My Title 2"
 path = "video1.mp4"
@@ -24,7 +35,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 3"
 title = "very original title"
 path = "video1.mp4"
@@ -32,7 +43,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 4"
 title = "my video"
 path = "video1.mp4"
@@ -40,7 +51,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 5"
 title = "Some other title 5"
 path = "video1.mp4"
@@ -48,7 +59,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 6"
 title = "Some other title 6"
 path = "video1.mp4"
@@ -56,7 +67,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 7"
 title = "Some other title 7"
 path = "video1.mp4"
@@ -64,7 +75,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 8"
 title = "Some other title 8"
 path = "video1.mp4"
@@ -72,7 +83,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 9"
 title = "Some other title 9"
 path = "video1.mp4"
@@ -80,7 +91,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 10"
 title = "Some other title 10"
 path = "video1.mp4"
@@ -88,7 +99,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 11"
 title = "Some other title 11"
 path = "video1.mp4"
@@ -96,7 +107,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 12"
 title = "Some other title 12"
 path = "video1.mp4"
@@ -104,7 +115,7 @@ description = """
 Multi line entry.
 More content."""
 
-[[media-item]]
+[[video]]
 creator = "Creator 13"
 title = "Some other title 13"
 path = "video1.mp4"

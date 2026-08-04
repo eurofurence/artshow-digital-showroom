@@ -2,8 +2,8 @@ package config
 
 type Config struct {
 	MediaInterface MediaInterfaceConfig `toml:"media-interface"`
-	PlayoutMachine PlayoutMachineConfig `toml:"playout-machine"`
-	MediaItems     []MediaItem          `toml:"media-item"`
+	Playout        PlayoutConfig        `toml:"playout"`
+	Videos         []Video              `toml:"video"`
 }
 
 type MediaInterfaceConfig struct {
@@ -12,12 +12,12 @@ type MediaInterfaceConfig struct {
 	Columns int    `toml:"columns"`
 }
 
-type PlayoutMachineConfig struct {
+type PlayoutConfig struct {
 	Path string `toml:"path"`
 	Port int    `toml:"port"`
 }
 
-type MediaItem struct {
+type Video struct {
 	Creator     string `toml:"creator"`
 	Title       string `toml:"title"`
 	Path        string `toml:"path"`

@@ -10,17 +10,17 @@ import (
 )
 
 type Handler struct {
-	config *config.Config
+	cfg *config.Config
 }
 
 func New(config *config.Config) *Handler {
-	return &Handler{config: config}
+	return &Handler{cfg: config}
 }
 
 type HomePageData struct {
 	Title   string
 	Columns int
-	Entries []config.MediaItem
+	Entries []config.Video
 }
 
 var templates = template.Must(
@@ -34,15 +34,15 @@ var templates = template.Must(
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	log.Println("got request for", r.Method, r.URL.Path)
 
-	entries := make([]config.MediaItem, len(h.config.MediaItems))
-	copy(entries, h.config.MediaItems)
+	entries := make([]config.Video, len(h.cfg.Videos))
+	copy(entries, h.cfg.Videos)
 	for i := range entries {
 		entries[i].Thumbnail = thumbnailFor(entries[i].Path)
 	}
 
 	data := HomePageData{
-		Title:   h.config.MediaInterface.Title,
-		Columns: h.config.MediaInterface.Columns,
+		Title:   h.cfg.MediaInterface.Title,
+		Columns: h.cfg.MediaInterface.Columns,
 		Entries: entries,
 	}
 
