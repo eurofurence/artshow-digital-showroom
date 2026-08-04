@@ -7,6 +7,8 @@ import (
 	"os"
 
 	"github.com/pelletier/go-toml/v2"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
 
 func Get() (*Config, error) {
@@ -29,16 +31,11 @@ func findConfig() (string, error) {
 		}
 		log.Println("No config found at " + configPath)
 	}
-	return "", errors.New("No config file found")
+	return "", errors.New("no config file found")
 
 }
 
 func load(path string) (*Config, error) {
-	_, err := os.Stat("Media/config.toml")
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -49,8 +46,10 @@ func load(path string) (*Config, error) {
 		return nil, err
 	}
 
-	s, _ := json.MarshalIndent(cfg, "", "\t")
-	log.Println(string(s))
+	if arguments.Verbose() {
+		s, _ := json.MarshalIndent(cfg, "", "\t")
+		log.Println(string(s))
+	}
 
 	return &cfg, nil
 }
