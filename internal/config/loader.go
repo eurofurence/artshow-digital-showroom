@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/pelletier/go-toml/v2"
 
@@ -57,6 +58,8 @@ func load(path string) (*Config, error) {
 	if err := toml.Unmarshal(data, &cfg); err != nil {
 		return nil, err
 	}
+
+	cfg.Folder = filepath.Dir(path)
 
 	return &cfg, nil
 }

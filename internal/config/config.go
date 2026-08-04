@@ -4,6 +4,9 @@ type Config struct {
 	MediaInterface MediaInterfaceConfig `toml:"media-interface"`
 	Playout        PlayoutConfig        `toml:"playout"`
 	Videos         []Video              `toml:"video"`
+
+	// Not from TOML
+	Folder string `toml:"-"`
 }
 
 type MediaInterfaceConfig struct {
