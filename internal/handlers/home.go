@@ -37,7 +37,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	entries := make([]config.Video, len(h.cfg.Videos))
 	copy(entries, h.cfg.Videos)
 	for i := range entries {
-		entries[i].Thumbnail = thumbnailFor(entries[i].Path)
+		entries[i].Thumbnail = thumbnailFor(entries[i].File)
 	}
 
 	data := HomePageData{

@@ -18,10 +18,12 @@ type PlayoutConfig struct {
 }
 
 type Video struct {
-	Creator     string `toml:"creator"`
+	Status      string `toml"status"`
+	File        string `toml:"file"`
+	Artist      string `toml:"artist"`
 	Title       string `toml:"title"`
-	Path        string `toml:"path"`
-	Description string `toml:"description"`
+	Description string `toml:"info"`
+	Contact     string `toml:"contact"`
 
 	// Not from TOML
 	Thumbnail string `toml:"-"`
