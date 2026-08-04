@@ -1,12 +1,16 @@
 package config
 
 import (
-	"os"
-	"log"
 	"encoding/json"
+	"log"
+	"os"
 
 	"github.com/pelletier/go-toml/v2"
 )
+
+func Get() (*Config, error) {
+	return Load("Media/config.toml")
+}
 
 func Load(path string) (*Config, error) {
 	data, err := os.ReadFile(path)

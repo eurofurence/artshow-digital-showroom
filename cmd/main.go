@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	cfg, err := config.Load("config.toml")
+	cfg, err := config.Get()
 	if err != nil {
 		log.Fatal(err)
 	}
