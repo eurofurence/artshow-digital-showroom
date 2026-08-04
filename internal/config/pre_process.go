@@ -1,10 +1,8 @@
 package config
 
 func preProcess(cfg *Config) {
-	entries := make([]Video, len(cfg.Videos))
-	copy(entries, cfg.Videos)
-	for i := range entries {
-		entries[i].Thumbnail = thumbnailFor(entries[i].File)
+	for i := range cfg.Videos {
+		cfg.Videos[i].Thumbnail = thumbnailFor(cfg.Videos[i].File)
 	}
 }
 

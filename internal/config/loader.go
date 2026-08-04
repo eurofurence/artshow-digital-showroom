@@ -24,6 +24,11 @@ func Get() (*Config, error) {
 
 	preProcess(cfg)
 
+	if arguments.Verbose() {
+		s, _ := json.MarshalIndent(cfg, "", "\t")
+		log.Println(string(s))
+	}
+
 	return cfg, nil
 }
 
@@ -51,11 +56,6 @@ func load(path string) (*Config, error) {
 	var cfg Config
 	if err := toml.Unmarshal(data, &cfg); err != nil {
 		return nil, err
-	}
-
-	if arguments.Verbose() {
-		s, _ := json.MarshalIndent(cfg, "", "\t")
-		log.Println(string(s))
 	}
 
 	return &cfg, nil

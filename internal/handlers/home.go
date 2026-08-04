@@ -34,16 +34,10 @@ var templates = template.Must(
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	log.Println("got request for", r.Method, r.URL.Path)
 
-	entries := make([]config.Video, len(h.cfg.Videos))
-	copy(entries, h.cfg.Videos)
-	for i := range entries {
-		entries[i].Thumbnail = thumbnailFor(entries[i].File)
-	}
-
 	data := HomePageData{
 		Title:   h.cfg.MediaInterface.Title,
 		Columns: h.cfg.MediaInterface.Columns,
-		Entries: entries,
+		Entries: h.cfg.Videos,
 	}
 
 	err := templates.ExecuteTemplate(w, "base", data)
@@ -59,14 +53,4 @@ func (h *Handler) Hello(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-}
-
-func thumbnailFor(path string) string {
-	/*
-		if fileExists(path) {
-			generate preview image
-		}
-	*/
-
-	return "/static/fallback-lyca-shocked-bw.png"
 }
