@@ -7,7 +7,7 @@ columns = 3
 path = "123.123.123.123"
 port = 1234
 
-# Example entry, remove leading "# " from each row and fill content
+# Example entry, remove leading "# " from each row and configure as needed
 # [[video]]
 # status = "enable" / "disable"
 # file = "video.mp4"
@@ -19,106 +19,108 @@ port = 1234
 # contact =
 
 [[video]]
-creator = "Creator 1"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 1"
 title = "cool title 1"
-path = "video1.mp4"
-description = """
+info = """
 Multi line entry.
 More content. Here is more text in a really long line. This will contain line breaks.
 More lines here."""
+contact = "https://example.com/"
 
 [[video]]
-creator = "Creator 2"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 2"
 title = "My Title 2"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 3"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 3"
 title = "very original title"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 4"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 4"
 title = "my video"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 5"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 5"
 title = "Some other title 5"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 6"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 6"
 title = "Some other title 6"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 7"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 7"
 title = "Some other title 7"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 8"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 8"
 title = "Some other title 8"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 9"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 9"
 title = "Some other title 9"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 10"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 10"
 title = "Some other title 10"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 11"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 11"
 title = "Some other title 11"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 12"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 12"
 title = "Some other title 12"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
 
 [[video]]
-creator = "Creator 13"
+status = "enable"
+file = "video1.mp4"
+artist = "Creator 13"
 title = "Some other title 13"
-path = "video1.mp4"
-description = """
-Multi line entry.
-More content."""
+info = "Info"
+# contact =
