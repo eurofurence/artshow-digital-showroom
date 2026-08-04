@@ -36,7 +36,7 @@ func thumbnailFor(path string) string {
 	} else {
 		err = createThumbnail(path, filePath)
 		if err != nil {
-			log.Println("Thumbnail failed to generate: %s\n", err)
+			log.Printf("Thumbnail failed to generate: %s\n", err)
 			return "/static/fallback-lyca-shocked-bw.png"
 		}
 		// thumbnail was generated
