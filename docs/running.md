@@ -19,10 +19,22 @@ Ensure that the other files are available:
 
     your-working-directory/
     ├── start-server
-    ├── config.toml
-    └── media/
+    └── Media/
+        ├── config.toml
         ├── video1.mp4
         ├── ...
         └── other-video.webp
 
-Run the binary `start-server`
+Run the binary `start-server`.
+
+Or run the script from source with
+
+    go run cmd/main.go
+
+Set up mpv. Run
+
+    mpv \
+    --idle=yes \
+    --force-window=yes \
+    --fullscreen \
+    --input-ipc-server=/tmp/mpv.sock
