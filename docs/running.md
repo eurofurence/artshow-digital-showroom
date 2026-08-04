@@ -7,8 +7,22 @@ Adjust the file [config.toml](../config.toml) as needed.
 
 ## Running from source
 
-- Install `go` in a compatible version. See the version in [go.mod](../go.mod)
-- Open a terminal in the repo and run `go run cmd/main.go`
+Install `go` in a compatible version. See the version in [go.mod](../go.mod)
+
+Download the repository and place your Media files:
+
+    artshow-digital-showroom/
+    ├── cmd/
+    ├── docs/
+    ├── README.md
+    ├── ...
+    └── Media/    <-- create this
+        ├── config.toml
+        ├── video1.mp4
+        ├── ...
+        └── other-video.webp
+
+Open a terminal in the repo and run `go run cmd/main.go`
 
 ## Running from a binary
 
