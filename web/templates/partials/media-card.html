@@ -2,7 +2,7 @@
 <div class="card"
      onclick="openMediaDialog(this)"
      data-title="{{.Title}}"
-     data-creator="{{.Creator}}"
+     data-creator="{{.Artist}}"
      data-description="{{.Description}}"
      data-image="{{.Thumbnail}}">
   <div class="card-body">
@@ -11,7 +11,7 @@
     <img class="card-image"
          src="{{.Thumbnail}}"
          alt="{{.Title}}">
-    <p><strong>{{.Creator}}</strong></p>
+    <p>By <strong>{{.Artist}}</strong></p>
   </div>
 </div>
 {{end}}

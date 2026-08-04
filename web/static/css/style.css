@@ -102,6 +102,7 @@ body {
 
 
 main {
+    /* add padding since status bar only floats on top instead of reserving space */
     padding-bottom: 3rem;
 }
 

@@ -16,6 +16,7 @@ function openMediaDialog(card) {
     dialog.showModal();
 }
 
+// Close dialog when clicking on backdrop
 document
     .getElementById("media-dialog")
     .addEventListener("click", function(event) {
