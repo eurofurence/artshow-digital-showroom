@@ -17,7 +17,14 @@ func Get() (*Config, error) {
 		return nil, err
 	}
 
-	return load(path)
+	cfg, err := load(path)
+	if err != nil {
+		return nil, err
+	}
+
+	preProcess(cfg)
+
+	return cfg, nil
 }
 
 func findConfig() (string, error) {
