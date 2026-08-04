@@ -12,13 +12,14 @@ func preProcess(cfg *Config) {
 	for i := range cfg.Videos {
 		videoFile := filepath.Join(cfg.Folder, cfg.Videos[i].File)
 		cfg.Videos[i].Thumbnail = thumbnailFor(videoFile)
+		cfg.Videos[i].Video = "media/" + cfg.Videos[i].File
 	}
 }
 
 func thumbnailFor(path string) string {
 	_, err := os.Stat(path)
 	if err != nil {
-		log.Println("the video "+path+" was not found")
+		log.Println("the video " + path + " was not found")
 		return "/static/fallback-lyca-shocked-bw.png"
 	}
 

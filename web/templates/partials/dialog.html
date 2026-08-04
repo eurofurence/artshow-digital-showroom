@@ -3,14 +3,17 @@
   <div class="dialog-content">
 
     <div class="dialog-preview">
-      <img id="dialog-image" src="" alt="">
+      <video id="dialog-video" controls autoplay>
+        <source id="dialog-video-source" src="" type="video/mp4">
+        Your browser does not support HTML video.
+      </video>
     </div>
 
     <div class="dialog-details">
       <h2 id="dialog-title"></h2>
 
       <p>
-        <strong id="dialog-creator"></strong>
+        By <strong id="dialog-creator"></strong>
       </p>
 
       <p id="dialog-description" class="description"></p>
