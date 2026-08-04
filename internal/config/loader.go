@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"os"
 
@@ -9,16 +10,26 @@ import (
 )
 
 func Get() (*Config, error) {
-	_, _ = findConfig()
-	return load("Media/config.toml")
+	path, err := findConfig()
+	if err != nil {
+		return nil, err
+	}
+
+	return load(path)
 }
 
 func findConfig() (string, error) {
-	_, err := os.Stat("Media/config.toml")
-	if err != nil {
-		log.Fatal(err)
+	for _, path := range []string{"Media", "MediaExample"} {
+		configPath := path + "/config.toml"
+
+		_, err := os.Stat(configPath)
+		if err == nil {
+			log.Println("Using config at: " + configPath)
+			return configPath, nil
+		}
+		log.Println("No config found at " + configPath)
 	}
-	return "", nil
+	return "", errors.New("No config file found")
 
 }
 
