@@ -45,12 +45,3 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
-
-func (h *Handler) Hello(w http.ResponseWriter, r *http.Request) {
-	err := templates.ExecuteTemplate(w, "message", map[string]string{
-		"Message": "Hello from Go + HTMX!",
-	})
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
