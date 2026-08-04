@@ -8,8 +8,8 @@ import (
 )
 
 type Server struct {
-	cfg *config.Config
-	addr   string
+	cfg  *config.Config
+	addr string
 }
 
 func New(cfg *config.Config) *Server {
