@@ -27,9 +27,7 @@ Ensure that the other files are available:
 
 Run the binary `start-server`.
 
-Or run the script from source with
-
-    go run cmd/main.go
+# Running the playback mpv server
 
 Set up mpv. Run
 
