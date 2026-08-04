@@ -15,6 +15,7 @@
         packages = with pkgs; [
           go
           air  # hot reloading go server
+          golangci-lint  # fmt and lint go code
         ];
 
         shellHook = let
@@ -25,6 +26,7 @@
           echo -e "\
           ${red_text}go version: ${green_text}$(go version)
           ${red_text}air version: ${green_text}$(air -v)
+          ${red_text}golangci-lint version: ${green_text}$(golangci-lint version)
           ${reset_formatting}"'';
       };
     };
