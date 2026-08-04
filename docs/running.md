@@ -43,7 +43,7 @@ Run the binary `start-server`.
 
 # Running the playback mpv server
 
-Set up mpv. Run
+Install mpv. Run
 
     mpv \
     --idle=yes \
