@@ -8,19 +8,19 @@ import (
 )
 
 type Server struct {
-	config *config.Config
+	cfg *config.Config
 	addr   string
 }
 
-func New(config *config.Config) *Server {
-	return &Server{config: config, addr: config.MediaInterface.Port}
+func New(cfg *config.Config) *Server {
+	return &Server{cfg: cfg, addr: cfg.MediaInterface.Port}
 }
 
 func (s *Server) Start() error {
 	mux := http.NewServeMux()
 
 	// Handlers
-	h := handlers.New(s.config)
+	h := handlers.New(s.cfg)
 
 	// Pages
 	mux.HandleFunc("/", h.Home)
