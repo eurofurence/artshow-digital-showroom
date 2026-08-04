@@ -15,7 +15,7 @@ func main() {
 
 	srv := server.New(cfg)
 
-	log.Printf("Listening on http://localhost%s", cfg.MediaInterface.Port)
+	log.Println("Listening on http://localhost" + cfg.MediaInterface.Port)
 
 	if err := srv.Start(); err != nil {
 		log.Fatal(err)
