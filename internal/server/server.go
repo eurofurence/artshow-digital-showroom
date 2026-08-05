@@ -21,8 +21,6 @@ func (s *Server) Start() error {
 
 	// Handlers
 	h := handlers.New(s.cfg)
-
-	// Pages
 	mux.HandleFunc("/", h.Home)
 	mux.HandleFunc("/play", h.PlayHandler)
 

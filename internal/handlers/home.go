@@ -9,14 +9,6 @@ import (
 	"github.com/eurofurence/artshow-digital-showroom/web"
 )
 
-type Handler struct {
-	cfg *config.Config
-}
-
-func New(config *config.Config) *Handler {
-	return &Handler{cfg: config}
-}
-
 type HomePageData struct {
 	Title   string
 	Columns int
