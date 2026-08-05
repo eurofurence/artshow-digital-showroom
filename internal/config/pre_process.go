@@ -45,7 +45,6 @@ func thumbnailFor(path string) string {
 		// thumbnail was generated
 	}
 	return fileRoute
-
 }
 
 func thumbnailName(videoFile string) (string, string) {

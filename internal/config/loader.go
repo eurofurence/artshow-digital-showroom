@@ -7,9 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/pelletier/go-toml/v2"
-
 	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
+	"github.com/pelletier/go-toml/v2"
 )
 
 func Get() (*Config, error) {
@@ -45,7 +44,6 @@ func findConfig() (string, error) {
 		log.Println("No config found at " + configPath)
 	}
 	return "", errors.New("no config file found")
-
 }
 
 func load(path string) (*Config, error) {
