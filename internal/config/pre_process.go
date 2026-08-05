@@ -66,12 +66,12 @@ func createThumbnail(videoFile, thumbnailFile string) error {
 	cmd := exec.Command(
 		"ffmpeg",
 		"-y",
-		"-ss", "5", // seek to 5 seconds
+		"-ss", "10", // seek to x seconds
 		"-i", videoFile,
 		"-frames:v", "1",
-		"-vf", "scale=320:-1",
+		// "-vf", "scale=320:-1",
 		"-c:v", "libwebp",
-		"-quality", "80", // 0-100
+		"-quality", "90", // 0-100
 		thumbnailFile,
 	)
 
