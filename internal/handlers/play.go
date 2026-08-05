@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	"encoding/json"
 	"log"
 	"net"
 	"net/http"
-	"encoding/json"
 )
 
 type PlayRequest struct {
