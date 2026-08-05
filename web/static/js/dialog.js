@@ -7,6 +7,7 @@ const contact = document.getElementById("dialog-contact");
 
 const video = document.getElementById("dialog-video");
 const source = document.getElementById("dialog-video-source");
+const duration = document.getElementById("dialog-duration");
 
 let currentVideo = "";
 
@@ -17,6 +18,7 @@ function openMediaDialog(card) {
     creator.textContent = card.dataset.creator;
     contact.textContent = card.dataset.contact;
     description.textContent = card.dataset.description;
+    duration.textContent = "Full runtime: " + card.dataset.duration;
 
     // Stop any currently playing video
     video.pause();

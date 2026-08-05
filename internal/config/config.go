@@ -35,4 +35,5 @@ type Video struct {
 	Thumbnail string `toml:"-"`
 	Video     string `toml:"-"`
 	VideoType string `toml:"-"`
+	Duration  string `toml:"-"`
 }

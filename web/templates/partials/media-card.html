@@ -7,7 +7,8 @@
      data-description="{{.Description}}"
      data-image="{{.Thumbnail}}"
      data-video="{{.Video}}"
-     data-video-type="{{.VideoType}}">
+     data-video-type="{{.VideoType}}"
+     data-duration="{{.Duration}}">
   <div class="card-body">
     <h2>{{.Title}}</h2>
 
@@ -15,6 +16,9 @@
          src="{{.Thumbnail}}"
          alt="{{.Title}}">
     <p>By <strong>{{.Artist}}</strong></p>
+    {{if .Duration}}
+    <p>Runtime: {{.Duration}}</p>
+    {{end}}
   </div>
 </div>
 {{end}}
