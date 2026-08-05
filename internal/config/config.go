@@ -13,6 +13,9 @@ type MediaInterfaceConfig struct {
 	Port    string `toml:"port"`
 	Title   string `toml:"title"`
 	Columns int    `toml:"columns"`
+
+	// Not from TOML
+	Address string `toml:"-"`
 }
 
 type PlayoutConfig struct {

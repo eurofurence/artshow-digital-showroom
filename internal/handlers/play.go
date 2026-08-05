@@ -21,7 +21,7 @@ func (h *Handler) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	route := "http://localhost" + h.cfg.MediaInterface.Port + "/" + req.Video
+	route := h.cfg.MediaInterface.Address + "/" + req.Video
 	if err := playVideo(route); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
