@@ -22,10 +22,12 @@ func preProcess(cfg *Config) {
 }
 
 func thumbnailFor(path string) string {
+	fallback := "/static/fallback-lyca-shocked-bw.png"
+
 	_, err := os.Stat(path)
 	if err != nil {
 		log.Println("the video " + path + " was not found")
-		return "/static/fallback-lyca-shocked-bw.png"
+		return fallback
 	}
 
 	filePath, fileRoute := thumbnailName(path)
@@ -37,7 +39,7 @@ func thumbnailFor(path string) string {
 		err = createThumbnail(path, filePath)
 		if err != nil {
 			log.Printf("Thumbnail failed to generate: %s\n", err)
-			return "/static/fallback-lyca-shocked-bw.png"
+			return fallback
 		}
 		// thumbnail was generated
 	}
