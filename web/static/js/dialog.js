@@ -4,6 +4,7 @@ const title = document.getElementById("dialog-title");
 const creator = document.getElementById("dialog-creator");
 const description = document.getElementById("dialog-description");
 const contact = document.getElementById("dialog-contact");
+const contactQr = document.getElementById("dialog-contact-qr");
 
 const video = document.getElementById("dialog-video");
 const source = document.getElementById("dialog-video-source");
@@ -17,6 +18,7 @@ function openMediaDialog(card) {
     title.textContent = card.dataset.title;
     creator.textContent = card.dataset.creator;
     contact.textContent = card.dataset.contact;
+    contactQr.src = card.dataset.contactQr;
     description.textContent = card.dataset.description;
     duration.textContent = "Full runtime: " + card.dataset.duration;
 
