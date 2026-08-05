@@ -28,14 +28,18 @@ func (h *Handler) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func playVideo(file string) error {
+func playVideo(file string) (err error) {
 	log.Println(file)
 
 	conn, err := net.Dial("unix", "/tmp/mpv.sock")
 	if err != nil {
 		return err
 	}
-	defer conn.Close()
+	defer func() {
+		if cerr := conn.Close(); cerr != nil && err == nil {
+			err = cerr
+		}
+	}()
 
 	cmd := map[string]any{
 		"command": []any{
@@ -45,5 +49,6 @@ func playVideo(file string) error {
 		},
 	}
 
-	return json.NewEncoder(conn).Encode(cmd)
+	err = json.NewEncoder(conn).Encode(cmd)
+	return
 }
