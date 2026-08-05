@@ -9,6 +9,8 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strconv"
+
+	"github.com/skip2/go-qrcode"
 )
 
 func preProcess(cfg *Config) {
@@ -22,6 +24,9 @@ func preProcess(cfg *Config) {
 		item.Thumbnail = thumbnailFor(videoFile)
 		item.Video = "media/" + item.File
 		item.VideoType = mime.TypeByExtension(filepath.Ext(item.File))
+		if item.Contact != "" {
+			item.ContactQR = qrCodeFor(videoFile, item.Contact)
+		}
 	}
 }
 
@@ -34,7 +39,7 @@ func thumbnailFor(path string) string {
 		return fallback
 	}
 
-	filePath, fileRoute := thumbnailName(path)
+	filePath, fileRoute := mediaPaths(path, "thumbnails")
 
 	_, err = os.Stat(filePath)
 	if err == nil {
@@ -50,18 +55,18 @@ func thumbnailFor(path string) string {
 	return fileRoute
 }
 
-func thumbnailName(videoFile string) (string, string) {
+func mediaPaths(videoFile string, subfolder string) (string, string) {
 	dir := filepath.Dir(videoFile)
 	base := filepath.Base(videoFile)
 	ext := filepath.Ext(base)
 
 	name := base[:len(base)-len(ext)]
 
-	return filepath.Join(dir, "thumbnails", name+".webp"),
-		filepath.Join("media", "thumbnails", name+".webp")
+	return filepath.Join(dir, subfolder, name+".webp"),
+		filepath.Join("media", subfolder, name+".webp")
 }
 
-func createThumbnail(videoFile, thumbnailFile string) error {
+func createThumbnail(videoFile string, thumbnailFile string) error {
 	if err := os.MkdirAll(filepath.Dir(thumbnailFile), 0o755); err != nil {
 		return err
 	}
@@ -117,4 +122,34 @@ func videoDuration(file string) (string, error) {
 
 	seconds := int(duration)
 	return fmt.Sprintf("%02d:%02d", seconds/60, seconds%60), nil
+}
+
+func qrCodeFor(videoFile string, url string) string {
+	filePath, fileRoute := mediaPaths(videoFile, "qr-codes")
+
+	_, err := os.Stat(filePath)
+	if err == nil {
+		// QR already exists
+	} else {
+		err = createQrCode(url, filePath)
+		if err != nil {
+			log.Printf("QR failed to generate: %s\n", err)
+			return ""
+		}
+		// thumbnail was generated
+	}
+	return fileRoute
+}
+
+func createQrCode(url string, qrFile string) error {
+	if err := os.MkdirAll(filepath.Dir(qrFile), 0o755); err != nil {
+		return err
+	}
+
+	return qrcode.WriteFile(
+		url,
+		qrcode.Medium,
+		256,
+		qrFile,
+	)
 }

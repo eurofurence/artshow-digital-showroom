@@ -36,4 +36,5 @@ type Video struct {
 	Video     string `toml:"-"`
 	VideoType string `toml:"-"`
 	Duration  string `toml:"-"`
+	ContactQR string `toml:"-"`
 }
