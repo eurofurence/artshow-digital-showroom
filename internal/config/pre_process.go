@@ -11,7 +11,7 @@ func preProcess(cfg *Config) {
 	for i := range cfg.Videos {
 		item := &cfg.Videos[i]
 
-		videoFile := filepath.Join(cfg.Folder, item.File)
+		videoFile := filepath.Join(cfg.ConfigFolder, item.File)
 
 		// Providing the local file path for Video.
 		// Use the route instead when serving to a remote machine.

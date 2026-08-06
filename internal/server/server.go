@@ -52,7 +52,7 @@ func (s *Server) Start() error {
 	fs := http.FileServer(http.Dir("./web/static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	fs = http.FileServer(http.Dir(s.cfg.Folder))
+	fs = http.FileServer(http.Dir(s.cfg.ConfigFolder))
 	mux.Handle("/media/", http.StripPrefix("/media/", fs))
 
 	s.httpServer = &http.Server{

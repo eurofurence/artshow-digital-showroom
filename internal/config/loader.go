@@ -57,7 +57,7 @@ func load(path string) (*Config, error) {
 		return nil, err
 	}
 
-	cfg.Folder = filepath.Dir(path)
+	cfg.ConfigFolder = filepath.Dir(path)
 
 	return &cfg, nil
 }
