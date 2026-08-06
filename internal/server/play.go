@@ -5,6 +5,8 @@ import (
 	"log"
 	"net"
 	"net/http"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
 
 type PlayRequest struct {
@@ -21,16 +23,13 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	route := s.cfg.MediaInterface.Address + "/" + req.Video
-	if err := playVideo(route, s.cfg.Playout.MpvSocket); err != nil {
+	if err := playVideo(req.Video, s.cfg.Playout.MpvSocket); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
 
 func playVideo(file string, socket string) (err error) {
-	log.Println(file)
-
 	conn, err := net.Dial("unix", socket)
 	if err != nil {
 		return err
@@ -59,8 +58,10 @@ func playVideo(file string, socket string) (err error) {
 		return err
 	}
 
-	s, _ := json.MarshalIndent(resp, "", "\t")
-	log.Println(string(s))
-	// log.Printf("response: %#v", resp)
+	if arguments.Verbose() {
+		s, _ := json.MarshalIndent(resp, "", "\t")
+		log.Println(string(s))
+	}
+
 	return
 }

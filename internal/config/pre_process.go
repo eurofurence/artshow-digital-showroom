@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"mime"
 	"path/filepath"
 
@@ -14,9 +13,14 @@ func preProcess(cfg *Config) {
 		item := &cfg.Videos[i]
 
 		videoFile := filepath.Join(cfg.Folder, item.File)
-		_, route, _ := file.MediaPaths(videoFile, "", "")
 
-		item.Video = route
+		// Providing the local file path for Video.
+		// Use the route instead when serving to a remote machine.
+		absPath, _ := filepath.Abs(videoFile)
+		item.Video = absPath
+		// _, route, _ := file.MediaPaths(videoFile, "", "")
+		// item.Video = cfg.MediaInterface.Address + "/" + route
+
 		item.VideoType = mime.TypeByExtension(filepath.Ext(item.File))
 		item.Duration, _ = file.VideoDuration(videoFile)
 
