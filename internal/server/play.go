@@ -26,7 +26,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	if req.Video == "" {
-		err = s.stopVideo()
+		err = s.startStandby()
 	} else {
 		err = s.playVideo(req.Video, "my title")
 	}
@@ -40,21 +40,20 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) playVideo(file string, title string) error {
-	standby := s.cfg.MediaInterface.Address + constants.StandbyVideo
 	return s.sendCommandsToMpv(
-		// []any{"set_property", "loop-file", "inf"},
+		// run once
+		[]any{"set_property", "loop-file", "no"},
 
 		[]any{"loadfile", file, "replace"},
 		[]any{"show-text", title, constants.PlaybackTitleDuration},
-
-		[]any{"loadfile", standby, "append-play"}, // stop all playback
 	)
 }
 
-func (s *Server) stopVideo() error {
+func (s *Server) startStandby() error {
 	return s.sendCommandsToMpv(
-		// repeat video forever
-		// []any{"set_property", "loop-file", "inf"},
+		// repeat forever
+		[]any{"set_property", "loop-file", "inf"},
+
 		[]any{"loadfile", s.cfg.MediaInterface.Address + constants.StandbyVideo},
 		[]any{"show-text", "", 0},
 	)
