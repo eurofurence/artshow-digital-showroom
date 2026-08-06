@@ -16,10 +16,12 @@
     <img class="card-image"
          src="{{.Thumbnail}}"
          alt="{{.Title}}">
-    <p>By <strong>{{.Artist}}</strong></p>
-    {{if .Duration}}
-    <p>Runtime: {{.Duration}}</p>
-    {{end}}
+    <div class="card-infos">
+      <p>By <strong>{{.Artist}}</strong></p>
+      {{if .Duration}}
+      <p>Runtime: {{.Duration}}</p>
+      {{end}}
+    </div>
   </div>
 </div>
 {{end}}

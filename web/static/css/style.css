@@ -94,6 +94,18 @@ body {
 
 .card h2 {
     margin-top: 0;
+    overflow-wrap: break-word;
+}
+
+.card-infos {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.card-infos p {
+    margin: 0;
 }
 
 .description {
