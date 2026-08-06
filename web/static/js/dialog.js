@@ -26,8 +26,7 @@ function openMediaDialog(card) {
     video.pause();
 
     // Load the selected video
-    source.src = card.dataset.video;
-    source.type = card.dataset.videoType;
+    source.src = card.dataset.preview;
     video.load();
 
     dialog.showModal();

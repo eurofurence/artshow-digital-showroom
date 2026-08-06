@@ -1,7 +1,6 @@
 package config
 
 import (
-	"mime"
 	"path/filepath"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/file"
@@ -18,10 +17,10 @@ func preProcess(cfg *Config) {
 		// Use the route instead when serving to a remote machine.
 		absPath, _ := filepath.Abs(videoFile)
 		item.Video = absPath
-		// _, route, _ := file.MediaPaths(videoFile, "", "")
+		_, route, _ := file.MediaPaths(videoFile, "", "")
 		// item.Video = cfg.MediaInterface.Address + "/" + route
 
-		item.VideoType = mime.TypeByExtension(filepath.Ext(item.File))
+		item.Preview = route
 		item.Duration, _ = file.VideoDuration(videoFile)
 
 		item.Thumbnail = file.ThumbnailFor(videoFile)
