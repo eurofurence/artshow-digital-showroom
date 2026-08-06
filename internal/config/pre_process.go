@@ -24,6 +24,9 @@ func preProcess(cfg *Config) {
 		item.Duration, _ = file.VideoDuration(videoFile)
 
 		item.Thumbnail = file.ThumbnailFor(videoFile)
-		item.ContactQR = file.QrCodeFor(videoFile, item.Contact)
+		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
+		item.ContactQR = qrRoute
+
+		item.PostCredit = file.PostCreditFor(videoFile, item.Title, item.Artist, qrPath)
 	}
 }

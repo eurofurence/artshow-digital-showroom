@@ -2,11 +2,31 @@ package file
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 )
 
-func GeneratePostCredit(outputFile, title, artist, qrPath string) error {
+func PostCreditFor(path, title, artist, qrPath string) string {
+	filePath, fileRoute, err := MediaPaths(path, "post_credits", ".png")
+	if err != nil {
+		log.Println("Could not create post_credits paths")
+		return ""
+	}
+
+	if !Exist(filePath) {
+		err := generatePostCredit(filePath, title, artist, qrPath)
+		if err != nil {
+			log.Printf("Thumbnail failed to generate: %s\n", err)
+			return constants.FallbackImage
+		}
+	}
+	return fileRoute
+}
+
+func generatePostCredit(outputFile, title, artist, qrPath string) error {
 	args := []string{
 		"-size", "1920x1080",
 		"xc:#000000",
@@ -29,10 +49,12 @@ func GeneratePostCredit(outputFile, title, artist, qrPath string) error {
 	if qrPath != "" {
 		if _, err := os.Stat(qrPath); err == nil {
 			args = append(args,
+				"(",
 				qrPath,
-				"-resize", "300x300",
+				"-resize", "250x250",
+				")",
 				"-gravity", "southeast",
-				"-geometry", "+100+100",
+				"-geometry", "+50+50",
 				"-composite",
 			)
 		}
