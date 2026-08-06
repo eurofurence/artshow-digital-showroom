@@ -1,5 +1,12 @@
 package config
 
+import (
+	"encoding/json"
+	"log"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
+)
+
 type Config struct {
 	MediaInterface MediaInterfaceConfig `toml:"media-interface"`
 	Playout        PlayoutConfig        `toml:"playout"`
@@ -36,4 +43,11 @@ type Video struct {
 	Duration   string `toml:"-"`
 	ContactQR  string `toml:"-"`
 	PostCredit string `toml:"-"`
+}
+
+func (cfg Config) Print(hint string) {
+	if arguments.Verbose() {
+		s, _ := json.MarshalIndent(cfg, "", "\t")
+		log.Println(hint, string(s))
+	}
 }

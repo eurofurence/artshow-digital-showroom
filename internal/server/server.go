@@ -22,7 +22,12 @@ type Server struct {
 }
 
 func NewServer(cfg *config.Config) *Server {
-	return &Server{cfg: cfg}
+	processConfig(cfg)
+	cfg.Print("Processed config")
+
+	return &Server{
+		cfg:    cfg,
+	}
 }
 
 func (s *Server) Start() error {

@@ -1,13 +1,11 @@
 package config
 
 import (
-	"encoding/json"
 	"errors"
 	"log"
 	"os"
 	"path/filepath"
 
-	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 	"github.com/eurofurence/artshow-digital-showroom/internal/file"
 	"github.com/pelletier/go-toml/v2"
 )
@@ -23,12 +21,7 @@ func Get() (*Config, error) {
 		return nil, err
 	}
 
-	preProcess(cfg)
-
-	if arguments.Verbose() {
-		s, _ := json.MarshalIndent(cfg, "", "\t")
-		log.Println(string(s))
-	}
+	cfg.Print("Raw loaded config")
 
 	return cfg, nil
 }
