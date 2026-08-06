@@ -37,6 +37,7 @@ type Video struct {
 	Contact     string `toml:"contact"`
 
 	// Not from TOML
+	ID         string `toml:"-"`
 	Thumbnail  string `toml:"-"`
 	Video      string `toml:"-"`
 	Preview    string `toml:"-"`

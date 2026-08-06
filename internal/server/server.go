@@ -22,14 +22,13 @@ type Server struct {
 	httpServer *http.Server
 }
 
-func NewServer(cfg *config.Config) *Server {
-	processConfig(cfg)
+func NewServer(cfg *config.Config) (s *Server) {
+	s = &Server{cfg: cfg}
+
+	s.processConfig()
 	cfg.Print("Processed config")
 
-	return &Server{
-		cfg:    cfg,
-		videos: make(map[string]*config.Video),
-	}
+	return
 }
 
 func (s *Server) Start() error {
