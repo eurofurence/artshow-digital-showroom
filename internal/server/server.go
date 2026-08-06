@@ -24,23 +24,9 @@ func NewServer(cfg *config.Config) *Server {
 func (s *Server) Start() error {
 	log.Println("Starting Server")
 
-	conn, err := net.Dial("unix", s.cfg.Playout.MpvSocket)
-	if err != nil {
+	if err := s.setupMpv(); err != nil {
 		return err
 	}
-	s.mpvConn = conn
-	s.mpvEncoder = json.NewEncoder(conn)
-
-	go func() {
-		dec := json.NewDecoder(s.mpvConn)
-		for {
-			var msg map[string]any
-			if err := dec.Decode(&msg); err != nil {
-				return
-			}
-			log.Printf("mpv: %#v", msg)
-		}
-	}()
 
 	mux := http.NewServeMux()
 

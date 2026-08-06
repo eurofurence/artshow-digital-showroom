@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 )
 
