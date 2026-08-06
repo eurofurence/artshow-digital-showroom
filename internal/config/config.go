@@ -19,12 +19,10 @@ type MediaInterfaceConfig struct {
 }
 
 type PlayoutConfig struct {
-	Path string `toml:"path"`
-	Port int    `toml:"port"`
+	MpvPort string `toml:"mpv-port"`
 }
 
 type Video struct {
-	Status      string `toml:"status"`
 	File        string `toml:"file"`
 	Artist      string `toml:"artist"`
 	Title       string `toml:"title"`
