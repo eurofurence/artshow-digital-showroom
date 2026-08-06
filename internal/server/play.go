@@ -22,7 +22,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("Playrequest %v", req)
+	log.Printf("Play Request %v", req)
 
 	var err error
 	if req.Video == "" {
