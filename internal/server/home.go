@@ -1,4 +1,4 @@
-package handlers
+package server
 
 import (
 	"html/template"
@@ -23,13 +23,13 @@ var templates = template.Must(
 	),
 )
 
-func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
+func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
 	log.Println("got request for", r.Method, r.URL.Path)
 
 	data := HomePageData{
-		Title:   h.cfg.MediaInterface.Title,
-		Columns: h.cfg.MediaInterface.Columns,
-		Entries: h.cfg.Videos,
+		Title:   s.cfg.MediaInterface.Title,
+		Columns: s.cfg.MediaInterface.Columns,
+		Entries: s.cfg.Videos,
 	}
 
 	err := templates.ExecuteTemplate(w, "base", data)

@@ -1,4 +1,4 @@
-package handlers
+package server
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ type PlayRequest struct {
 	Video string `json:"video"`
 }
 
-func (h *Handler) PlayHandler(w http.ResponseWriter, r *http.Request) {
+func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("got request for", r.Method, r.URL.Path)
 
 	var req PlayRequest
@@ -21,8 +21,8 @@ func (h *Handler) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	route := h.cfg.MediaInterface.Address + "/" + req.Video
-	if err := playVideo(route, h.cfg.Playout.MpvSocket); err != nil {
+	route := s.cfg.MediaInterface.Address + "/" + req.Video
+	if err := playVideo(route, s.cfg.Playout.MpvSocket); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -59,6 +59,8 @@ func playVideo(file string, socket string) (err error) {
 		return err
 	}
 
-	log.Printf("response: %#v", resp)
+	s, _ := json.MarshalIndent(resp, "", "\t")
+	log.Println(string(s))
+	// log.Printf("response: %#v", resp)
 	return
 }

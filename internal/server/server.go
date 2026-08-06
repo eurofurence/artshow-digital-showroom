@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
-	"github.com/eurofurence/artshow-digital-showroom/internal/handlers"
 )
 
 type Server struct {
@@ -20,9 +19,8 @@ func (s *Server) Start() error {
 	mux := http.NewServeMux()
 
 	// Handlers
-	h := handlers.New(s.cfg)
-	mux.HandleFunc("/", h.Home)
-	mux.HandleFunc("/play", h.PlayHandler)
+	mux.HandleFunc("/", s.Home)
+	mux.HandleFunc("/play", s.PlayHandler)
 
 	// Static files
 	fs := http.FileServer(http.Dir("./web/static"))
