@@ -3,28 +3,30 @@
   <div class="dialog-content">
 
     <div class="dialog-preview">
-      <video id="dialog-video" controls autoplay muted>
-        <source id="dialog-video-source" src="" type="video/mp4">
+      <video controls autoplay muted>
+        <source src="{{.Preview}}" type="video/mp4">
         Your browser does not support HTML video.
       </video>
     </div>
 
     <div class="dialog-details">
-      <h2 id="dialog-title"></h2>
+      <h2>{{.Title}}</h2>
 
-      <p>
-        By <strong id="dialog-creator"></strong>
-      </p>
+      <p>By <strong>{{.Artist}}</strong></p>
 
-      <img id="dialog-contact-qr" src="">
-      <p id="dialog-contact"></p>
+      {{if .ContactQR}}
+      <img src="{{.ContactQR}}">
+      {{end}}
+      {{if .Contact}}
+      <p>{{.Contact}}</p>
+      {{end}}
 
-      <p id="dialog-description" class="description"></p>
+      <p class="description">{{.Description}}</p>
 
-      <p id="dialog-duration"></p>
+      <p id="dialog-duration">Full runtime: {{.Duration}}</p>
 
       <div class="dialog-actions">
-        <button onclick="playCurrentVideo()">
+        <button onclick="playCurrentVideo({{.ID}})">
           Play
         </button>
 
@@ -33,7 +35,6 @@
         </button>
       </div>
     </div>
-
   </div>
 </dialog>
 {{end}}

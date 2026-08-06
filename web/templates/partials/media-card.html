@@ -1,6 +1,10 @@
 {{define "media-card"}}
 <div class="card"
-     onclick="openMediaDialog(this)"
+     hx-get="/dialog/{{.ID}}"
+     hx-target="#media-dialog"
+     hx-swap="outerHTML"
+     hx-trigger="click"
+     data-id="{{.ID}}"
      data-title="{{.Title}}"
      data-creator="{{.Artist}}"
      data-contact="{{.Contact}}"

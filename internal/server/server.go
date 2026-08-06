@@ -43,6 +43,7 @@ func (s *Server) Start() error {
 	// Handlers
 	mux.HandleFunc("/", s.Home)
 	mux.HandleFunc("/play", s.PlayHandler)
+	mux.HandleFunc("GET /dialog/{id}", s.DialogHandler)
 
 	// Static files
 	fs := http.FileServer(http.Dir("./web/static"))

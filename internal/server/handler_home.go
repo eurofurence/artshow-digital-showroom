@@ -24,7 +24,7 @@ var templates = template.Must(
 )
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
-	log.Println("got request for", r.Method, r.URL.Path)
+	log.Println("HomeHandler got request for", r.Method, r.URL.Path)
 
 	data := HomePageData{
 		Title:   s.cfg.MediaInterface.Title,

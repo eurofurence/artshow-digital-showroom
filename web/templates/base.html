@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <title>{{block "title" .}}My App{{end}}</title>
 
-    <!--
     <script src="https://unpkg.com/htmx.org@2.0.9"></script>
-    -->
     <script src="/static/js/dialog.js" defer></script>
 
     <link rel="stylesheet" href="/static/css/style.css">
@@ -19,7 +17,7 @@
       {{block "content" .}}{{end}}
     </main>
     {{template "statusbar" .}}
-    {{template "dialog" .}}
+    <dialog id="media-dialog"></dialog>
   </body>
 </html>
 {{end}}

@@ -5,17 +5,16 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 )
 
 type PlayRequest struct {
-	Video      string `json:"video"`
-	Title      string `json:"title"`
-	PostCredit string `json:"postcredit"`
+	ID string `json:"id"`
 }
 
 func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("got request for", r.Method, r.URL.Path)
+	log.Println("PlayHandler got request for", r.Method, r.URL.Path)
 
 	var req PlayRequest
 
@@ -24,13 +23,11 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("Play Request %v", req)
-
 	var err error
-	if req.Video == "" {
+	if req.ID == "" {
 		err = s.startStandby()
 	} else {
-		err = s.playVideo(req)
+		err = s.playVideo(s.videos[req.ID])
 	}
 
 	if err != nil {
@@ -41,17 +38,16 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (s *Server) playVideo(req PlayRequest) error {
-	log.Printf("play %#v", req)
+func (s *Server) playVideo(video *config.Video) error {
 	return s.sendCommandsToMpv(
 		// run once
 		[]any{"set_property", "loop-file", "no"},
 
-		[]any{"loadfile", req.Video, "replace"},
-		[]any{"show-text", req.Title, constants.PlaybackTitleDuration},
+		[]any{"loadfile", video.Video, "replace"},
+		[]any{"show-text", video.Title, constants.PlaybackTitleDuration},
 
 		[]any{"set_property", "image-display-duration", 10},
-		[]any{"loadfile", req.PostCredit, "append-play"},
+		[]any{"loadfile", video.PostCredit, "append-play"},
 	)
 }
 
