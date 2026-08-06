@@ -20,10 +20,21 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := playVideo(req.Video, s.mpvEncoder); err != nil {
+	log.Printf("Playrequest %v", req)
+
+	var err error
+	if req.Video == "" {
+		err = stopVideo(s.mpvEncoder)
+	} else {
+		err = playVideo(req.Video, s.mpvEncoder)
+	}
+
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func playVideo(file string, encoder *json.Encoder) error {
@@ -33,6 +44,14 @@ func playVideo(file string, encoder *json.Encoder) error {
 			file,
 			"replace",
 		},
+	}
+
+	return encoder.Encode(cmd)
+}
+
+func stopVideo(encoder *json.Encoder) error {
+	cmd := map[string]any{
+		"command": []any{"stop"},
 	}
 
 	return encoder.Encode(cmd)

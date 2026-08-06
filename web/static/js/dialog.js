@@ -49,6 +49,16 @@ async function playCurrentVideo() {
     });
 }
 
+async function stopVideo() {
+    await fetch("/play", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    });
+}
+
 dialog.addEventListener("close", () => {
     video.pause();
     video.currentTime = 0;

@@ -188,3 +188,12 @@ main {
 .dialog-details button {
     flex-shrink: 0;
 }
+
+.dialog-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dialog-actions button {
+    flex: 1;
+}
