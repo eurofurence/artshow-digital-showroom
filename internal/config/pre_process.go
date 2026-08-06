@@ -10,7 +10,6 @@ import (
 	"strconv"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/file"
-	"github.com/skip2/go-qrcode"
 )
 
 func preProcess(cfg *Config) {
@@ -25,7 +24,7 @@ func preProcess(cfg *Config) {
 		item.Video = "media/" + item.File
 		item.VideoType = mime.TypeByExtension(filepath.Ext(item.File))
 		if item.Contact != "" {
-			item.ContactQR = qrCodeFor(videoFile, item.Contact)
+			item.ContactQR = file.QrCodeFor(videoFile, item.Contact)
 		}
 	}
 }
@@ -108,32 +107,4 @@ func videoDuration(file string) (string, error) {
 
 	seconds := int(duration)
 	return fmt.Sprintf("%02d:%02d", seconds/60, seconds%60), nil
-}
-
-func qrCodeFor(videoFile string, url string) string {
-	filePath, fileRoute, err := file.MediaPaths(videoFile, "qr-codes", ".webp")
-	if err != nil {
-		log.Println("Could not create qr code paths for " + videoFile)
-		return ""
-	}
-
-	if !file.Exist(filePath) {
-		err = createQrCode(url, filePath)
-		if err != nil {
-			log.Printf("QR failed to generate: %s\n", err)
-			return ""
-		}
-	}
-	return fileRoute
-}
-
-func createQrCode(url string, qrFile string) error {
-	log.Println("Creating qr Code " + qrFile)
-
-	return qrcode.WriteFile(
-		url,
-		qrcode.Medium,
-		256,
-		qrFile,
-	)
 }
