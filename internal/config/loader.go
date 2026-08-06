@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
+	"github.com/eurofurence/artshow-digital-showroom/internal/file"
 	"github.com/pelletier/go-toml/v2"
 )
 
@@ -36,8 +37,7 @@ func findConfig() (string, error) {
 	for _, path := range []string{"Media", "MediaExample"} {
 		configPath := path + "/config.toml"
 
-		_, err := os.Stat(configPath)
-		if err == nil {
+		if file.Exist(configPath) {
 			log.Println("Using config at: " + configPath)
 			return configPath, nil
 		}

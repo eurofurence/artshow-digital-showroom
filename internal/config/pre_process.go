@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/file"
 	"github.com/skip2/go-qrcode"
 )
 
@@ -33,24 +34,19 @@ func preProcess(cfg *Config) {
 func thumbnailFor(path string) string {
 	fallback := "/static/fallback-lyca-shocked-bw.png"
 
-	_, err := os.Stat(path)
-	if err != nil {
+	if !file.Exist(path) {
 		log.Println("the video " + path + " was not found")
 		return fallback
 	}
 
 	filePath, fileRoute := mediaPaths(path, "thumbnails")
 
-	_, err = os.Stat(filePath)
-	if err == nil {
-		// thumbnail already exists
-	} else {
-		err = createThumbnail(path, filePath)
+	if !file.Exist(filePath) {
+		err := createThumbnail(path, filePath)
 		if err != nil {
 			log.Printf("Thumbnail failed to generate: %s\n", err)
 			return fallback
 		}
-		// thumbnail was generated
 	}
 	return fileRoute
 }
@@ -67,6 +63,8 @@ func mediaPaths(videoFile string, subfolder string) (string, string) {
 }
 
 func createThumbnail(videoFile string, thumbnailFile string) error {
+	log.Println("Creating thumbnail " + thumbnailFile)
+
 	if err := os.MkdirAll(filepath.Dir(thumbnailFile), 0o755); err != nil {
 		return err
 	}
@@ -127,16 +125,12 @@ func videoDuration(file string) (string, error) {
 func qrCodeFor(videoFile string, url string) string {
 	filePath, fileRoute := mediaPaths(videoFile, "qr-codes")
 
-	_, err := os.Stat(filePath)
-	if err == nil {
-		// QR already exists
-	} else {
-		err = createQrCode(url, filePath)
+	if !file.Exist(filePath) {
+		err := createQrCode(url, filePath)
 		if err != nil {
 			log.Printf("QR failed to generate: %s\n", err)
 			return ""
 		}
-		// thumbnail was generated
 	}
 	return fileRoute
 }
