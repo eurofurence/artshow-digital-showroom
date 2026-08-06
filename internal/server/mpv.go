@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
 
 const observerID = 1
@@ -46,7 +48,9 @@ func (s *Server) processMpvOutput() {
 			return
 		}
 
-		log.Printf("mpv: %#v", msg)
+		if arguments.Verbose() {
+			log.Printf("mpv: %#v", msg)
+		}
 
 		if msg["event"] == "property-change" && msg["name"] == "idle-active" {
 			idle, ok := msg["data"].(bool)
