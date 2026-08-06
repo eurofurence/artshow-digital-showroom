@@ -27,6 +27,6 @@ func preProcess(cfg *Config) {
 		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
 		item.ContactQR = qrRoute
 
-		item.PostCredit = file.PostCreditFor(videoFile, item.Title, item.Artist, qrPath)
+		item.PostCredit = cfg.MediaInterface.Address + "/" + file.PostCreditFor(videoFile, item.Title, item.Artist, qrPath)
 	}
 }

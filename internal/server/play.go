@@ -30,7 +30,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	if req.Video == "" {
 		err = s.startStandby()
 	} else {
-		err = s.playVideo(req.Video, req.Title, req.PostCredit)
+		err = s.playVideo(req)
 	}
 
 	if err != nil {
@@ -41,16 +41,17 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (s *Server) playVideo(file, title, postCredit string) error {
+func (s *Server) playVideo(req PlayRequest) error {
+	log.Printf("play %#v", req)
 	return s.sendCommandsToMpv(
 		// run once
 		[]any{"set_property", "loop-file", "no"},
 
-		[]any{"loadfile", file, "replace"},
-		[]any{"show-text", title, constants.PlaybackTitleDuration},
+		[]any{"loadfile", req.Video, "replace"},
+		[]any{"show-text", req.Title, constants.PlaybackTitleDuration},
 
 		[]any{"set_property", "image-display-duration", 10},
-		[]any{"loadfile", postCredit, "append-play"},
+		[]any{"loadfile", req.PostCredit, "append-play"},
 	)
 }
 
