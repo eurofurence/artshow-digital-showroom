@@ -1,7 +1,13 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/server"
@@ -13,11 +19,21 @@ func main() {
 		log.Fatal(err)
 	}
 
-	srv := server.New(cfg)
+	// Handle exit if processed is killed
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
 
-	log.Println("Listening on " + cfg.MediaInterface.Address)
+	srv := server.NewServer(cfg)
 
-	if err := srv.Start(); err != nil {
+	go func() {
+		if err := srv.Start(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Fatal(err)
+		}
+	}()
+
+	<-ctx.Done()
+
+	if err := srv.Close(); err != nil {
 		log.Fatal(err)
 	}
 }
