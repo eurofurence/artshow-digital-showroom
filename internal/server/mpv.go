@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net"
 
@@ -14,6 +15,10 @@ func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
 	// protect against conflicting requests by using a mutex
 	s.mpvMu.Lock()
 	defer s.mpvMu.Unlock()
+
+	if s.mpvEncoder == nil {
+		return errors.New("mpv is not connected")
+	}
 
 	for _, cmd := range cmds {
 		command := map[string]any{"command": cmd}

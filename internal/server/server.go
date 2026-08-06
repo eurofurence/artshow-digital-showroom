@@ -35,7 +35,7 @@ func (s *Server) Start() error {
 	log.Println("Starting Server")
 
 	if err := s.setupMpv(); err != nil {
-		return err
+		log.Printf("Error setting up mpv. Is mpv running?\n%v", err)
 	}
 
 	mux := http.NewServeMux()
