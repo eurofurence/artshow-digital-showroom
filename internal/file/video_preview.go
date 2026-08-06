@@ -8,7 +8,7 @@ import (
 
 func PreviewFor(path string) string {
 	if !Exist(path) {
-		log.Println("the video " + path + " was not found")
+		log.Println("preview: the video " + path + " was not found")
 		return ""
 	}
 

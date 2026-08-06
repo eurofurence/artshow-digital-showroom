@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 )
 
 func ThumbnailFor(path string) string {
-	fallback := "/static/fallback-lyca-shocked-bw.png"
-
 	if !Exist(path) {
-		log.Println("the video " + path + " was not found")
-		return fallback
+		log.Println("thumbnail: the video " + path + " was not found")
+		return constants.FallbackImage
 	}
 
 	filePath, fileRoute, err := MediaPaths(path, "thumbnails", ".webp")
@@ -24,7 +23,7 @@ func ThumbnailFor(path string) string {
 		err := createThumbnail(path, filePath)
 		if err != nil {
 			log.Printf("Thumbnail failed to generate: %s\n", err)
-			return fallback
+			return constants.FallbackImage
 		}
 	}
 	return fileRoute

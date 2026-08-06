@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 )
 
 type PlayRequest struct {
@@ -38,15 +40,23 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) playVideo(file string, title string) error {
+	standby := s.cfg.MediaInterface.Address + constants.StandbyVideo
 	return s.sendCommandsToMpv(
+		// []any{"set_property", "loop-file", "inf"},
+
 		[]any{"loadfile", file, "replace"},
-		[]any{"show-text", title, 10_000}, // time in ms
+		[]any{"show-text", title, constants.PlaybackTitleDuration},
+
+		[]any{"loadfile", standby, "append-play"}, // stop all playback
 	)
 }
 
 func (s *Server) stopVideo() error {
 	return s.sendCommandsToMpv(
-		[]any{"stop"}, // stop all playback
+		// repeat video forever
+		// []any{"set_property", "loop-file", "inf"},
+
+		[]any{"loadfile", s.cfg.MediaInterface.Address + constants.StandbyVideo}, // stop all playback
 		[]any{"show-text", "", 0},
 	)
 }
