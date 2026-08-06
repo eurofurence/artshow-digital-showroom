@@ -38,7 +38,7 @@ func thumbnailFor(path string) string {
 		return fallback
 	}
 
-	filePath, fileRoute, err := file.MediaPaths(path, "thumbnails")
+	filePath, fileRoute, err := file.MediaPaths(path, "thumbnails", ".webp")
 	if err != nil {
 		log.Println("Could not create thumbnail paths for " + path)
 		return ""
@@ -111,7 +111,7 @@ func videoDuration(file string) (string, error) {
 }
 
 func qrCodeFor(videoFile string, url string) string {
-	filePath, fileRoute, err := file.MediaPaths(videoFile, "qr-codes")
+	filePath, fileRoute, err := file.MediaPaths(videoFile, "qr-codes", ".webp")
 	if err != nil {
 		log.Println("Could not create qr code paths for " + videoFile)
 		return ""
@@ -128,6 +128,8 @@ func qrCodeFor(videoFile string, url string) string {
 }
 
 func createQrCode(url string, qrFile string) error {
+	log.Println("Creating qr Code " + qrFile)
+
 	return qrcode.WriteFile(
 		url,
 		qrcode.Medium,
