@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"net"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 type Server struct {
 	cfg        *config.Config
 	mpvConn    net.Conn
+	mpvEncoder *json.Encoder
 	httpServer *http.Server
 }
 
@@ -27,6 +29,18 @@ func (s *Server) Start() error {
 		return err
 	}
 	s.mpvConn = conn
+	s.mpvEncoder = json.NewEncoder(conn)
+
+	go func() {
+		dec := json.NewDecoder(s.mpvConn)
+		for {
+			var msg map[string]any
+			if err := dec.Decode(&msg); err != nil {
+				return
+			}
+			log.Printf("mpv: %#v", msg)
+		}
+	}()
 
 	mux := http.NewServeMux()
 
