@@ -7,6 +7,10 @@ import (
 )
 
 func QrCodeFor(videoFile string, url string) string {
+	if url == "" {
+		return ""
+	}
+
 	filePath, fileRoute, err := MediaPaths(videoFile, "qr-codes", ".webp")
 	if err != nil {
 		log.Println("Could not create qr code paths for " + videoFile)

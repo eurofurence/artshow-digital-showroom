@@ -14,13 +14,13 @@ func preProcess(cfg *Config) {
 		item := &cfg.Videos[i]
 
 		videoFile := filepath.Join(cfg.Folder, item.File)
+		_, route, _ := file.MediaPaths(videoFile, "", "")
 
-		item.Duration, _ = file.VideoDuration(videoFile)
-		item.Thumbnail = file.ThumbnailFor(videoFile)
-		item.Video = "media/" + item.File
+		item.Video = route
 		item.VideoType = mime.TypeByExtension(filepath.Ext(item.File))
-		if item.Contact != "" {
-			item.ContactQR = file.QrCodeFor(videoFile, item.Contact)
-		}
+		item.Duration, _ = file.VideoDuration(videoFile)
+
+		item.Thumbnail = file.ThumbnailFor(videoFile)
+		item.ContactQR = file.QrCodeFor(videoFile, item.Contact)
 	}
 }
