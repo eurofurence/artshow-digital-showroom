@@ -11,9 +11,13 @@ const source = document.getElementById("dialog-video-source");
 const duration = document.getElementById("dialog-duration");
 
 let currentVideo = "";
+let postCredit = "";
+let titleText = "";
 
 function openMediaDialog(card) {
     currentVideo = card.dataset.video;
+    postCredit = card.dataset.postCredit;
+    titleText = card.dataset.title;
 
     title.textContent = card.dataset.title;
     creator.textContent = card.dataset.creator;
@@ -44,7 +48,9 @@ async function playCurrentVideo() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            video: currentVideo
+            video: currentVideo,
+            postcredit: postCredit,
+            title: titleText
         })
     });
 }

@@ -9,7 +9,9 @@ import (
 )
 
 type PlayRequest struct {
-	Video string `json:"video"`
+	Video      string `json:"video"`
+	Title      string `json:"title"`
+	PostCredit string `json:"postcredit"`
 }
 
 func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +30,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	if req.Video == "" {
 		err = s.startStandby()
 	} else {
-		err = s.playVideo(req.Video, "my title")
+		err = s.playVideo(req.Video, req.Title, req.PostCredit)
 	}
 
 	if err != nil {
@@ -39,13 +41,16 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (s *Server) playVideo(file string, title string) error {
+func (s *Server) playVideo(file, title, postCredit string) error {
 	return s.sendCommandsToMpv(
 		// run once
 		[]any{"set_property", "loop-file", "no"},
 
 		[]any{"loadfile", file, "replace"},
 		[]any{"show-text", title, constants.PlaybackTitleDuration},
+
+		[]any{"set_property", "image-display-duration", 10},
+		[]any{"loadfile", postCredit, "append-play"},
 	)
 }
 
