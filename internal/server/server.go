@@ -12,7 +12,8 @@ import (
 )
 
 type Server struct {
-	cfg *config.Config
+	cfg    *config.Config
+	videos map[string]*config.Video
 
 	mpvConn    net.Conn
 	mpvEncoder *json.Encoder
@@ -27,6 +28,7 @@ func NewServer(cfg *config.Config) *Server {
 
 	return &Server{
 		cfg:    cfg,
+		videos: make(map[string]*config.Video),
 	}
 }
 

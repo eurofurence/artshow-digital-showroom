@@ -1,12 +1,13 @@
-package config
+package server
 
 import (
 	"path/filepath"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/file"
 )
 
-func preProcess(cfg *Config) {
+func processConfig(cfg *config.Config) {
 	cfg.MediaInterface.Address = "http://localhost" + cfg.MediaInterface.Port
 	for i := range cfg.Videos {
 		item := &cfg.Videos[i]
@@ -27,6 +28,11 @@ func preProcess(cfg *Config) {
 		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
 		item.ContactQR = qrRoute
 
-		item.PostCredit = cfg.MediaInterface.Address + "/" + file.PostCreditFor(videoFile, item.Title, item.Artist, qrPath)
+		item.PostCredit = cfg.MediaInterface.Address + "/" + file.PostCreditFor(
+			videoFile,
+			item.Title,
+			item.Artist,
+			qrPath,
+		)
 	}
 }
