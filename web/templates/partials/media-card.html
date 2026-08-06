@@ -4,17 +4,7 @@
      hx-target="#media-dialog"
      hx-swap="outerHTML"
      hx-trigger="click"
-     data-id="{{.ID}}"
-     data-title="{{.Title}}"
-     data-creator="{{.Artist}}"
-     data-contact="{{.Contact}}"
-     data-contact-qr="{{.ContactQR}}"
-     data-post-credit="{{.PostCredit}}"
-     data-description="{{.Description}}"
-     data-image="{{.Thumbnail}}"
-     data-video="{{.Video}}"
-     data-preview="{{.Preview}}"
-     data-duration="{{.Duration}}">
+     hx-on::after-request="document.getElementById('media-dialog').showModal()">
   <div class="card-body">
     <h2>{{.Title}}</h2>
 

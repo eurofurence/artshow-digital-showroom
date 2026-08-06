@@ -1,9 +1,3 @@
-document.body.addEventListener("htmx:afterSwap", (event) => {
-    if (event.target.id === "media-dialog") {
-        event.target.showModal();
-    }
-});
-
 async function playCurrentVideo(id) {
     await fetch("/play", {
         method: "POST",
