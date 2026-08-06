@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"mime"
-	"os"
 	"os/exec"
 	"path/filepath"
 	"strconv"
@@ -39,7 +38,11 @@ func thumbnailFor(path string) string {
 		return fallback
 	}
 
-	filePath, fileRoute := mediaPaths(path, "thumbnails")
+	filePath, fileRoute, err := file.MediaPaths(path, "thumbnails")
+	if err != nil {
+		log.Println("Could not create thumbnail paths for " + path)
+		return ""
+	}
 
 	if !file.Exist(filePath) {
 		err := createThumbnail(path, filePath)
@@ -51,23 +54,8 @@ func thumbnailFor(path string) string {
 	return fileRoute
 }
 
-func mediaPaths(videoFile string, subfolder string) (string, string) {
-	dir := filepath.Dir(videoFile)
-	base := filepath.Base(videoFile)
-	ext := filepath.Ext(base)
-
-	name := base[:len(base)-len(ext)]
-
-	return filepath.Join(dir, subfolder, name+".webp"),
-		filepath.Join("media", subfolder, name+".webp")
-}
-
 func createThumbnail(videoFile string, thumbnailFile string) error {
 	log.Println("Creating thumbnail " + thumbnailFile)
-
-	if err := os.MkdirAll(filepath.Dir(thumbnailFile), 0o755); err != nil {
-		return err
-	}
 
 	cmd := exec.Command(
 		"ffmpeg",
@@ -123,10 +111,14 @@ func videoDuration(file string) (string, error) {
 }
 
 func qrCodeFor(videoFile string, url string) string {
-	filePath, fileRoute := mediaPaths(videoFile, "qr-codes")
+	filePath, fileRoute, err := file.MediaPaths(videoFile, "qr-codes")
+	if err != nil {
+		log.Println("Could not create qr code paths for " + videoFile)
+		return ""
+	}
 
 	if !file.Exist(filePath) {
-		err := createQrCode(url, filePath)
+		err = createQrCode(url, filePath)
 		if err != nil {
 			log.Printf("QR failed to generate: %s\n", err)
 			return ""
@@ -136,10 +128,6 @@ func qrCodeFor(videoFile string, url string) string {
 }
 
 func createQrCode(url string, qrFile string) error {
-	if err := os.MkdirAll(filepath.Dir(qrFile), 0o755); err != nil {
-		return err
-	}
-
 	return qrcode.WriteFile(
 		url,
 		qrcode.Medium,
