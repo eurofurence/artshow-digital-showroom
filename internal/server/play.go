@@ -24,9 +24,9 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	if req.Video == "" {
-		err = stopVideo(s.mpvEncoder)
+		err = s.stopVideo()
 	} else {
-		err = playVideo(req.Video, s.mpvEncoder)
+		err = s.playVideo(req.Video, "my title")
 	}
 
 	if err != nil {
@@ -37,22 +37,16 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func playVideo(file string, encoder *json.Encoder) error {
-	cmd := map[string]any{
-		"command": []any{
-			"loadfile",
-			file,
-			"replace",
-		},
-	}
-
-	return encoder.Encode(cmd)
+func (s *Server) playVideo(file string, title string) error {
+	return s.sendCommandsToMpv(
+		[]any{"loadfile", file, "replace"},
+		[]any{"show-text", title, 10_000}, // time in ms
+	)
 }
 
-func stopVideo(encoder *json.Encoder) error {
-	cmd := map[string]any{
-		"command": []any{"stop"},
-	}
-
-	return encoder.Encode(cmd)
+func (s *Server) stopVideo() error {
+	return s.sendCommandsToMpv(
+		[]any{"stop"}, // stop all playback
+		[]any{"show-text", "", 0},
+	)
 }
