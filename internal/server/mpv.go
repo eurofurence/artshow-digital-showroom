@@ -9,6 +9,10 @@ import (
 const observerID = 1
 
 func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
+	// protect against conflicting requests by using a mutex
+	s.mpvMu.Lock()
+	defer s.mpvMu.Unlock()
+
 	for _, cmd := range cmds {
 		command := map[string]any{"command": cmd}
 		if err := s.mpvEncoder.Encode(command); err != nil {

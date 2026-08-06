@@ -6,14 +6,18 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"sync"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 )
 
 type Server struct {
-	cfg        *config.Config
+	cfg *config.Config
+
 	mpvConn    net.Conn
 	mpvEncoder *json.Encoder
+	mpvMu      sync.Mutex
+
 	httpServer *http.Server
 }
 
