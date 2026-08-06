@@ -50,5 +50,15 @@ func playVideo(file string, socket string) (err error) {
 	}
 
 	err = json.NewEncoder(conn).Encode(cmd)
+	if err != nil {
+		return err
+	}
+
+	var resp map[string]any
+	if err := json.NewDecoder(conn).Decode(&resp); err != nil {
+		return err
+	}
+
+	log.Printf("response: %#v", resp)
 	return
 }
