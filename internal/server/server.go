@@ -8,11 +8,10 @@ import (
 
 type Server struct {
 	cfg  *config.Config
-	addr string
 }
 
 func New(cfg *config.Config) *Server {
-	return &Server{cfg: cfg, addr: cfg.MediaInterface.Port}
+	return &Server{cfg: cfg}
 }
 
 func (s *Server) Start() error {
@@ -29,5 +28,5 @@ func (s *Server) Start() error {
 	fs = http.FileServer(http.Dir(s.cfg.Folder))
 	mux.Handle("/media/", http.StripPrefix("/media/", fs))
 
-	return http.ListenAndServe(s.addr, mux)
+	return http.ListenAndServe(s.cfg.MediaInterface.Port, mux)
 }
