@@ -17,10 +17,10 @@ func preProcess(cfg *Config) {
 		// Use the route instead when serving to a remote machine.
 		absPath, _ := filepath.Abs(videoFile)
 		item.Video = absPath
-		_, route, _ := file.MediaPaths(videoFile, "", "")
+		// _, route, _ := file.MediaPaths(videoFile, "", "")
 		// item.Video = cfg.MediaInterface.Address + "/" + route
 
-		item.Preview = route
+		item.Preview = file.PreviewFor(videoFile)
 		item.Duration, _ = file.VideoDuration(videoFile)
 
 		item.Thumbnail = file.ThumbnailFor(videoFile)
