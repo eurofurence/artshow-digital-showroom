@@ -55,8 +55,7 @@ func (s *Server) stopVideo() error {
 	return s.sendCommandsToMpv(
 		// repeat video forever
 		// []any{"set_property", "loop-file", "inf"},
-
-		[]any{"loadfile", s.cfg.MediaInterface.Address + constants.StandbyVideo}, // stop all playback
+		[]any{"loadfile", s.cfg.MediaInterface.Address + constants.StandbyVideo},
 		[]any{"show-text", "", 0},
 	)
 }
