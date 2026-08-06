@@ -19,7 +19,7 @@ type MediaInterfaceConfig struct {
 }
 
 type PlayoutConfig struct {
-	MpvPort string `toml:"mpv-port"`
+	MpvSocket string `toml:"mpv-socket"`
 }
 
 type Video struct {

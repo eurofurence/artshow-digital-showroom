@@ -22,16 +22,16 @@ func (h *Handler) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	route := h.cfg.MediaInterface.Address + "/" + req.Video
-	if err := playVideo(route); err != nil {
+	if err := playVideo(route, h.cfg.Playout.MpvSocket); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
 
-func playVideo(file string) (err error) {
+func playVideo(file string, socket string) (err error) {
 	log.Println(file)
 
-	conn, err := net.Dial("unix", "/tmp/mpv.sock")
+	conn, err := net.Dial("unix", socket)
 	if err != nil {
 		return err
 	}

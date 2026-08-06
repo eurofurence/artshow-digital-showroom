@@ -4,7 +4,7 @@ title = "Art Show Media Interface"
 columns = 3
 
 [playout]
-mpv-port = "/tmp/mpv.sock"
+mpv-socket = "/tmp/mpv.sock"
 
 # Example entry, remove leading "# " from each row and configure as needed
 # [[video]]
