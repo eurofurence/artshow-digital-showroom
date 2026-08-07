@@ -17,7 +17,12 @@
     <main>
       {{block "content" .}}{{end}}
     </main>
-    {{template "statusbar" .}}
+    <div
+      hx-ext="sse"
+      sse-connect="/mpvStatus"
+      sse-swap="message"
+      class="statusbar">Connection to mpv missing. Please start mpv before go server.
+    </div>
     <dialog id="media-dialog"></dialog>
   </body>
 </html>

@@ -3,10 +3,12 @@ package server
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 )
@@ -45,6 +47,8 @@ func (s *Server) Start() error {
 	mux.HandleFunc("/play", s.PlayHandler)
 	mux.HandleFunc("GET /dialog/{id}", s.DialogHandler)
 
+	mux.HandleFunc("/mpvStatus", s.StatusHandler)
+
 	// Static files
 	fs := http.FileServer(http.Dir("./web/static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
@@ -76,4 +80,32 @@ func (s *Server) Close() error {
 	}
 
 	return nil
+}
+
+func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Connection", "keep-alive")
+
+	flusher, ok := w.(http.Flusher)
+	if !ok {
+		http.Error(w, "Streaming unsupported", http.StatusInternalServerError)
+		return
+	}
+
+	ticker := time.NewTicker(time.Second)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-r.Context().Done():
+			log.Println("client disconnected")
+			return
+
+		case t := <-ticker.C:
+			// log.Printf("data: %s\n\n", t.Format(time.TimeOnly))
+			fmt.Fprintf(w, "data: %s\n\n", t.Format(time.TimeOnly))
+			flusher.Flush()
+		}
+	}
 }
