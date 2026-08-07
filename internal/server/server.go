@@ -3,12 +3,10 @@ package server
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"sync"
-	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 )
@@ -21,11 +19,21 @@ type Server struct {
 	mpvEncoder *json.Encoder
 	mpvMu      sync.Mutex
 
+	status   PlaybackStatus
+	statusMu sync.RWMutex
+
+	clients   map[chan string]struct{}
+	clientsMu sync.Mutex
+
 	httpServer *http.Server
 }
 
 func NewServer(cfg *config.Config) (s *Server) {
-	s = &Server{cfg: cfg}
+	s = &Server{
+		cfg:     cfg,
+		videos:  make(map[string]*config.Video, len(cfg.Videos)),
+		clients: make(map[chan string]struct{}),
+	}
 
 	s.processConfig()
 	cfg.Print("Processed config")
@@ -46,7 +54,6 @@ func (s *Server) Start() error {
 	mux.HandleFunc("/", s.Home)
 	mux.HandleFunc("/play", s.PlayHandler)
 	mux.HandleFunc("GET /dialog/{id}", s.DialogHandler)
-
 	mux.HandleFunc("/mpvStatus", s.StatusHandler)
 
 	// Static files
