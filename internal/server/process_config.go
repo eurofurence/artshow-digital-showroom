@@ -5,13 +5,11 @@ import (
 	"encoding/hex"
 	"path/filepath"
 
-	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/file"
 )
 
 func (s *Server) processConfig() {
 	s.cfg.MediaInterface.Address = "http://localhost" + s.cfg.MediaInterface.Port
-	s.videos = make(map[string]*config.Video, len(s.cfg.Videos))
 
 	for i := range s.cfg.Videos {
 		item := &s.cfg.Videos[i]
