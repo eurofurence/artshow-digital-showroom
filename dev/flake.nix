@@ -37,7 +37,7 @@
             ${red_text}golangci-lint version: ${green_text}$(golangci-lint version)
             ${red_text}ffmpeg version: ${green_text}$(ffmpeg -version)
             ${red_text}magick version: ${green_text}$(magick -version)
-            ${red_text}mpv version: ${green_text}$(magick --version)
+            ${red_text}mpv version: ${green_text}$(mpv --version)
             ${reset_formatting}"'';
         };
       }
