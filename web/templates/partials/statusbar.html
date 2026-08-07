@@ -1,5 +1,14 @@
 {{define "statusbar"}}
-<div class="statusbar">
-  Status bar. Will be filled later. Show some progress and state of the Display server.
-</div>
-{{end}}
+{{- if .Idle -}}
+    <span class="status-dot idle"></span>
+    Nothing playing
+{{- else -}}
+    <span class="status-dot playing"></span>
+    <strong>{{.Title}}</strong>
+    <span class="status-time">
+        {{- formatDuration .Position -}}
+        /
+        {{- formatDuration .Duration -}}
+    </span>
+{{- end}}
+{{- end -}}

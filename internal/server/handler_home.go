@@ -16,11 +16,13 @@ type HomePageData struct {
 }
 
 var templates = template.Must(
-	template.ParseFS(
-		web.Files,
-		"templates/*.html",
-		"templates/partials/*.html",
-	),
+	template.New("").
+		Funcs(template.FuncMap{"formatDuration": formatDuration}).
+		ParseFS(
+			web.Files,
+			"templates/*.html",
+			"templates/partials/*.html",
+		),
 )
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
