@@ -32,8 +32,8 @@ For a preconfigured setup download the folder [Media](https://cloud.eurofurence.
   and only generated if they are missing
   - You can overwrite them with different content and this will render after the next page reload.\
     You might need to force clear the browser cache.
-  - However when updating titles or contact info in `config.toml` the images stay outdated.
-    Delete them to have them regenerated with the correct info.
+  - However when updating titles or contact info in `config.toml` the images stay outdated.\
+    Delete them to have them regenerated with the correct info on the next server launch.
 
 ## Running the playback mpv server
 
