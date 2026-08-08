@@ -1,12 +1,10 @@
 package server
 
 import (
-	"html/template"
 	"log"
 	"net/http"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
-	"github.com/eurofurence/artshow-digital-showroom/web"
 )
 
 type HomePageData struct {
@@ -14,16 +12,6 @@ type HomePageData struct {
 	Columns int
 	Entries []config.Video
 }
-
-var templates = template.Must(
-	template.New("").
-		Funcs(template.FuncMap{"formatDuration": formatDuration}).
-		ParseFS(
-			web.Files,
-			"templates/*.html",
-			"templates/partials/*.html",
-		),
-)
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
 	log.Println("HomeHandler got request for", r.Method, r.URL.Path)
@@ -34,7 +22,7 @@ func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
 		Entries: s.cfg.Videos,
 	}
 
-	err := templates.ExecuteTemplate(w, "base", data)
+	err := s.templates.ExecuteTemplate(w, "base", data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

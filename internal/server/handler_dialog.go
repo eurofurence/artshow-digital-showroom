@@ -16,7 +16,7 @@ func (s *Server) DialogHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := templates.ExecuteTemplate(w, "dialog", video); err != nil {
+	if err := s.templates.ExecuteTemplate(w, "dialog", video); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }

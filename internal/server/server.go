@@ -3,15 +3,19 @@ package server
 import (
 	"context"
 	"encoding/json"
+	"html/template"
 	"log"
 	"net"
 	"net/http"
 	"sync"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
+	"github.com/eurofurence/artshow-digital-showroom/web"
 )
 
 type Server struct {
+	templates *template.Template
+
 	cfg    *config.Config
 	videos map[string]*config.Video
 
@@ -27,7 +31,18 @@ type Server struct {
 }
 
 func NewServer(cfg *config.Config) (s *Server) {
+	templates := template.Must(
+		template.New("").
+			Funcs(template.FuncMap{"formatDuration": formatDuration}).
+			ParseFS(
+				web.Files,
+				"templates/*.html",
+				"templates/partials/*.html",
+			),
+	)
+
 	s = &Server{
+		templates:      templates,
 		cfg:            cfg,
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
 		clients:        make(map[chan string]struct{}),

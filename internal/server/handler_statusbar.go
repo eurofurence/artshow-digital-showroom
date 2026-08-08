@@ -23,7 +23,7 @@ func (s *Server) PublishStatus() {
 	defer s.clientsMu.Unlock()
 
 	var buf bytes.Buffer
-	if err := templates.ExecuteTemplate(&buf, "statusbar", s.playbackStatus); err != nil {
+	if err := s.templates.ExecuteTemplate(&buf, "statusbar", s.playbackStatus); err != nil {
 		log.Printf("Error rendering statusbar in publish %v", err)
 	}
 	html := buf.String()
