@@ -87,7 +87,7 @@ Run the binary `start-server`.
 
 ## Connect to the server
 
-Open the webpage [http://localhost:8080/] in your browser.
+Open the webpage [http://localhost:8080/](http://localhost:8080/) in your browser.
 
 If you adjust the port in the `config.toml` at `media-interface -> port` then also update the port in the URL accordingly.
 
