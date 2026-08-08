@@ -18,7 +18,8 @@
     --color-backdrop: rgba(0, 0, 0, 0.5);
 
     /* Status */
-    --color-statusbar-background: rgba(255, 155, 255, 0.95);
+    --color-statusbar-background: rgba(30,30,30,.9);
+    --color-statusbar-text: white;
 
     /* Accent */
     --color-accent: #3b82f6;
@@ -121,20 +122,44 @@ body {
 /************** STATUS BAR **************/
 .statusbar {
     position: fixed;
-
-    width: min(70vw, 900px);
     left: 50%;
-    transform: translateX(-50%);
-
     bottom: 1rem;
+    transform: translateX(-50%);
+    width: min(70vw, 900px);
 
-    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+
+    padding: .75rem 1.25rem;
+
+    border-radius: 999px;
 
     background: var(--color-statusbar-background);
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 12px var(--color-shadow);
+    color: var(--color-statusbar-text);
 
-    z-index: 1000;
+    box-shadow: 0 4px 16px var(--color-shadow);
+
+    z-index: 100;
+}
+
+.status-time {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+}
+
+.status-dot {
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+}
+
+.status-dot.playing {
+    background: #34c759;
+}
+
+.status-dot.idle {
+    background: #888;
 }
 
 /************** MEDIA DIALOG **************/
