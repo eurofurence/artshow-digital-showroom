@@ -46,7 +46,9 @@ Run the binary `start-server`.
 
 # Running the playback mpv server
 
-Install mpv. Run
+Install mpv. Run the following instruction.
+Also make sure the path listed for "input-ipc-server"
+exactly matches the path `config.toml` at `playout -> mpv-socket`.
 
     mpv \
     --idle=yes \
