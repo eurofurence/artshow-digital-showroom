@@ -83,7 +83,7 @@ Ensure that the other files are available:
         ├── ...
         └── other-video.webp
 
-Run the binary `start-server`.
+Run the binary `./start-server`.
 
 ## Connect to the server
 
