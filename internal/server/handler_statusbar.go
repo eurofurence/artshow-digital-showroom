@@ -18,6 +18,24 @@ type Status struct {
 	Duration float64
 }
 
+func (s *Server) PublishStatus(status Status) {
+	s.clientsMu.Lock()
+	defer s.clientsMu.Unlock()
+
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "statusbar", status); err != nil {
+		log.Printf("Error rendering statusbar in publish %v", err)
+	}
+	html := buf.String()
+
+	for ch := range s.clients {
+		select {
+		case ch <- html: // delivered
+		default: // Client is slow. Drop this update.
+		}
+	}
+}
+
 func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/event-stream")
 	w.Header().Set("Cache-Control", "no-cache")
@@ -56,24 +74,6 @@ func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			flusher.Flush()
-		}
-	}
-}
-
-func (s *Server) PublishStatus(status Status) {
-	s.clientsMu.Lock()
-	defer s.clientsMu.Unlock()
-
-	var buf bytes.Buffer
-	if err := templates.ExecuteTemplate(&buf, "statusbar", status); err != nil {
-		log.Printf("Error rendering statusbar in publish %v", err)
-	}
-	html := buf.String()
-
-	for ch := range s.clients {
-		select {
-		case ch <- html: // delivered
-		default: // Client is slow. Drop this update.
 		}
 	}
 }
