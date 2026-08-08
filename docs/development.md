@@ -10,7 +10,7 @@ Some additional user interaction on the webpage is enabled through HTMX (not yet
 To run please install a compatible version of `go`.
 See the version in the file [go.mod](../go.mod).
 
-### Installing dependencies with nix
+## Installing dependencies with nix
 
 If you have `nix` running on your server then you can install dependencies with the following steps:
 
@@ -40,12 +40,12 @@ See the config in [.air.toml](../.air.toml).
 
 # Code style
 
-### editorconfig
+## editorconfig
 
 Basic indent style can be set in the file [.editorconfig](../.editorconfig).
 Most IDEs and advanced editors will respect this config by default.
 
-### go fmt
+## go fmt
 
 After making changes to the `go` code, use the included formatter
 
