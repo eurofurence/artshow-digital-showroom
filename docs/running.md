@@ -37,7 +37,7 @@ For a preconfigured setup download the folder [Media](https://cloud.eurofurence.
 
 ## Running the playback mpv server
 
-Run the following instruction.
+Run the following instruction.\
 Also make sure the path listed for "input-ipc-server"
 exactly matches the path `config.toml` at `playout -> mpv-socket`.
 
@@ -73,6 +73,7 @@ Open a terminal in the repo and run `go run cmd/main.go`
 Get a (statically linked) binary for the server, e.g. a binary called `start-server`.
 
 The static files are bundled into the binary.
+
 Ensure that the other files are available:
 
     your-working-directory/
@@ -88,7 +89,8 @@ Run the binary `start-server`.
 ## Connect to the server
 
 Open the webpage `http://localhost:8080/` in your browser.
-Make sure to update the port in the url is the same as in the `config.toml` at `media-interface -> port`.
+
+If you adjust the port in the `config.toml` at `media-interface -> port` then also update the port in the URL accordingly.
 
 For the full experience, start your browser in kiosk mode, e.g.:
 
