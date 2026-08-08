@@ -25,15 +25,22 @@ func main() {
 
 	srv := server.NewServer(cfg)
 
+	errCh := make(chan error, 1)
+
 	go func() {
-		if err := srv.Start(); err != nil && !errors.Is(err, http.ErrServerClosed) {
-			log.Fatal(err)
-		}
+		errCh <- srv.Start()
 	}()
 
-	<-ctx.Done()
+	select {
+	case <-ctx.Done():
+		// Normal shutdown requested.
+		if err := srv.Close(); err != nil {
+			log.Printf("server shutdown error: %v", err)
+		}
 
-	if err := srv.Close(); err != nil {
-		log.Fatal(err)
+	case err := <-errCh:
+		if err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Fatalf("server error: %v", err)
+		}
 	}
 }
