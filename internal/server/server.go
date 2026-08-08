@@ -8,6 +8,7 @@ import (
 	"net"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/web"
@@ -28,9 +29,14 @@ type Server struct {
 	clientsMu      sync.Mutex
 
 	httpServer *http.Server
+
+	shutdownCtx    context.Context
+	shutdownCancel context.CancelFunc
 }
 
 func NewServer(cfg *config.Config) (s *Server) {
+	shutdownCtx, shutdownCancel := context.WithCancel(context.Background())
+
 	templates := template.Must(
 		template.New("").
 			Funcs(template.FuncMap{"formatDuration": formatDuration}).
@@ -47,6 +53,8 @@ func NewServer(cfg *config.Config) (s *Server) {
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
 		clients:        make(map[chan string]struct{}),
 		playbackStatus: PlaybackStatus{Idle: true},
+		shutdownCtx:    shutdownCtx,
+		shutdownCancel: shutdownCancel,
 	}
 
 	s.processConfig()
@@ -88,8 +96,17 @@ func (s *Server) Start() error {
 func (s *Server) Close() error {
 	log.Println("Shutting down")
 
+	// Tell long-lived handlers, such as SSE, to terminate.
+	s.shutdownCancel()
+
+	shutdownCtx, cancel := context.WithTimeout(
+		context.Background(),
+		5*time.Second,
+	)
+	defer cancel()
+
 	if s.httpServer != nil {
-		if err := s.httpServer.Shutdown(context.Background()); err != nil {
+		if err := s.httpServer.Shutdown(shutdownCtx); err != nil {
 			log.Printf("http server result %v", err)
 		}
 	}

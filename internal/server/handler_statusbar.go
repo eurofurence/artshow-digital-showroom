@@ -69,6 +69,10 @@ func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
 			log.Println("SSE client disconnected")
 			return
 
+		case <-s.shutdownCtx.Done():
+			log.Println("SSE server shutting down")
+			return
+
 		case html := <-ch:
 			if err := writeSSE(w, html); err != nil {
 				log.Printf("SSE write failed: %v", err)
