@@ -33,7 +33,7 @@ func NewServer(cfg *config.Config) (s *Server) {
 	}
 
 	s.processConfig()
-	cfg.Println("Processed config")
+	cfg.Print("Processed config")
 
 	return
 }
