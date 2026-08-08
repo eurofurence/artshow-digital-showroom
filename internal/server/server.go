@@ -71,8 +71,8 @@ func (s *Server) Start() error {
 	mux.HandleFunc("/mpvStatus", s.StatusHandler)
 
 	// Static files
-	fs := http.FileServer(http.Dir("./web/static"))
-	mux.Handle("/static/", http.StripPrefix("/static/", fs))
+	fs := http.FileServer(http.FS(web.Files))
+	mux.Handle("/static/", fs)
 
 	fs = http.FileServer(http.Dir(s.cfg.ConfigFolder))
 	mux.Handle("/media/", http.StripPrefix("/media/", fs))
