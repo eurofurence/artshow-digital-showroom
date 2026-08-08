@@ -39,6 +39,10 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) playVideo(video *config.Video) error {
+	s.playbackStatus.Idle = false
+	s.playbackStatus.Title = video.Title
+	s.PublishStatus()
+
 	return s.sendCommandsToMpv(
 		// run once
 		[]any{"set_property", "loop-file", "no"},
@@ -52,6 +56,9 @@ func (s *Server) playVideo(video *config.Video) error {
 }
 
 func (s *Server) startStandby() error {
+	s.playbackStatus.Idle = true
+	s.PublishStatus()
+
 	return s.sendCommandsToMpv(
 		// repeat forever
 		[]any{"set_property", "loop-file", "inf"},

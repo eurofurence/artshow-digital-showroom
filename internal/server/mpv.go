@@ -5,16 +5,7 @@ import (
 	"errors"
 	"log"
 	"net"
-
-	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
-
-type PlaybackStatus struct {
-	Idle     bool
-	Title    string
-	Position float64
-	Duration float64
-}
 
 func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
 	// protect against conflicting requests by using a mutex
@@ -46,9 +37,9 @@ func (s *Server) setupMpv() error {
 
 	return s.sendCommandsToMpv(
 		[]any{"observe_property", 1, "idle-active"},
-		[]any{"observe_property", 2, "media-title"},
-		[]any{"observe_property", 3, "playback-time"},
-		[]any{"observe_property", 4, "duration"},
+		[]any{"observe_property", 2, "playback-time"},
+		[]any{"observe_property", 3, "duration"},
+		// []any{"observe_property", 4, "media-title"},
 	)
 }
 
@@ -61,20 +52,44 @@ func (s *Server) processMpvOutput() {
 			return
 		}
 
-		if arguments.Verbose() {
-			log.Printf("mpv: %#v", msg)
-		}
+		if msg["event"] == "property-change" {
+			// if arguments.Verbose() {
+			// log.Printf("mpv: %v", msg)
+			// }
 
-		if msg["event"] == "property-change" && msg["name"] == "idle-active" {
-			idle, ok := msg["data"].(bool)
-			if !ok || !idle {
-				continue
-			}
+			switch msg["name"] {
+			case "idle-active":
+				idle, ok := msg["data"].(bool)
+				if !ok || !idle {
+					continue
+				}
 
-			log.Println("playlist finished, starting standby")
+				if err := s.startStandby(); err != nil {
+					log.Printf("failed to start standby: %v", err)
+				}
+			case "playback-time":
+				if s.playbackStatus.Idle {
+					continue
+				}
 
-			if err := s.startStandby(); err != nil {
-				log.Printf("failed to start standby: %v", err)
+				time, ok := msg["data"].(float64)
+				if !ok {
+					continue
+				}
+
+				seconds := int(time)
+				if seconds != s.playbackStatus.Position {
+					s.playbackStatus.Position = seconds
+					s.PublishStatus()
+				}
+			case "duration":
+				duration, ok := msg["data"].(float64)
+				if !ok {
+					continue
+				}
+
+				s.playbackStatus.Duration = int(duration)
+				s.PublishStatus()
 			}
 		}
 	}

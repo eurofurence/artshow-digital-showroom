@@ -19,17 +19,19 @@ type Server struct {
 	mpvEncoder *json.Encoder
 	mpvMu      sync.Mutex
 
-	clients   map[chan string]struct{}
-	clientsMu sync.Mutex
+	playbackStatus PlaybackStatus
+	clients        map[chan string]struct{}
+	clientsMu      sync.Mutex
 
 	httpServer *http.Server
 }
 
 func NewServer(cfg *config.Config) (s *Server) {
 	s = &Server{
-		cfg:     cfg,
-		videos:  make(map[string]*config.Video, len(cfg.Videos)),
-		clients: make(map[chan string]struct{}),
+		cfg:            cfg,
+		videos:         make(map[string]*config.Video, len(cfg.Videos)),
+		clients:        make(map[chan string]struct{}),
+		playbackStatus: PlaybackStatus{Idle: true},
 	}
 
 	s.processConfig()

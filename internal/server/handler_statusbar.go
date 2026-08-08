@@ -11,19 +11,19 @@ import (
 	"time"
 )
 
-type Status struct {
+type PlaybackStatus struct {
 	Idle     bool
 	Title    string
-	Position float64
-	Duration float64
+	Position int
+	Duration int
 }
 
-func (s *Server) PublishStatus(status Status) {
+func (s *Server) PublishStatus() {
 	s.clientsMu.Lock()
 	defer s.clientsMu.Unlock()
 
 	var buf bytes.Buffer
-	if err := templates.ExecuteTemplate(&buf, "statusbar", status); err != nil {
+	if err := templates.ExecuteTemplate(&buf, "statusbar", s.playbackStatus); err != nil {
 		log.Printf("Error rendering statusbar in publish %v", err)
 	}
 	html := buf.String()
@@ -61,6 +61,8 @@ func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
 		close(ch)
 	}()
 
+	s.PublishStatus()
+
 	for {
 		select {
 		case <-r.Context().Done():
@@ -68,7 +70,6 @@ func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
 			return
 
 		case html := <-ch:
-			log.Println(html)
 			if err := writeSSE(w, html); err != nil {
 				log.Printf("SSE write failed: %v", err)
 				return
@@ -94,11 +95,11 @@ func writeSSE(w io.Writer, data string) error {
 	return err
 }
 
-func formatDuration(seconds float64) string {
-	if seconds <= 0 {
+func formatDuration(seconds int) string {
+	if seconds < 0 {
 		return "--:--"
 	}
-	d := time.Duration(seconds * float64(time.Second))
+	d := time.Duration(seconds * int(time.Second))
 
 	h := int(d.Hours())
 	m := int(d.Minutes()) % 60
