@@ -19,9 +19,6 @@ type Server struct {
 	mpvEncoder *json.Encoder
 	mpvMu      sync.Mutex
 
-	status   PlaybackStatus
-	statusMu sync.RWMutex
-
 	clients   map[chan string]struct{}
 	clientsMu sync.Mutex
 
@@ -36,7 +33,7 @@ func NewServer(cfg *config.Config) (s *Server) {
 	}
 
 	s.processConfig()
-	cfg.Print("Processed config")
+	cfg.Println("Processed config")
 
 	return
 }

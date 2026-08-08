@@ -9,7 +9,12 @@ import (
 	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
 
-const observerID = 1
+type PlaybackStatus struct {
+	Idle     bool
+	Title    string
+	Position float64
+	Duration float64
+}
 
 func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
 	// protect against conflicting requests by using a mutex
@@ -40,7 +45,10 @@ func (s *Server) setupMpv() error {
 	go s.processMpvOutput()
 
 	return s.sendCommandsToMpv(
-		[]any{"observe_property", observerID, "idle-active"},
+		[]any{"observe_property", 1, "idle-active"},
+		[]any{"observe_property", 2, "media-title"},
+		[]any{"observe_property", 3, "playback-time"},
+		[]any{"observe_property", 4, "duration"},
 	)
 }
 
