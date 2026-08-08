@@ -72,8 +72,7 @@ Open a terminal in the repo and run `go run cmd/main.go`
 
 Get a (statically linked) binary for the server, e.g. a binary called `start-server`.
 
-The static files are bundled into the binary.
-
+The static files are bundled into the binary.\
 Ensure that the other files are available:
 
     your-working-directory/
@@ -88,7 +87,7 @@ Run the binary `start-server`.
 
 ## Connect to the server
 
-Open the webpage `http://localhost:8080/` in your browser.
+Open the webpage [http://localhost:8080/] in your browser.
 
 If you adjust the port in the `config.toml` at `media-interface -> port` then also update the port in the URL accordingly.
 
