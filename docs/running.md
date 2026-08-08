@@ -4,10 +4,10 @@
 
 Make sure the following programs are installed in a recent version
 
-- mpv - for media playback
-- go - for running from source, otherwise ask for a compiled binary
-- ffmpeg - for video preview generation
-- magick - part of imagemagick, to generate some images
+- `mpv` - for media playback
+- `go` - for running from source, otherwise ask for a compiled binary
+- `ffmpeg` - for video preview generation
+- `magick` - part of imagemagick, to generate some images
 
 ## Configuring the application
 
@@ -15,8 +15,8 @@ The application reads the config and Videos from a folder `Media` if it exists
 and otherwise falls back to `MediaExample`.
 
 The sample folder `MediaExample` is provided.
-There is however only a config file and no videos.
-Hence the application will mostly work, but only show Fallback images and display no videos.
+There is however only a config file and no videos.\
+Hence the application will mostly work, but only show Fallback images and display no videos.\
 You can adjust the file [config.toml](../MediaExample/config.toml) as desired.
 
 For a preconfigured setup download the folder [Media](https://cloud.eurofurence.org/index.php/f/3244131) from Nextcloud.
@@ -26,13 +26,14 @@ For a preconfigured setup download the folder [Media](https://cloud.eurofurence.
 ## Important information
 
 - The html server reads the `config.toml` and connects to `mpv` at launch.\
-If you make changes to the config or restart `mpv` then also restart the server.
+  If you make changes to the config or restart `mpv` then also restart the server.
 
 - Thumbnails, QR-Codes and previews are placed in subfolders of `Media` / `MediaExample`
-and only generated if they are missing.\
-You can overwrite them with different content.\
-However when updating titles or contact info in `config.toml` the images stay outdated.
-Delete them to have them regenerated with the correct info.
+  and only generated if they are missing
+  - You can overwrite them with different content and this will render after the next page reload.\
+    You might need to force clear the browser cache.
+  - However when updating titles or contact info in `config.toml` the images stay outdated.
+    Delete them to have them regenerated with the correct info.
 
 ## Running the playback mpv server
 
