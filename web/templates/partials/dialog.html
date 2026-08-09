@@ -11,17 +11,17 @@
 
     <div class="dialog-details">
       <h2>{{.Title}}</h2>
-
-      <p>By <strong>{{.Artist}}</strong></p>
-
-      {{if .ContactQR}}
-      <div class="qrcode" style="background: center / contain no-repeat url('{{.ContactQR}}')"></div>
-      <!-- <img class="qrcode" src="{{.ContactQR}}"> -->
-      {{end}}
-      {{if .Contact}}
-      <p>{{.Contact}}</p>
-      {{end}}
-
+      <div class="author-details">
+        {{if .ContactQR}}
+          <div class="qrcode" style="background: center / contain no-repeat url('{{.ContactQR}}')"></div>
+        {{end}}
+        <div class="author-strings">
+          <p class="author">By <strong>{{.Artist}}</strong></p>
+          {{if .Contact}}
+            <p class="contact">{{.Contact}}</p>
+          {{end}}
+        </div>
+      </div>
       <p class="description">{{.Description}}</p>
     </div>
     <div class="dialog-actions">

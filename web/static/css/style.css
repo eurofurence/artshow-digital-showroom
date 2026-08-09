@@ -329,7 +329,6 @@ main:before{
     grid-template-columns: auto 508px;
 
     height: 100%;
-    border-radius:4px;
 }
 
 .dialog-preview {
@@ -348,14 +347,15 @@ main:before{
 }
 
 .dialog-details {
-    padding: 40px 40px 0 40px;
-    margin-bottom: 40px;
+    padding: 0 40px;
+    margin: 40px 0;
 
     display: flex;
     flex-direction: column;
     gap: 15px;
     position: relative;
     overflow-y:scroll;
+    max-height:435px;
 }
 
 .dialog-details h2{
@@ -372,6 +372,7 @@ main:before{
     position: relative;
     flex-shrink: 0;
 }
+
 .dialog-details .qrcode:after{
     position:absolute;
     display: block;
@@ -382,6 +383,20 @@ main:before{
     content: " ";
     background:var(--color-text);
     mix-blend-mode: screen;
+}
+.dialog-details .author-details:has(.qrcode){
+    display:grid;
+    grid-template-columns:194px auto;
+}
+.dialog-details .author-details .qrcode{
+    grid-column:1;
+}
+.dialog-details .author-details .author-strings{
+    /* margin-top:8px; */
+    /*shouldn't be necessary with QR codes without whitespace*/
+}
+.dialog-details .author-details:has(.qrcode) .author{
+    margin-bottom:9px;
 }
 
 .dialog-details button {
