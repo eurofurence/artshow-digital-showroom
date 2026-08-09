@@ -3,16 +3,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>{{block "title" .}}My App{{end}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{block "title" .}}Digital Showroom Media Interface{{end}}</title>
 
     <script src="/static/third_party/htmx/htmx@2.0.10.min.js"></script>
     <script src="/static/third_party/htmx/htmx-ext-sse@2.2.4.min.js"></script>
     <script src="/static/js/dialog.js" defer></script>
 
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.png">
   </head>
-  <body>
+  <body class="horizontal-scroll">
     {{template "header" .}}
     <main>
       {{block "content" .}}{{end}}

@@ -4,11 +4,11 @@
     Nothing playing
 {{- else -}}
     <span class="status-dot playing"></span>
-    <strong>{{.Title}}</strong>
+    <span class="status-title">{{.Title}}</span>
     <span class="status-time">
-        {{- formatDuration .Position -}}
+        <span class="status-position">{{- formatDuration .Position -}}</span>
         /
-        {{- formatDuration .Duration -}}
+        <span class="status-duration">{{- formatDuration .Duration -}}</span>
     </span>
 {{- end}}
 {{- end -}}
