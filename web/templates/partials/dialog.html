@@ -3,7 +3,7 @@
   <div class="dialog-content">
 
     <div class="dialog-preview">
-      <video controls autoplay muted>
+      <video autoplay loop muted>
         <source src="{{.Preview}}" type="video/mp4">
         Your browser does not support HTML video.
       </video>
@@ -15,26 +15,25 @@
       <p>By <strong>{{.Artist}}</strong></p>
 
       {{if .ContactQR}}
-      <img src="{{.ContactQR}}">
+      <div class="qrcode" style="background: center / contain no-repeat url('{{.ContactQR}}')"></div>
+      <!-- <img class="qrcode" src="{{.ContactQR}}"> -->
       {{end}}
       {{if .Contact}}
       <p>{{.Contact}}</p>
       {{end}}
 
       <p class="description">{{.Description}}</p>
-
-      <p id="dialog-duration">Full runtime: {{.Duration}}</p>
-
-      <div class="dialog-actions">
-        <button onclick="playCurrentVideo({{.ID}})">
+    </div>
+    <div class="dialog-actions">
+        <button class="play" onclick="playCurrentVideo({{.ID}})">
           Play
         </button>
 
-        <button onclick="stopVideo()">
+        <button class="stop" onclick="stopVideo()">
           Stop Playback
         </button>
+        <p class="dialog-duration">Runtime: {{.Duration}}</p>
       </div>
-    </div>
   </div>
 </dialog>
 {{end}}

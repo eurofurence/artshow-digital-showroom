@@ -1,6 +1,6 @@
 [media-interface]
 port = ":8080"
-title = "Art Show Media Interface"
+title = "Digital Showroom"
 columns = 3
 
 [playout]
