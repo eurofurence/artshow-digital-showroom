@@ -366,9 +366,8 @@ main:before{
 }
 
 .dialog-details .qrcode{
-    width:200px;
-    height:200px;
-    margin: -9px 0 -9px -24px;
+    width:160px;
+    height:160px;
     position: relative;
     flex-shrink: 0;
 }
@@ -386,14 +385,15 @@ main:before{
 }
 .dialog-details .author-details:has(.qrcode){
     display:grid;
-    grid-template-columns:194px auto;
+    grid-template-columns:160px auto;
+    gap:40px;
+    margin-bottom:9px;
 }
 .dialog-details .author-details .qrcode{
     grid-column:1;
 }
 .dialog-details .author-details .author-strings{
-    /* margin-top:8px; */
-    /*shouldn't be necessary with QR codes without whitespace*/
+    margin-top:-5px;
 }
 .dialog-details .author-details:has(.qrcode) .author{
     margin-bottom:9px;
