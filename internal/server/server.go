@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
+	"github.com/eurofurence/artshow-digital-showroom/internal/file"
 	"github.com/eurofurence/artshow-digital-showroom/web"
 )
 
@@ -27,6 +28,8 @@ type Server struct {
 	playbackStatus PlaybackStatus
 	clients        map[chan string]struct{}
 	clientsMu      sync.Mutex
+
+	logger *file.Logger
 
 	httpServer *http.Server
 
@@ -66,6 +69,12 @@ func NewServer(cfg *config.Config) (s *Server) {
 func (s *Server) Start() error {
 	log.Println("Starting Server")
 
+	logger, err := file.Open("log.csv")
+	if err != nil {
+		return err
+	}
+	s.logger = logger
+
 	if err := s.setupMpv(); err != nil {
 		log.Printf("Error setting up mpv. Is mpv running?\n%v", err)
 	}
@@ -98,6 +107,10 @@ func (s *Server) Close() error {
 
 	// Tell long-lived handlers, such as SSE, to terminate.
 	s.shutdownCancel()
+
+	if err := s.logger.Close(); err != nil {
+		log.Printf("csv writer failed to close %v", err)
+	}
 
 	shutdownCtx, cancel := context.WithTimeout(
 		context.Background(),

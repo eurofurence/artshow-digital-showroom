@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
@@ -42,6 +43,11 @@ func (s *Server) playVideo(video *config.Video) error {
 	s.playbackStatus.Idle = false
 	s.playbackStatus.Title = video.Title
 	s.PublishStatus()
+
+	now := time.Now().Format(time.RFC3339)
+	if err := s.logger.Append(video.Title, now, now, "started"); err != nil {
+		log.Printf("error logging to csv %v", err)
+	}
 
 	return s.sendCommandsToMpv(
 		// run once
