@@ -27,15 +27,13 @@ func QrCodeFor(videoFile string, url string) (string, string) {
 	return filePath, fileRoute
 }
 
-func createQrCode(url string, qrFile string) (err error) {
+func createQrCode(url string, qrFile string) error {
 	log.Println("Creating qr Code " + qrFile)
 
-	q, err := qrcode.New(url, qrcode.Medium)
-	if err != nil {
-		return
-	}
-
-	q.DisableBorder = true
-
-	return q.WriteFile(256, qrFile)
+	return qrcode.WriteFile(
+		url,
+		qrcode.Medium,
+		256,
+		qrFile,
+	)
 }
