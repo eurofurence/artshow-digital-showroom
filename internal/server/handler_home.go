@@ -8,8 +8,6 @@ import (
 )
 
 type HomePageData struct {
-	Title   string
-	Columns int
 	Entries []config.Video
 }
 
@@ -17,8 +15,6 @@ func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
 	log.Println("HomeHandler got request for", r.Method, r.URL.Path)
 
 	data := HomePageData{
-		Title:   s.cfg.MediaInterface.Title,
-		Columns: s.cfg.MediaInterface.Columns,
 		Entries: s.cfg.Videos,
 	}
 

@@ -17,9 +17,7 @@ type Config struct {
 }
 
 type MediaInterfaceConfig struct {
-	Port    string `toml:"port"`
-	Title   string `toml:"title"`
-	Columns int    `toml:"columns"`
+	Port string `toml:"port"`
 
 	// Not from TOML
 	Address string `toml:"-"`
