@@ -1,10 +1,9 @@
 {{define "dialog"}}
 <dialog id="media-dialog">
   <div class="dialog-content">
-
     <div class="dialog-preview">
       <video autoplay loop muted>
-        <source src="{{.Preview}}" type="video/mp4">
+        <source src="{{.Preview}}" type="video/mp4" />
         Your browser does not support HTML video.
       </video>
     </div>
@@ -13,27 +12,23 @@
       <h2>{{.Title}}</h2>
       <div class="author-details">
         {{if .ContactQR}}
-          <div class="qrcode" style="background: center / contain no-repeat url('{{.ContactQR}}')"></div>
+        <div class="qrcode" style="background: center / contain no-repeat url('{{.ContactQR}}')"></div>
         {{end}}
         <div class="author-strings">
           <p class="author">By <strong>{{.Artist}}</strong></p>
           {{if .Contact}}
-            <p class="contact">{{.Contact}}</p>
+          <p class="contact">{{.Contact}}</p>
           {{end}}
         </div>
       </div>
       <p class="description">{{.Description}}</p>
     </div>
     <div class="dialog-actions">
-        <button class="play" onclick="playCurrentVideo({{.ID}})">
-          Play
-        </button>
+      <button class="play" onclick="playCurrentVideo({{.ID}})">Play</button>
 
-        <button class="stop" onclick="stopVideo()">
-          Stop Playback
-        </button>
-        <p class="dialog-duration">Runtime: {{.Duration}}</p>
-      </div>
+      <button class="stop" onclick="stopVideo()">Stop Playback</button>
+      <p class="dialog-duration">Runtime: {{.Duration}}</p>
+    </div>
   </div>
 </dialog>
 {{end}}

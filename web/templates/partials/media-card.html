@@ -1,21 +1,21 @@
 {{define "media-card"}}
-<div class="card"
-     hx-get="/dialog/{{.ID}}"
-     hx-target="#media-dialog"
-     hx-swap="outerHTML"
-     hx-trigger="click"
-     hx-on::after-request="document.getElementById('media-dialog').showModal()">
+<div
+  class="card"
+  hx-get="/dialog/{{.ID}}"
+  hx-target="#media-dialog"
+  hx-swap="outerHTML"
+  hx-trigger="click"
+  hx-on::after-request="document.getElementById('media-dialog').showModal()"
+>
   <div class="card-body">
     <div class="card-data">
       <h2>{{.Title}}</h2>
       <p>{{.Artist}}</p>
     </div>
 
-    <img class="card-image"
-         src="{{.Thumbnail}}"
-         alt="{{.Title}}">
+    <img class="card-image" src="{{.Thumbnail}}" alt="{{.Title}}" />
     {{if .Duration}}
-      <div class="card-duration"><p>{{.Duration}}</p></div>
+    <div class="card-duration"><p>{{.Duration}}</p></div>
     {{end}}
   </div>
 </div>

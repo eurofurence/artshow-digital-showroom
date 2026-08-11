@@ -1,14 +1,14 @@
 {{define "statusbar"}}
 {{- if .Idle -}}
-    <span class="status-dot idle"></span>
-    Nothing playing
+<span class="status-dot idle"></span>
+Nothing playing
 {{- else -}}
-    <span class="status-dot playing"></span>
-    <span class="status-title">{{.Title}}</span>
-    <span class="status-time">
-        <span class="status-position">{{- formatDuration .Position -}}</span>
-        /
-        <span class="status-duration">{{- formatDuration .Duration -}}</span>
-    </span>
+<span class="status-dot playing"></span>
+<span class="status-title">{{.Title}}</span>
+<span class="status-time">
+  <span class="status-position">{{- formatDuration .Position -}}</span>
+  /
+  <span class="status-duration">{{- formatDuration .Duration -}}</span>
+</span>
 {{- end}}
 {{- end -}}
