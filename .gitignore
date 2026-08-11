@@ -41,8 +41,3 @@ vendor/
 # Go workspace file
 go.work
 go.work.sum
-
-##### JS
-
-# Do not add minified js files
-*.min.js
