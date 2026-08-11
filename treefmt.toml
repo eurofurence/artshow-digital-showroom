@@ -1,0 +1,8 @@
+[formatter.nix]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.go]
+command = "golangci-lint"
+options = ["fmt"]
+includes = ["*.go"]
