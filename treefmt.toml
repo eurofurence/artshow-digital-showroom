@@ -6,3 +6,12 @@ includes = ["*.nix"]
 command = "golangci-lint"
 options = ["fmt"]
 includes = ["*.go"]
+
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = [
+  "*.css",
+  "*.js",
+]
+excludes = ["*.min.js"]
