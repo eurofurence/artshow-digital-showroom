@@ -4,7 +4,6 @@ This project implements its main server in go.
 
 Some additional user interaction on the webpage is enabled through HTMX (not yet).
 
-
 # Dependencies
 
 To run please install a compatible version of `go`.
@@ -23,7 +22,6 @@ Run `direnv allow` in the repository.
 
 The file `.envrc` will instruct `direnv` to enter the dev shell of the flake as long as you stay inside any folder of the repository.
 
-
 # Running the server
 
 To compile and start the server use:
@@ -36,7 +34,6 @@ For hot reloading on any change use [https://github.com/air-verse/air] and just 
 
 Now the server is updated and restarted whenever you change a file.
 See the config in [.air.toml](../.air.toml).
-
 
 # Code style
 
