@@ -11,6 +11,9 @@ Media/
 # Direnv cache
 .direnv/
 
+# log file
+log.csv
+
 ##### Go
 
 # Binaries for programs and plugins
