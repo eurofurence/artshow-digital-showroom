@@ -23,10 +23,15 @@
           packages = with pkgs; [
             go
             air # hot reloading go server
-            golangci-lint # fmt and lint go code
             ffmpeg # generate preview videos
             imagemagick # generate images
             mpv # playback
+
+            pre-commit # Run checks before creating git commits
+            treefmt # manage formatters
+            golangci-lint # fmt and lint go code
+            prettier # formatting html, css, js files
+            nixfmt # format nix code
           ];
 
           shellHook =
@@ -39,10 +44,15 @@
               echo -e "\
               ${red_text}go version: ${green_text}$(go version)
               ${red_text}air version: ${green_text}$(air -v)
+              ${red_text}ffmpeg version: ${green_text}$(ffmpeg -version | head -n2)
+              ${red_text}magick version: ${green_text}$(magick -version | head -n1)
+              ${red_text}mpv version: ${green_text}$(mpv --version | head -n1)
+
+              ${red_text}pre-commit version: ${green_text}$(pre-commit --version)
+              ${red_text}treefmt version: ${green_text}$(treefmt --version)
               ${red_text}golangci-lint version: ${green_text}$(golangci-lint version)
-              ${red_text}ffmpeg version: ${green_text}$(ffmpeg -version)
-              ${red_text}magick version: ${green_text}$(magick -version)
-              ${red_text}mpv version: ${green_text}$(mpv --version)
+              ${red_text}prettier version: ${green_text}$(prettier --version)
+              ${red_text}nixfmt version: ${green_text}$(nixfmt --version)
               ${reset_formatting}"'';
         };
       }
