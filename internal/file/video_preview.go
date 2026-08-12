@@ -8,13 +8,13 @@ import (
 
 func PreviewFor(path string) string {
 	if !Exist(path) {
-		log.Println("preview: the video " + path + " was not found")
+		log.Printf("preview: the video %q was not found", path)
 		return ""
 	}
 
 	filePath, fileRoute, err := MediaPaths(path, "previews", ".mp4")
 	if err != nil {
-		log.Println("Could not create previews paths for " + path)
+		log.Printf("Could not create previews paths for %q", path)
 		return ""
 	}
 
@@ -29,7 +29,7 @@ func PreviewFor(path string) string {
 }
 
 func createPreview(videoFile string, previewFile string) error {
-	log.Println("Creating Preview " + previewFile)
+	log.Printf("Creating Preview %q", previewFile)
 
 	cmd := exec.Command(
 		"ffmpeg",

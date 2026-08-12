@@ -31,10 +31,10 @@ func findConfig() (string, error) {
 		configPath := path + "/config.toml"
 
 		if file.Exist(configPath) {
-			log.Println("Using config at: " + configPath)
+			log.Printf("Using config at %q", configPath)
 			return configPath, nil
 		}
-		log.Println("No config found at " + configPath)
+		log.Printf("No config found at %q", configPath)
 	}
 	return "", errors.New("no config file found")
 }

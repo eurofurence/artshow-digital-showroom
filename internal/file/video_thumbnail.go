@@ -10,13 +10,13 @@ import (
 
 func ThumbnailFor(path string) string {
 	if !Exist(path) {
-		log.Println("thumbnail: the video " + path + " was not found")
+		log.Printf("thumbnail: the video %q was not found", path)
 		return constants.FallbackImage
 	}
 
 	filePath, fileRoute, err := MediaPaths(path, "thumbnails", ".webp")
 	if err != nil {
-		log.Println("Could not create thumbnail paths for " + path)
+		log.Printf("Could not create thumbnail paths for %q", path)
 		return ""
 	}
 
@@ -31,7 +31,7 @@ func ThumbnailFor(path string) string {
 }
 
 func createThumbnail(videoFile string, thumbnailFile string) error {
-	log.Println("Creating thumbnail " + thumbnailFile)
+	log.Printf("Creating thumbnail for %q", thumbnailFile)
 
 	cmd := exec.Command(
 		"ffmpeg",

@@ -13,7 +13,7 @@ func QrCodeFor(videoFile string, url string) (string, string) {
 
 	filePath, fileRoute, err := MediaPaths(videoFile, "qr-codes", ".png")
 	if err != nil {
-		log.Println("Could not create qr code paths for " + videoFile)
+		log.Printf("Could not create qr code paths for %q", videoFile)
 		return "", ""
 	}
 
@@ -28,7 +28,7 @@ func QrCodeFor(videoFile string, url string) (string, string) {
 }
 
 func createQrCode(url string, qrFile string) error {
-	log.Println("Creating qr Code " + qrFile)
+	log.Printf("Creating qr Code %q", qrFile)
 
 	return qrcode.WriteFile(
 		url,
