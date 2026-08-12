@@ -12,7 +12,7 @@
       <h2>{{.Title}}</h2>
       <div class="author-details">
         {{if .ContactQR}}
-        <div class="qrcode" style="background: center / contain no-repeat url('{{.ContactQR}}')"></div>
+        <div class="qrcode"> <img src="{{.ContactQR}}"> </div>
         {{end}}
         <div class="author-strings">
           <p class="author">By <strong>{{.Artist}}</strong></p>
