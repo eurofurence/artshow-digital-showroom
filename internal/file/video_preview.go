@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strconv"
 	"time"
 )
 
@@ -42,7 +43,7 @@ func createPreview(ctx context.Context, videoFile string, previewFile string, pl
 		duration = "10"
 	} else {
 		seek = "0"
-		duration = string(duration)
+		duration = strconv.Itoa(playtime)
 	}
 
 	cmd := exec.CommandContext(
