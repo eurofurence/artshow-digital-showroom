@@ -34,6 +34,7 @@ func (s *Server) processConfig() {
 		item.ContactQR = qrRoute
 
 		item.PostCredit = s.cfg.MediaInterface.Address + "/" + file.PostCreditFor(
+			s.serverCtx,
 			videoFile,
 			item.Title,
 			item.Artist,

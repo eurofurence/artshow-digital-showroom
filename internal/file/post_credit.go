@@ -1,16 +1,18 @@
 package file
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
+	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 	"github.com/eurofurence/artshow-digital-showroom/internal/hash"
 )
 
-func PostCreditFor(path, title, artist, qrPath, qrURL string) string {
+func PostCreditFor(ctx context.Context, path, title, artist, qrPath, qrURL string) string {
 	hash := hash.GetMD5Hash(qrURL)
 	filePath, fileRoute, err := MediaPaths(path, "post_credits", "_"+hash+".png")
 	if err != nil {
@@ -19,7 +21,7 @@ func PostCreditFor(path, title, artist, qrPath, qrURL string) string {
 	}
 
 	if !Exist(filePath) {
-		err := generatePostCredit(filePath, title, artist, qrPath)
+		err := generatePostCredit(ctx, filePath, title, artist, qrPath)
 		if err != nil {
 			log.Printf("Thumbnail failed to generate: %s\n", err)
 			return constants.FallbackImage
@@ -28,7 +30,10 @@ func PostCreditFor(path, title, artist, qrPath, qrURL string) string {
 	return fileRoute
 }
 
-func generatePostCredit(outputFile, title, artist, qrPath string) error {
+func generatePostCredit(ctx context.Context, outputFile, title, artist, qrPath string) error {
+	timeoutCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
 	args := []string{
 		"-size", "1920x1080",
 		"xc:#000000",
@@ -65,7 +70,7 @@ func generatePostCredit(outputFile, title, artist, qrPath string) error {
 	// Output file
 	args = append(args, outputFile)
 
-	cmd := exec.Command("magick", args...)
+	cmd := exec.CommandContext(timeoutCtx, "magick", args...)
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {
