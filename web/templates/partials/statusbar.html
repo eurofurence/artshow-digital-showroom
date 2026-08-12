@@ -5,10 +5,14 @@ Nothing playing
 {{- else -}}
 <span class="status-dot playing"></span>
 <span class="status-title">{{.Title}}</span>
+{{- if .InCredits -}}
+<span>Credits</span>
+{{- else -}}
 <span class="status-time">
-  <span class="status-position">{{- formatDuration .Position -}}</span>
+  <span class="status-position">{{formatDuration .Position}}</span>
   /
-  <span class="status-duration">{{- formatDuration .Duration -}}</span>
+  <span class="status-duration">{{formatDuration .Duration}}</span>
 </span>
+{{- end}}
 {{- end}}
 {{- end -}}
