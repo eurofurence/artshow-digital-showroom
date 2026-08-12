@@ -3,6 +3,7 @@ package file
 import (
 	"log"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/hash"
 	"github.com/skip2/go-qrcode"
 )
 
@@ -11,7 +12,9 @@ func QrCodeFor(videoFile string, url string) (string, string) {
 		return "", ""
 	}
 
-	filePath, fileRoute, err := MediaPaths(videoFile, "qr-codes", ".png")
+	hash := hash.GetMD5Hash(url)
+
+	filePath, fileRoute, err := MediaPaths(videoFile, "qr-codes", "_"+hash+".png")
 	if err != nil {
 		log.Printf("Could not create qr code paths for %q", videoFile)
 		return "", ""

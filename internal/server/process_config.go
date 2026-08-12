@@ -1,11 +1,10 @@
 package server
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"path/filepath"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/file"
+	"github.com/eurofurence/artshow-digital-showroom/internal/hash"
 )
 
 func (s *Server) processConfig() {
@@ -14,7 +13,7 @@ func (s *Server) processConfig() {
 	for i := range s.cfg.Videos {
 		item := &s.cfg.Videos[i]
 
-		hash := getMD5Hash(item.Title)
+		hash := hash.GetMD5Hash(item.Title)
 		item.ID = hash
 		s.videos[hash] = item
 
@@ -41,9 +40,4 @@ func (s *Server) processConfig() {
 			qrPath,
 		)
 	}
-}
-
-func getMD5Hash(text string) string {
-	hash := md5.Sum([]byte(text))
-	return hex.EncodeToString(hash[:])
 }
