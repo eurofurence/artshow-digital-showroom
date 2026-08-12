@@ -1,4 +1,4 @@
-package file
+package stats
 
 import (
 	"encoding/csv"

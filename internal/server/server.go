@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
-	"github.com/eurofurence/artshow-digital-showroom/internal/file"
+	"github.com/eurofurence/artshow-digital-showroom/internal/stats"
 	"github.com/eurofurence/artshow-digital-showroom/web"
 )
 
@@ -29,7 +29,7 @@ type Server struct {
 	clients        map[chan string]struct{}
 	clientsMu      sync.Mutex
 
-	logger *file.Logger
+	logger *stats.Logger
 
 	httpServer *http.Server
 
@@ -69,7 +69,7 @@ func NewServer(cfg *config.Config) (s *Server) {
 func (s *Server) Start() error {
 	log.Println("Starting Server")
 
-	logger, err := file.Open("log.csv")
+	logger, err := stats.Open("log.csv")
 	if err != nil {
 		return err
 	}
