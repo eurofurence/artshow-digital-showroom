@@ -15,7 +15,7 @@ type PlayRequest struct {
 }
 
 func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("PlayHandler got request for", r.Method, r.URL.Path)
+	log.Printf("PlayHandler got request for %s %q", r.Method, r.URL.Path)
 
 	var req PlayRequest
 

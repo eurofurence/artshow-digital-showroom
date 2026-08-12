@@ -12,7 +12,7 @@ type HomePageData struct {
 }
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
-	log.Println("HomeHandler got request for", r.Method, r.URL.Path)
+	log.Printf("HomeHandler got request for %s %q", r.Method, r.URL.Path)
 
 	data := HomePageData{
 		Entries: s.cfg.Videos,

@@ -37,6 +37,8 @@ func (s *Server) PublishStatus() {
 }
 
 func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("StatusHandler got request for %s %q", r.Method, r.URL.Path)
+
 	w.Header().Set("Content-Type", "text/event-stream")
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("Connection", "keep-alive")

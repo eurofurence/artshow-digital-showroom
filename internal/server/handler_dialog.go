@@ -6,7 +6,7 @@ import (
 )
 
 func (s *Server) DialogHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("DialogHandler got request for", r.Method, r.URL.Path)
+	log.Printf("DialogHandler got request for %s %q", r.Method, r.URL.Path)
 
 	id := r.PathValue("id")
 
