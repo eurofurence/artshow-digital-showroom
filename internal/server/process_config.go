@@ -23,9 +23,10 @@ func (s *Server) processConfig() {
 		// Attributes that always exist or have fallbacks
 		item.Thumbnail = file.ThumbnailFor(s.serverCtx, videoFile)
 
-		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
-		item.ContactQR = qrRoute
+		_, qrRouteNoBorder := file.QrCodeFor(videoFile, item.Contact, false)
+		item.ContactQR = qrRouteNoBorder
 
+		qrPath, _ := file.QrCodeFor(videoFile, item.Contact, true)
 		item.PostCredit = s.cfg.MediaInterface.Address + "/" + file.PostCreditFor(
 			s.serverCtx,
 			videoFile,
