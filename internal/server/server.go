@@ -33,12 +33,12 @@ type Server struct {
 
 	httpServer *http.Server
 
-	shutdownCtx    context.Context
-	shutdownCancel context.CancelFunc
+	serverCtx    context.Context
+	serverCancel context.CancelFunc
 }
 
-func NewServer(cfg *config.Config) (s *Server) {
-	shutdownCtx, shutdownCancel := context.WithCancel(context.Background())
+func NewServer(cfg *config.Config, ctx context.Context) (s *Server) {
+	serverCtx, serverCancel := context.WithCancel(ctx)
 
 	templates := template.Must(
 		template.New("").
@@ -56,8 +56,8 @@ func NewServer(cfg *config.Config) (s *Server) {
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
 		playbackStatus: PlaybackStatus{Idle: true},
 		clients:        make(map[chan string]struct{}),
-		shutdownCtx:    shutdownCtx,
-		shutdownCancel: shutdownCancel,
+		serverCtx:      serverCtx,
+		serverCancel:   serverCancel,
 	}
 
 	s.processConfig()
@@ -107,7 +107,7 @@ func (s *Server) Close() error {
 	log.Println("Shutting down")
 
 	// Tell long-lived handlers, such as SSE, to terminate.
-	s.shutdownCancel()
+	s.serverCancel()
 
 	if err := s.logger.Close(); err != nil {
 		log.Printf("csv writer failed to close %v", err)

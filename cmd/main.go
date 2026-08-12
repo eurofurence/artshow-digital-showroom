@@ -23,7 +23,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	srv := server.NewServer(cfg)
+	srv := server.NewServer(cfg, ctx)
 
 	errCh := make(chan error, 1)
 
