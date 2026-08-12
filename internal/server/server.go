@@ -96,8 +96,10 @@ func (s *Server) Start() error {
 	mux.Handle(prefix, http.StripPrefix(prefix, fs))
 
 	s.httpServer = &http.Server{
-		Addr:    s.cfg.MediaInterface.Port,
-		Handler: mux,
+		Addr:              s.cfg.MediaInterface.Port,
+		Handler:           mux,
+		ReadHeaderTimeout: 5 * time.Second,
+		IdleTimeout:       60 * time.Second,
 	}
 	log.Println("Listening on " + s.cfg.MediaInterface.Address)
 	return s.httpServer.ListenAndServe()
