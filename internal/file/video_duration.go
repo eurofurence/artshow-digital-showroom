@@ -1,10 +1,12 @@
 package file
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os/exec"
 	"strconv"
+	"time"
 )
 
 type Probe struct {
@@ -13,8 +15,12 @@ type Probe struct {
 	} `json:"format"`
 }
 
-func VideoDuration(file string) (string, error) {
-	cmd := exec.Command(
+func VideoDuration(ctx context.Context, file string) (string, error) {
+	timeoutCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
+	cmd := exec.CommandContext(
+		timeoutCtx,
 		"ffprobe",
 		"-v", "quiet",
 		"-print_format", "json",
