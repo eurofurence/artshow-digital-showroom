@@ -27,6 +27,9 @@ func (p *PlaybackStatus) SetIdle() {
 }
 
 func (p *PlaybackStatus) IsIdle() bool {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+
 	return p.idle
 }
 
@@ -43,12 +46,12 @@ func (p *PlaybackStatus) StartTrack(title string) {
 
 // Return true if the position now has a new value
 func (p *PlaybackStatus) SetPosition(position int) bool {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+
 	if position == p.position {
 		return false
 	}
-
-	p.mu.Lock()
-	defer p.mu.Unlock()
 
 	p.position = position
 	return true
