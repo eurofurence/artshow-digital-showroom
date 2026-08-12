@@ -37,7 +37,7 @@ type Server struct {
 	serverCancel context.CancelFunc
 }
 
-func NewServer(cfg *config.Config, ctx context.Context) (s *Server) {
+func NewServer(cfg *config.Config, ctx context.Context) (*Server, error) {
 	serverCtx, serverCancel := context.WithCancel(ctx)
 
 	templates := template.Must(
@@ -50,7 +50,7 @@ func NewServer(cfg *config.Config, ctx context.Context) (s *Server) {
 			),
 	)
 
-	s = &Server{
+	s := &Server{
 		templates:      templates,
 		cfg:            cfg,
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
@@ -63,15 +63,9 @@ func NewServer(cfg *config.Config, ctx context.Context) (s *Server) {
 	s.processConfig()
 	cfg.Print("Processed config")
 
-	return
-}
-
-func (s *Server) Start() error {
-	log.Println("Starting Server")
-
 	logger, err := stats.Open("log.csv")
 	if err != nil {
-		return err
+		return nil, err
 	}
 	s.logger = logger
 
@@ -101,6 +95,11 @@ func (s *Server) Start() error {
 		ReadHeaderTimeout: 5 * time.Second,
 		IdleTimeout:       60 * time.Second,
 	}
+
+	return s, nil
+}
+
+func (s *Server) Start() error {
 	log.Println("Listening on " + s.cfg.MediaInterface.Address)
 	return s.httpServer.ListenAndServe()
 }
