@@ -7,7 +7,7 @@ import (
 	"github.com/skip2/go-qrcode"
 )
 
-func QrCodeFor(videoFile string, url string) (string, string) {
+func QrCodeFor(videoFile, url string) (string, string) {
 	if url == "" {
 		return "", ""
 	}
@@ -21,7 +21,7 @@ func QrCodeFor(videoFile string, url string) (string, string) {
 	}
 
 	if !Exist(filePath) {
-		err = createQrCode(url, filePath)
+		err = createQrCode(url, filePath, true)
 		if err != nil {
 			log.Printf("QR failed to generate: %s\n", err)
 			return "", ""
@@ -30,13 +30,24 @@ func QrCodeFor(videoFile string, url string) (string, string) {
 	return filePath, fileRoute
 }
 
-func createQrCode(url string, qrFile string) error {
+func createQrCode(url, qrFile string, border bool) error {
 	log.Printf("Creating qr Code %q", qrFile)
 
-	return qrcode.WriteFile(
-		url,
-		qrcode.Medium,
-		256,
-		qrFile,
-	)
+	if border {
+		return qrcode.WriteFile(
+			url,
+			qrcode.Medium,
+			256,
+			qrFile,
+		)
+	} else {
+		q, err := qrcode.New(url, qrcode.Medium)
+		if err != nil {
+			return err
+		}
+
+		q.DisableBorder = true
+
+		return q.WriteFile(256, qrFile)
+	}
 }
