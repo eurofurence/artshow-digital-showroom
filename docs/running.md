@@ -11,8 +11,9 @@ Make sure the following programs are installed in a recent version
 
 ## Configuring the application
 
-The application reads the config and Videos from a folder `Media` if it exists
-and otherwise falls back to `MediaExample`.
+The application searches for a file `config.toml` in the folder `Media`.
+If this is missing it tries again under `MediaExample`.
+The server starts with that configuration and searches any Videos in the same folder.
 
 The sample folder `MediaExample` is provided.
 There is however only a config file and no videos.\
@@ -23,17 +24,17 @@ For a preconfigured setup download the folder [Media](https://cloud.eurofurence.
 
 # Running the application
 
-## Important information
+> [!IMPORTANT]
+> The html server reads the `config.toml` and connects to `mpv` at launch.\
+> If you make changes to the config or restart `mpv` then also restart the server.
 
-- The html server reads the `config.toml` and connects to `mpv` at launch.\
-  If you make changes to the config or restart `mpv` then also restart the server.
-
-- Thumbnails, QR-Codes and previews are placed in subfolders of `Media` / `MediaExample`
-  and only generated if they are missing
-  - You can overwrite them with different content and this will render after the next page reload.\
-    You might need to force clear the browser cache.
-  - However when updating titles or contact info in `config.toml` the images stay outdated.\
-    Delete them to have them regenerated with the correct info on the next server launch.
+> [!IMPORTANT]
+> Thumbnails, QR-Codes and previews are placed in subfolders of `Media` / `MediaExample`
+> and only generated if they are missing
+> - You can overwrite them with different content and this will render after the next page reload.\
+>   You might need to force clear the browser cache.
+> - However when updating titles or contact info in `config.toml` the images stay outdated.\
+>   Delete them to have them regenerated with the correct info on the next server launch.
 
 ## Running the playback mpv server
 
