@@ -154,7 +154,7 @@ html {
 
 main::before {
     content: "";
-    background: url("../as-logo.svg");
+    background: url("/static/images/as-logo.svg");
     width: 96px;
     position: absolute;
     display: block;
