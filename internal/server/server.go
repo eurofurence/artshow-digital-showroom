@@ -25,7 +25,7 @@ type Server struct {
 	mpvEncoder *json.Encoder
 	mpvMu      sync.Mutex
 
-	playbackStatus PlaybackStatus
+	playbackStatus *PlaybackStatus
 	clients        map[chan string]struct{}
 	clientsMu      sync.Mutex
 
@@ -54,7 +54,7 @@ func NewServer(cfg *config.Config, ctx context.Context) (s *Server) {
 		templates:      templates,
 		cfg:            cfg,
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
-		playbackStatus: PlaybackStatus{Idle: true},
+		playbackStatus: &PlaybackStatus{idle: true},
 		clients:        make(map[chan string]struct{}),
 		serverCtx:      serverCtx,
 		serverCancel:   serverCancel,

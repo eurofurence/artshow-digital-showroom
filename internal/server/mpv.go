@@ -68,7 +68,7 @@ func (s *Server) processMpvOutput() {
 					log.Printf("failed to start standby: %v", err)
 				}
 			case "playback-time":
-				if s.playbackStatus.Idle {
+				if s.playbackStatus.IsIdle() {
 					continue
 				}
 
@@ -78,8 +78,7 @@ func (s *Server) processMpvOutput() {
 				}
 
 				seconds := int(time)
-				if seconds != s.playbackStatus.Position {
-					s.playbackStatus.Position = seconds
+				if s.playbackStatus.SetPosition(seconds) {
 					s.PublishStatus()
 				}
 			case "duration":
@@ -88,7 +87,7 @@ func (s *Server) processMpvOutput() {
 					continue
 				}
 
-				s.playbackStatus.Duration = int(duration)
+				s.playbackStatus.SetDuration(int(duration))
 				s.PublishStatus()
 			}
 		}

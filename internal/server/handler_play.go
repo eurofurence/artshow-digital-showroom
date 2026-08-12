@@ -45,8 +45,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) playVideo(video *config.Video) error {
-	s.playbackStatus.Idle = false
-	s.playbackStatus.Title = video.Title
+	s.playbackStatus.StartTrack(video.Title)
 	s.PublishStatus()
 
 	now := time.Now().Format(time.RFC3339)
@@ -67,7 +66,7 @@ func (s *Server) playVideo(video *config.Video) error {
 }
 
 func (s *Server) startStandby() error {
-	s.playbackStatus.Idle = true
+	s.playbackStatus.SetIdle()
 	s.PublishStatus()
 
 	return s.sendCommandsToMpv(

@@ -11,19 +11,14 @@ import (
 	"time"
 )
 
-type PlaybackStatus struct {
-	Idle     bool
-	Title    string
-	Position int
-	Duration int
-}
-
 func (s *Server) PublishStatus() {
 	s.clientsMu.Lock()
 	defer s.clientsMu.Unlock()
 
+	snapshot := s.playbackStatus.Snapshot()
+
 	var buf bytes.Buffer
-	if err := s.templates.ExecuteTemplate(&buf, "statusbar", s.playbackStatus); err != nil {
+	if err := s.templates.ExecuteTemplate(&buf, "statusbar", snapshot); err != nil {
 		log.Printf("Error rendering statusbar in publish %v", err)
 	}
 	html := buf.String()
