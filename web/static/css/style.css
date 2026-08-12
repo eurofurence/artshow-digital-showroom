@@ -54,9 +54,14 @@
 }
 
 /* avoid outlines on active element when opening dialog popups */
-*:focus,
-*:focus-visible {
+*:focus {
     outline: none;
+}
+
+/* allow outline for keyboard focus */
+*:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
 }
 
 @font-face {
@@ -520,7 +525,6 @@ body.horizontal-scroll .card-container {
     grid-template-rows: 1fr 1fr 1fr;
     grid-auto-flow: column;
     width: max-content;
-    overflow: hidden;
 }
 
 body.horizontal-scroll .card-container::after {
