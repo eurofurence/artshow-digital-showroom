@@ -54,7 +54,7 @@ func NewServer(cfg *config.Config, ctx context.Context) (*Server, error) {
 		templates:      templates,
 		cfg:            cfg,
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
-		playbackStatus: &PlaybackStatus{idle: true},
+		playbackStatus: &PlaybackStatus{},
 		clients:        make(map[chan string]struct{}),
 		serverCtx:      serverCtx,
 		serverCancel:   serverCancel,
