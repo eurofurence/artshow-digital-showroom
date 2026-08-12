@@ -1,6 +1,7 @@
 :root {
     /* Backgrounds */
     --color-background: #e6efee;
+    --color-background-fadeout: #ffffff;
     --color-surface: #ffffff;
     --color-surface-muted: #0f1614;
 
@@ -11,6 +12,7 @@
     /* Text */
     --color-text: #674731;
     --color-text-muted: #666666;
+    --color-text-header: #ffffff;
 
     --heading-size: 40px;
     --bodytext-size: 16px;
@@ -89,13 +91,13 @@ body {
     font-weight: var(--bodytext-weight);
     font-size: var(--bodytext-size);
     color: var(--color-text);
-    background: linear-gradient(to bottom, var(--color-background), #fff);
+    background: linear-gradient(to bottom, var(--color-background), var(--color-background-fadeout));
     overscroll-behavior: contain;
 }
 
 html {
     /* for overscroll */
-    background: linear-gradient(to bottom, var(--color-background), #fff);
+    background: linear-gradient(to bottom, var(--color-background), var(--color-background-fadeout));
 }
 
 /************** HEADER **************/
@@ -104,7 +106,7 @@ html {
     top: 0;
     left: 0;
     background: rgb(20 83 67);
-    color: #fff;
+    color: var(--color-text-header);
     z-index: 1;
     font-size: var(--heading-size);
     font-family: "Josefin Sans", sans-serif;
