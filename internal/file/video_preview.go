@@ -1,12 +1,14 @@
 package file
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os/exec"
+	"time"
 )
 
-func PreviewFor(path string) string {
+func PreviewFor(ctx context.Context, path string) string {
 	if !Exist(path) {
 		log.Printf("preview: the video %q was not found", path)
 		return ""
@@ -19,7 +21,7 @@ func PreviewFor(path string) string {
 	}
 
 	if !Exist(filePath) {
-		err := createPreview(path, filePath)
+		err := createPreview(ctx, path, filePath)
 		if err != nil {
 			log.Printf("Preview failed to generate: %s\n", err)
 			return ""
@@ -28,10 +30,14 @@ func PreviewFor(path string) string {
 	return fileRoute
 }
 
-func createPreview(videoFile string, previewFile string) error {
+func createPreview(ctx context.Context, videoFile string, previewFile string) error {
+	timeoutCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
 	log.Printf("Creating Preview %q", previewFile)
 
-	cmd := exec.Command(
+	cmd := exec.CommandContext(
+		timeoutCtx,
 		"ffmpeg",
 		"-ss", "5", // start at 5 seconds
 		"-i", videoFile,

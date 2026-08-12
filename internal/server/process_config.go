@@ -26,7 +26,7 @@ func (s *Server) processConfig() {
 		// _, route, _ := file.MediaPaths(videoFile, "", "")
 		// item.Video = s.cfg.MediaInterface.Address + "/" + route
 
-		item.Preview = file.PreviewFor(videoFile)
+		item.Preview = file.PreviewFor(s.serverCtx, videoFile)
 		item.Duration, _ = file.VideoDuration(s.serverCtx, videoFile)
 
 		item.Thumbnail = file.ThumbnailFor(s.serverCtx, videoFile)
