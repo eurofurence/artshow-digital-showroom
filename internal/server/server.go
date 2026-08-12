@@ -54,8 +54,8 @@ func NewServer(cfg *config.Config) (s *Server) {
 		templates:      templates,
 		cfg:            cfg,
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
-		clients:        make(map[chan string]struct{}),
 		playbackStatus: PlaybackStatus{Idle: true},
+		clients:        make(map[chan string]struct{}),
 		shutdownCtx:    shutdownCtx,
 		shutdownCancel: shutdownCancel,
 	}
