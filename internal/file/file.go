@@ -32,7 +32,7 @@ func MediaPaths(
 	}
 
 	path = filepath.Join(dir, subfolder, name)
-	route = filepath.Join("media", subfolder, name)
+	route = filepath.Join(dir, subfolder, name)
 
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 		return "", "", err

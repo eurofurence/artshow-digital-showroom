@@ -92,7 +92,8 @@ func (s *Server) Start() error {
 	mux.Handle("/static/", fs)
 
 	fs = http.FileServer(http.Dir(s.cfg.ConfigFolder))
-	mux.Handle("/media/", http.StripPrefix("/media/", fs))
+	prefix := "/" + s.cfg.ConfigFolder + "/"
+	mux.Handle(prefix, http.StripPrefix(prefix, fs))
 
 	s.httpServer = &http.Server{
 		Addr:    s.cfg.MediaInterface.Port,
