@@ -13,7 +13,7 @@ func (s *Server) processConfig() {
 	for i := range s.cfg.Videos {
 		item := &s.cfg.Videos[i]
 
-		hash := hash.GetMD5Hash(item.Title)
+		hash := hash.GetMD5Hash(item.File + "\x00" + item.Artist + "\x00" + item.Title)
 		item.ID = hash
 		s.videos[hash] = item
 
