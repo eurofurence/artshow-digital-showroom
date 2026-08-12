@@ -82,10 +82,10 @@ func (s *Server) Start() error {
 	mux := http.NewServeMux()
 
 	// Handlers
-	mux.HandleFunc("/", s.Home)
-	mux.HandleFunc("/play", s.PlayHandler)
+	mux.HandleFunc("GET /{$}", s.Home)
+	mux.HandleFunc("POST /play", s.PlayHandler)
 	mux.HandleFunc("GET /dialog/{id}", s.DialogHandler)
-	mux.HandleFunc("/mpvStatus", s.StatusHandler)
+	mux.HandleFunc("GET /mpvStatus", s.StatusHandler)
 
 	// Static files
 	fs := http.FileServer(http.FS(web.Files))
