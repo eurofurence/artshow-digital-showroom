@@ -66,6 +66,11 @@ func (s *Server) playVideo(video *config.Video) error {
 }
 
 func (s *Server) startStandby() error {
+	// do not set idle again
+	if s.playbackStatus.IsIdle() {
+		return nil
+	}
+
 	s.playbackStatus.SetIdle()
 	s.PublishStatus()
 
