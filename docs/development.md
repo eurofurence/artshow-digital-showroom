@@ -2,7 +2,7 @@
 
 This project implements its main server in go.
 
-Some additional user interaction on the webpage is enabled through HTMX (not yet).
+Some additional user interaction on the webpage is enabled through HTMX.
 
 # Dependencies
 
@@ -42,8 +42,20 @@ See the config in [.air.toml](../.air.toml).
 Basic indent style can be set in the file [.editorconfig](../.editorconfig).
 Most IDEs and advanced editors will respect this config by default.
 
-## go fmt
+## treefmt
 
-After making changes to the `go` code, use the included formatter
+After making changes to the Go code, or to JS or CSS , run the configured formatter:
 
-    go fmt ./...
+    treefmt
+
+This calls the all formatters configured in [treefmt.toml](../treefmt.toml).
+
+## pre-commit
+
+Activate `pre-commit` with:
+
+    pre-commit install
+
+Now before each commit the hooks defined in [.pre-commit-config.yaml](../.pre-commit-config.yaml) run.
+
+This includes `treefmt` and the Go linter.
