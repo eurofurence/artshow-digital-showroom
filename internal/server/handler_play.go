@@ -49,7 +49,7 @@ func (s *Server) playVideo(video *config.Video) error {
 	s.PublishStatus()
 
 	now := time.Now().Format(time.RFC3339)
-	if err := s.logger.Append(video.Title, now, now, "started"); err != nil {
+	if err := s.logger.Append(now, video.Title, video.Duration); err != nil {
 		log.Printf("error logging to csv %v", err)
 	}
 

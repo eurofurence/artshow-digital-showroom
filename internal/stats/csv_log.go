@@ -32,10 +32,9 @@ func Open(path string) (*Logger, error) {
 
 	if newFile {
 		if err := logger.csv.Write([]string{
+			"timestamp",
 			"video",
-			"started_at_utc",
-			"ended_at_utc",
-			"status",
+			"full_duration",
 		}); err != nil {
 			if closeErr := file.Close(); closeErr != nil {
 				return nil, fmt.Errorf("write header: %w; close file: %v", err, closeErr)
@@ -56,15 +55,14 @@ func Open(path string) (*Logger, error) {
 	return logger, nil
 }
 
-func (l *Logger) Append(videoID, startedAt, endedAt, status string) error {
+func (l *Logger) Append(timestamp, videoID, duration string) error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
 	if err := l.csv.Write([]string{
+		timestamp,
 		videoID,
-		startedAt,
-		endedAt,
-		status,
+		duration,
 	}); err != nil {
 		return err
 	}
