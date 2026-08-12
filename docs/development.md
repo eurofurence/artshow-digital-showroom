@@ -44,7 +44,7 @@ Most IDEs and advanced editors will respect this config by default.
 
 ## treefmt
 
-After making changes to the Go code, or to JS or CSS , run the configured formatter:
+After making changes to Go, JavaScript, or CSS, run the configured formatter:
 
     treefmt
 
