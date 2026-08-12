@@ -284,7 +284,7 @@ main::before {
 }
 
 .status-dot.playing::after {
-    background: no-repeat url("../glyph-play.svg");
+    background: no-repeat url("/static/images/glyph-play.svg");
     animation: pulse 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
     height: 18px;
     width: 18px;
@@ -305,7 +305,7 @@ main::before {
 }
 
 .status-dot.idle::after {
-    background: no-repeat url("../glyph-stop.svg");
+    background: no-repeat url("/static/images/glyph-stop.svg");
     height: 16px;
     width: 16px;
 }
@@ -474,7 +474,7 @@ main::before {
 
 .dialog-actions button.play::after {
     content: " ";
-    background: url("../glyph-play.svg");
+    background: url("/static/images/glyph-play.svg");
     width: 25px;
     height: 24px;
     top: 42%;
@@ -493,7 +493,7 @@ main::before {
 
 .dialog-actions button.stop::after {
     content: "";
-    background: url("../glyph-stop.svg");
+    background: url("/static/images/glyph-stop.svg");
     width: 21px;
     height: 21px;
     font-size: 35px;
