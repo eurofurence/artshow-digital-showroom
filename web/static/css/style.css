@@ -166,16 +166,28 @@ main::before {
 
 /************** MEDIA CARDS **************/
 .card {
-    break-inside: avoid;
+    /* Make the button behave like a grid item / block card */
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 
-    /* padding: 1rem; */
     border: 1px solid var(--color-border);
     border-radius: 4px;
 
     background: var(--color-surface);
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+
     overflow: hidden;
+    break-inside: avoid;
+
+    /* Useful if the card is inside a grid */
+    min-width: 0;
 
     /* box-shadow: 0 2px 8px var(--color-shadow); */
+    cursor: pointer;
 }
 
 .card-image {

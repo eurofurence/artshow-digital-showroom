@@ -1,10 +1,10 @@
 {{define "media-card"}}
-<div
+<button
+  type="button"
   class="card"
   hx-get="/dialog/{{.ID}}"
   hx-target="#media-dialog"
   hx-swap="outerHTML"
-  hx-trigger="click"
   hx-on::after-request="document.getElementById('media-dialog').showModal()"
 >
   <div class="card-body">
@@ -18,5 +18,5 @@
     <div class="card-duration"><p>{{.Duration}}</p></div>
     {{end}}
   </div>
-</div>
+</button>
 {{end}}
