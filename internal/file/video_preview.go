@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func PreviewFor(ctx context.Context, path string) string {
+func PreviewFor(ctx context.Context, path string, playtime int) string {
 	if !Exist(path) {
 		log.Printf("preview: the video %q was not found", path)
 		return ""
@@ -21,7 +21,7 @@ func PreviewFor(ctx context.Context, path string) string {
 	}
 
 	if !Exist(filePath) {
-		err := createPreview(ctx, path, filePath)
+		err := createPreview(ctx, path, filePath, playtime)
 		if err != nil {
 			log.Printf("Preview failed to generate: %s\n", err)
 			return ""
@@ -30,18 +30,27 @@ func PreviewFor(ctx context.Context, path string) string {
 	return fileRoute
 }
 
-func createPreview(ctx context.Context, videoFile string, previewFile string) error {
+func createPreview(ctx context.Context, videoFile string, previewFile string, playtime int) error {
 	timeoutCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 
 	log.Printf("Creating Preview %q", previewFile)
 
+	var seek, duration string
+	if playtime >= 15 {
+		seek = "5"
+		duration = "10"
+	} else {
+		seek = "0"
+		duration = string(duration)
+	}
+
 	cmd := exec.CommandContext(
 		timeoutCtx,
 		"ffmpeg",
-		"-ss", "5", // start at 5 seconds
+		"-ss", seek,
 		"-i", videoFile,
-		"-t", "10", // duration 10 seconds
+		"-t", duration,
 		"-an", // no audio
 		"-c:v", "libx264",
 		"-crf", "28", // constant rate factor / determines preview quality, size

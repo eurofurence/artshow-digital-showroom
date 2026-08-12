@@ -3,7 +3,6 @@ package file
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"os/exec"
 	"strconv"
 	"time"
@@ -15,7 +14,7 @@ type Probe struct {
 	} `json:"format"`
 }
 
-func VideoDuration(ctx context.Context, file string) (string, error) {
+func VideoDuration(ctx context.Context, file string) (int, error) {
 	timeoutCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 
@@ -30,19 +29,19 @@ func VideoDuration(ctx context.Context, file string) (string, error) {
 
 	out, err := cmd.Output()
 	if err != nil {
-		return "", err
+		return -1, err
 	}
 
 	var p Probe
 	if err := json.Unmarshal(out, &p); err != nil {
-		return "", err
+		return -1, err
 	}
 
 	duration, err := strconv.ParseFloat(p.Format.Duration, 64)
 	if err != nil {
-		return "", err
+		return -1, err
 	}
 
 	seconds := int(duration)
-	return fmt.Sprintf("%02d:%02d", seconds/60, seconds%60), nil
+	return seconds, nil
 }

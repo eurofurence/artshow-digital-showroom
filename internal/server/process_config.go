@@ -26,8 +26,9 @@ func (s *Server) processConfig() {
 		// _, route, _ := file.MediaPaths(videoFile, "", "")
 		// item.Video = s.cfg.MediaInterface.Address + "/" + route
 
-		item.Preview = file.PreviewFor(s.serverCtx, videoFile)
-		item.Duration, _ = file.VideoDuration(s.serverCtx, videoFile)
+		duration, _ := file.VideoDuration(s.serverCtx, videoFile)
+		item.Duration = formatDuration(duration)
+		item.Preview = file.PreviewFor(s.serverCtx, videoFile, duration)
 
 		item.Thumbnail = file.ThumbnailFor(s.serverCtx, videoFile)
 		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
