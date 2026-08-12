@@ -38,6 +38,7 @@ func (s *Server) processConfig() {
 			item.Title,
 			item.Artist,
 			qrPath,
+			item.Contact,
 		)
 	}
 }

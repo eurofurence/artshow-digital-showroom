@@ -7,10 +7,12 @@ import (
 	"os/exec"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
+	"github.com/eurofurence/artshow-digital-showroom/internal/hash"
 )
 
-func PostCreditFor(path, title, artist, qrPath string) string {
-	filePath, fileRoute, err := MediaPaths(path, "post_credits", ".png")
+func PostCreditFor(path, title, artist, qrPath, qrURL string) string {
+	hash := hash.GetMD5Hash(qrURL)
+	filePath, fileRoute, err := MediaPaths(path, "post_credits", "_"+hash+".png")
 	if err != nil {
 		log.Println("Could not create post_credits paths")
 		return ""
