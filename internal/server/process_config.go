@@ -21,7 +21,6 @@ func (s *Server) processConfig() {
 		item.VideoExists = file.Exist(videoFile)
 
 		// Attributes that always exist or have fallbacks
-
 		item.Thumbnail = file.ThumbnailFor(s.serverCtx, videoFile)
 
 		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
@@ -37,7 +36,6 @@ func (s *Server) processConfig() {
 		)
 
 		// Attributes that depend on VideoExists
-
 		if item.VideoExists {
 			// Providing the local file path for Video.
 			// Use the route instead when serving to a remote machine.
