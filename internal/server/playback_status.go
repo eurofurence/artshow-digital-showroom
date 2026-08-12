@@ -3,18 +3,20 @@ package server
 import "sync"
 
 type PlaybackStatus struct {
-	mu       sync.Mutex
-	idle     bool
-	title    string
-	position int
-	duration int
+	mu        sync.Mutex
+	idle      bool
+	inCredits bool
+	title     string
+	position  int
+	duration  int
 }
 
 type PlaybackStatusSnapshot struct {
-	Idle     bool
-	Title    string
-	Position int
-	Duration int
+	Idle      bool
+	InCredits bool
+	Title     string
+	Position  int
+	Duration  int
 }
 
 func (p *PlaybackStatus) SetIdle() {
@@ -33,6 +35,7 @@ func (p *PlaybackStatus) StartTrack(title string) {
 	defer p.mu.Unlock()
 
 	p.idle = false
+	p.inCredits = false
 	p.title = title
 	p.position = 0
 	p.duration = 0
@@ -58,14 +61,22 @@ func (p *PlaybackStatus) SetDuration(duration int) {
 	p.duration = duration
 }
 
+func (p *PlaybackStatus) SetInCredits() {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+
+	p.inCredits = true
+}
+
 func (p *PlaybackStatus) Snapshot() PlaybackStatusSnapshot {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 
 	return PlaybackStatusSnapshot{
-		Idle:     p.idle,
-		Title:    p.title,
-		Position: p.position,
-		Duration: p.duration,
+		Idle:      p.idle,
+		InCredits: p.inCredits,
+		Title:     p.title,
+		Position:  p.position,
+		Duration:  p.duration,
 	}
 }

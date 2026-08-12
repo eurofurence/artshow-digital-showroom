@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"net"
+	"strings"
 )
 
 func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
@@ -39,7 +40,7 @@ func (s *Server) setupMpv() error {
 		[]any{"observe_property", 1, "idle-active"},
 		[]any{"observe_property", 2, "playback-time"},
 		[]any{"observe_property", 3, "duration"},
-		// []any{"observe_property", 4, "media-title"},
+		[]any{"observe_property", 4, "filename"},
 	)
 }
 
@@ -88,6 +89,14 @@ func (s *Server) processMpvOutput() {
 				}
 
 				s.playbackStatus.SetDuration(int(duration))
+				s.PublishStatus()
+			case "filename":
+				filename, ok := msg["data"].(string)
+				if !ok || !strings.HasSuffix(filename, ".png") {
+					continue
+				}
+
+				s.playbackStatus.SetInCredits()
 				s.PublishStatus()
 			}
 		}
