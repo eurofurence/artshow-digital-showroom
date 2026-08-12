@@ -18,19 +18,12 @@ func (s *Server) processConfig() {
 		s.videos[hash] = item
 
 		videoFile := filepath.Join(s.cfg.ConfigFolder, item.File)
+		item.VideoExists = file.Exist(videoFile)
 
-		// Providing the local file path for Video.
-		// Use the route instead when serving to a remote machine.
-		absPath, _ := filepath.Abs(videoFile)
-		item.Video = absPath
-		// _, route, _ := file.MediaPaths(videoFile, "", "")
-		// item.Video = s.cfg.MediaInterface.Address + "/" + route
-
-		duration, _ := file.VideoDuration(s.serverCtx, videoFile)
-		item.Duration = formatDuration(duration)
-		item.Preview = file.PreviewFor(s.serverCtx, videoFile, duration)
+		// Attributes that always exist or have fallbacks
 
 		item.Thumbnail = file.ThumbnailFor(s.serverCtx, videoFile)
+
 		qrPath, qrRoute := file.QrCodeFor(videoFile, item.Contact)
 		item.ContactQR = qrRoute
 
@@ -42,5 +35,21 @@ func (s *Server) processConfig() {
 			qrPath,
 			item.Contact,
 		)
+
+		// Attributes that depend on VideoExists
+
+		if item.VideoExists {
+			// Providing the local file path for Video.
+			// Use the route instead when serving to a remote machine.
+			absPath, _ := filepath.Abs(videoFile)
+			item.Video = absPath
+			// _, route, _ := file.MediaPaths(videoFile, "", "")
+			// item.Video = s.cfg.MediaInterface.Address + "/" + route
+
+			duration, _ := file.VideoDuration(s.serverCtx, videoFile)
+			item.Duration = formatDuration(duration)
+			item.Preview = file.PreviewFor(s.serverCtx, videoFile, duration)
+		}
+
 	}
 }

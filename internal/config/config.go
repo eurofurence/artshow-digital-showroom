@@ -35,13 +35,14 @@ type Video struct {
 	Contact     string `toml:"contact"`
 
 	// Not from TOML
-	ID         string `toml:"-"`
-	Thumbnail  string `toml:"-"`
-	Video      string `toml:"-"`
-	Preview    string `toml:"-"`
-	Duration   string `toml:"-"`
-	ContactQR  string `toml:"-"`
-	PostCredit string `toml:"-"`
+	VideoExists bool   `toml:"-"`
+	ID          string `toml:"-"`
+	Thumbnail   string `toml:"-"`
+	Video       string `toml:"-"`
+	Preview     string `toml:"-"`
+	Duration    string `toml:"-"`
+	ContactQR   string `toml:"-"`
+	PostCredit  string `toml:"-"`
 }
 
 func (cfg Config) Print(hint string) {

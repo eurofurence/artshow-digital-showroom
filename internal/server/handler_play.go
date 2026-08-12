@@ -29,7 +29,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 		err = s.startStandby()
 	} else {
 		video, ok := s.videos[req.ID]
-		if !ok {
+		if !ok || !video.VideoExists {
 			http.Error(w, "video not found", http.StatusNotFound)
 			return
 		}
