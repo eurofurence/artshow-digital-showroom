@@ -348,6 +348,37 @@ main::before {
     /* mix-blend-mode: multiply; */
 }
 
+.dialog-close {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+
+    width: 3rem;
+    height: 3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+    background: var(--button-background);
+    color: var(--color-text);
+
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+.dialog-close:active,
+.dialog-close:target,
+.dialog-close:hover {
+    background: var(--color-text);
+    color: var(--button-background);
+}
+
 .dialog-content {
     display: grid;
     grid-template-columns: auto 508px;
