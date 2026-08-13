@@ -273,19 +273,19 @@ main::before {
     height: 18px;
     align-self: center;
     font-size: 32px;
-}
 
-.status-dot::after {
-    display: block;
-    position: absolute;
-    content: "";
-}
+    &::after {
+        display: block;
+        position: absolute;
+        content: "";
+    }
 
-.status-dot.playing::after {
-    background: no-repeat url("/static/images/glyph-play.svg");
-    animation: pulse 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
-    height: 18px;
-    width: 18px;
+    &.playing::after {
+        background: no-repeat url("/static/images/glyph-play.svg");
+        animation: pulse 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+        height: 18px;
+        width: 18px;
+    }
 }
 
 @keyframes pulse {
