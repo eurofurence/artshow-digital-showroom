@@ -364,13 +364,13 @@ main::before {
     line-height: 1;
     cursor: pointer;
     z-index: 10;
-}
 
-.dialog-close:active,
-.dialog-close:target,
-.dialog-close:hover {
-    background: var(--color-text);
-    color: var(--button-background);
+    &:active,
+    &:target,
+    &:hover {
+        background: var(--color-text);
+        color: var(--button-background);
+    }
 }
 
 .dialog-content {
