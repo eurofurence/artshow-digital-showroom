@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 3 ]]; then
+    echo "Create a preview for the given video starting at the given second with the given duration."
+    echo "Usage:   $0 <video-file> <seek-seconds> <duration-seconds>" >&2
+    echo "Example: $0 Media/foo.mp4 4 10" >&2
+    exit 1
+fi
+
+video="$1"
+seek="$2"
+duration="$3"
+[[ -f "$video" ]] || { echo "Error: not a file: $video" >&2; exit 1; }
+
+dir="$(dirname "$video")"
+name="$(basename "${video%.*}")"
+mkdir -p "$dir/previews"
+
+ffmpeg -y \
+    -ss "$seek" \
+    -i "$video" \
+    -t "$duration" \
+    -an \
+    -c:v libx264 \
+    -crf 28 \
+    -preset veryfast \
+    -pix_fmt yuv420p \
+    -movflags +faststart \
+    "$dir/previews/$name.mp4"

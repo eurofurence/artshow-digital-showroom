@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 2 ]]; then
+    echo "Create a thumbnail for the given video from the frame at the given time" >&2
+    echo "Usage:   $0 <video-file> <seek-seconds>" >&2
+    echo "Example: $0 Media/foo.mp4 7" >&2
+    exit 1
+fi
+
+video="$1"
+seek="$2"
+[[ -f "$video" ]] || { echo "Error: not a file: $video" >&2; exit 1; }
+
+dir="$(dirname "$video")"
+name="$(basename "${video%.*}")"
+mkdir -p "$dir/thumbnails"
+
+ffmpeg -y -ss "$seek" -i "$video" -frames:v 1 -c:v libwebp -quality 90 \
+    "$dir/thumbnails/$name.webp"
