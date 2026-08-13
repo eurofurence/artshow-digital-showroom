@@ -7,6 +7,7 @@
     --ci-light-tint: #f9f4e5;
     --ci-bronze-tint: #8e7246;
     --ci-ef-green: #1f5651;
+    --button-background: #f4eacd;
 
     /* Text */
     --color-text: #674731;
@@ -436,7 +437,7 @@ main::before {
 }
 
 .dialog-actions button {
-    background: #f4eacd;
+    background: var(--button-background);
     color: var(--color-text);
     font-size: 0;
     border: none;
@@ -448,7 +449,6 @@ main::before {
 .dialog-actions button:active,
 .dialog-actions button:target {
     background: var(--color-text);
-    color: #f4eacd;
 }
 
 .dialog-actions button::after {
@@ -465,12 +465,18 @@ main::before {
 
 .dialog-actions button.play::after {
     content: " ";
-    background: url("/static/images/glyph-play.svg");
+    mask: url("/static/images/glyph-play.svg");
+    -webkit-mask: url("/static/images/glyph-play.svg");
+    background: var(--color-text);
     width: 25px;
     height: 24px;
     top: 42%;
     left: 39%;
     font-size: 33px;
+}
+
+.dialog-actions button.play:active::after {
+    background: var(--button-background);
 }
 
 .dialog-actions button.stop {
@@ -484,12 +490,18 @@ main::before {
 
 .dialog-actions button.stop::after {
     content: "";
-    background: url("/static/images/glyph-stop.svg");
+    mask: url("/static/images/glyph-stop.svg");
+    -webkit-mask: url("/static/images/glyph-stop.svg");
+    background-color: var(--color-text);
     width: 21px;
     height: 21px;
     font-size: 35px;
     top: 31%;
     left: 35%;
+}
+
+.dialog-actions button.stop:active::after {
+    background: var(--button-background);
 }
 
 .dialog-actions .dialog-duration {
