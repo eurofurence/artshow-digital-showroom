@@ -469,15 +469,15 @@ main::before {
     position: relative;
 
     /* transition:0.3s ease; */
-}
 
-.dialog-actions button:active,
-.dialog-actions button:target {
-    background: var(--color-text);
-}
+    &:active,
+    &:target {
+        background: var(--color-text);
+    }
 
-.dialog-actions button::after {
-    position: absolute;
+    &::after {
+        position: absolute;
+    }
 }
 
 .dialog-actions button.play {
@@ -510,21 +510,21 @@ main::before {
     );
     width: 73px;
     height: 81px;
-}
 
-.dialog-actions button.stop::after {
-    content: "";
-    mask: url("/static/images/glyph-stop.svg");
-    background-color: var(--color-text);
-    width: 21px;
-    height: 21px;
-    font-size: 35px;
-    top: 31%;
-    left: 35%;
-}
+    &::after {
+        content: "";
+        mask: url("/static/images/glyph-stop.svg");
+        background-color: var(--color-text);
+        width: 21px;
+        height: 21px;
+        font-size: 35px;
+        top: 31%;
+        left: 35%;
+    }
 
-.dialog-actions button.stop:active::after {
-    background: var(--button-background);
+    &:active::after {
+        background: var(--button-background);
+    }
 }
 
 .dialog-actions .dialog-duration {
