@@ -6,10 +6,8 @@ import (
 )
 
 func Exist(path string) bool {
-	if _, err := os.Stat(path); err != nil {
-		return false
-	}
-	return true
+	info, err := os.Stat(path)
+	return err == nil && info.Mode().IsRegular()
 }
 
 // MediaPath takes a given video file and creates paths for derived media like thumbnails and qr Codes.
