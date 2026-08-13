@@ -278,7 +278,7 @@ main::before {
 .status-dot::after {
     display: block;
     position: absolute;
-    content: " ";
+    content: "";
 }
 
 .status-dot.playing::after {
@@ -424,7 +424,7 @@ main::before {
     height: 100%;
     top: 0;
     left: 0;
-    content: " ";
+    content: "";
     background: var(--color-text);
     mix-blend-mode: screen;
 }
@@ -489,7 +489,7 @@ main::before {
 }
 
 .dialog-actions button.play::after {
-    content: " ";
+    content: "";
     mask: url("/static/images/glyph-play.svg");
     background: var(--color-text);
     width: 25px;
