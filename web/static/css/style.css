@@ -214,20 +214,20 @@ main::before {
     /* mix-blend-mode: hard-light; */
     background: #cbdeddcc;
     backdrop-filter: blur(8px);
-}
 
-.card-data h2 {
-    overflow-wrap: break-word;
+    h2 {
+        overflow-wrap: break-word;
 
-    /* font-family: "Josefin Sans", sans-serif; */
-    margin: 0;
-    font-size: var(--bodytext-size);
-    font-weight: 800;
-}
+        /* font-family: "Josefin Sans", sans-serif; */
+        margin: 0;
+        font-size: var(--bodytext-size);
+        font-weight: 800;
+    }
 
-.card-data p {
-    margin: 0 56px 0 0;
-    font-size: var(--bodytext-size);
+    p {
+        margin: 0 56px 0 0;
+        font-size: var(--bodytext-size);
+    }
 }
 
 .card-duration {
