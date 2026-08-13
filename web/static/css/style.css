@@ -529,29 +529,31 @@ main::before {
 }
 
 /* Optional: Horizontal scroll fuckery */
-body.horizontal-scroll main {
-    max-width: 100vw;
-    height: 100vh;
-    overflow: scroll hidden;
-}
+body.horizontal-scroll {
+    main {
+        max-width: 100vw;
+        height: 100vh;
+        overflow: scroll hidden;
+    }
 
-body.horizontal-scroll .card-container {
-    grid-template-columns: unset;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-auto-flow: column;
-    width: max-content;
-}
+    .card-container {
+        grid-template-columns: unset;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-auto-flow: column;
+        width: max-content;
+    }
 
-body.horizontal-scroll .card-container::after {
-    /* content:":3"; */
-    position: relative;
-    right: -64px;
-    color: #075952;
-}
+    .card-container::after {
+        /* content:":3"; */
+        position: relative;
+        right: -64px;
+        color: #075952;
+    }
 
-body.horizontal-scroll .card {
-    width: 21.24vw;
+    .card {
+        width: 21.24vw;
 
-    /* this is here so the cards come out the right size (at our target resolution) to align
-    to the right side along our anchor elements. yes it's kind of dirty, but it works for the case we're in */
+        /* this is here so the cards come out the right size (at our target resolution) to align
+           to the right side along our anchor elements. yes it's kind of dirty, but it works for the case we're in */
+    }
 }
