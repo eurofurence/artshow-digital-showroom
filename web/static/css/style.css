@@ -336,15 +336,15 @@ main::before {
     overflow: hidden;
     background: var(--color-surface);
     color: var(--color-text);
-}
 
-#media-dialog::backdrop {
-    /* background: linear-gradient(to bottom, #19362e, #19362e90 80%, #19362e00); */
-    background: linear-gradient(to bottom, #1b2925, #1b292590 80%, #1b292500);
-    backdrop-filter: blur(10px);
-    mask: linear-gradient(to bottom, black, black, transparent);
+    &::backdrop {
+        /* background: linear-gradient(to bottom, #19362e, #19362e90 80%, #19362e00); */
+        background: linear-gradient(to bottom, #1b2925, #1b292590 80%, #1b292500);
+        backdrop-filter: blur(10px);
+        mask: linear-gradient(to bottom, black, black, transparent);
 
-    /* mix-blend-mode: multiply; */
+        /* mix-blend-mode: multiply; */
+    }
 }
 
 .dialog-close {
