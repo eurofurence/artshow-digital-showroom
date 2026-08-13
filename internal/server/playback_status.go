@@ -24,6 +24,7 @@ func (p *PlaybackStatus) SetIdle() {
 	defer p.mu.Unlock()
 
 	p.idle = true
+	p.inCredits = false
 }
 
 func (p *PlaybackStatus) IsIdle() bool {
