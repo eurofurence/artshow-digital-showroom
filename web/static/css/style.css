@@ -7,6 +7,7 @@
     --ci-light-tint: #f9f4e5;
     --ci-bronze-tint: #8e7246;
     --ci-ef-green: #1f5651;
+    --color-header: #145343;
     --button-background: #f4eacd;
 
     /* Text */
@@ -108,7 +109,7 @@ html {
     position: fixed;
     top: 0;
     left: 0;
-    background: rgb(20 83 67);
+    background: var(--color-header);
     color: var(--color-text-header);
     z-index: 1;
     font-size: var(--heading-size);
