@@ -486,21 +486,21 @@ main::before {
     clip-path: path(
         "M85.07.11C45.57-2.18-3.53,30.61.2,62.22c4.28,36.29,46.69,47.15,69.21,47.08s38.8-13.12,39.79-25.56c1.13-14.12-6.26-14.71-3.75-29.55,2.14-12.7,10.79-16.11,10.65-29.16-.16-15.86-14.24-23.95-31.03-24.92Z"
     );
-}
 
-.dialog-actions button.play::after {
-    content: "";
-    mask: url("/static/images/glyph-play.svg");
-    background: var(--color-text);
-    width: 25px;
-    height: 24px;
-    top: 42%;
-    left: 39%;
-    font-size: 33px;
-}
+    &::after {
+        content: "";
+        mask: url("/static/images/glyph-play.svg");
+        background: var(--color-text);
+        width: 25px;
+        height: 24px;
+        top: 42%;
+        left: 39%;
+        font-size: 33px;
+    }
 
-.dialog-actions button.play:active::after {
-    background: var(--button-background);
+    &:active::after {
+        background: var(--button-background);
+    }
 }
 
 .dialog-actions button.stop {
