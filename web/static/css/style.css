@@ -262,7 +262,6 @@ main::before {
     padding: 48px 64px 28px 40px;
     background: var(--color-statusbar-background);
     color: var(--color-text);
-    z-index: 100;
     clip-path: path(
         "M649.24,99.16V14.48S623,.79,580.35.05c-76.25-1.33-101.05,25.99-215.85,28-78.27,1.37-194.99-23.28-250.97-22.07-28.95.62-66.26.83-96.38,29.89C-2.12,54.46-3.16,86.8,4.3,99.16h644.94Z"
     );
