@@ -1,5 +1,5 @@
 {{define "statusbar"}}
-{{- if .Idle -}}
+{{- if or .Idle (eq .Title "") -}}
 <span class="status-dot idle"></span>
 Nothing playing
 {{- else -}}
