@@ -58,7 +58,7 @@ func generatePostCredit(ctx context.Context, outputFile, title, artist, qrPath s
 			args = append(args,
 				"(",
 				qrPath,
-				"-resize", "250x250",
+				"-resize", "300x300",
 				")",
 				"-gravity", "southeast",
 				"-geometry", "+50+50",
