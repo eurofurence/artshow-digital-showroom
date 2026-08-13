@@ -14,7 +14,7 @@ import (
 
 func PostCreditFor(ctx context.Context, path, title, artist, qrPath, qrURL string) string {
 	hash := hash.GetMD5Hash(qrURL)
-	filePath, fileRoute, err := MediaPaths(path, "post_credits", "_"+hash+".png")
+	filePath, err := MediaPath(path, "post_credits", "_"+hash+".png")
 	if err != nil {
 		log.Println("Could not create post_credits paths")
 		return ""
@@ -27,7 +27,7 @@ func PostCreditFor(ctx context.Context, path, title, artist, qrPath, qrURL strin
 			return constants.FallbackImage
 		}
 	}
-	return fileRoute
+	return filePath
 }
 
 func generatePostCredit(ctx context.Context, outputFile, title, artist, qrPath string) error {

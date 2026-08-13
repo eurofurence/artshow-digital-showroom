@@ -12,14 +12,14 @@ func Exist(path string) bool {
 	return true
 }
 
-// MediaPaths takes a given video file and creates paths for derived media like thumbnails and qr Codes.
+// MediaPath takes a given video file and creates paths for derived media like thumbnails and qr Codes.
 // The "path" is the location on disk relative to the working directory of the server.
-// The "route" is the location the server serves the file, i.e., at localhost:port/<route>
-func MediaPaths(
+// It also represents the location where the server serves the file, i.e., at localhost:port/<path>
+func MediaPath(
 	videoFile string,
 	subfolder string,
 	newExtension string,
-) (path string, route string, err error) {
+) (path string, err error) {
 	dir := filepath.Dir(videoFile)
 	base := filepath.Base(videoFile)
 	ext := filepath.Ext(base)
@@ -32,10 +32,9 @@ func MediaPaths(
 	}
 
 	path = filepath.Join(dir, subfolder, name)
-	route = filepath.Join(dir, subfolder, name)
 
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
-		return "", "", err
+		return "", err
 	}
 
 	return

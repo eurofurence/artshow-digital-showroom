@@ -15,7 +15,7 @@ func PreviewFor(ctx context.Context, path string, playtime int) string {
 		return ""
 	}
 
-	filePath, fileRoute, err := MediaPaths(path, "previews", ".mp4")
+	filePath, err := MediaPath(path, "previews", ".mp4")
 	if err != nil {
 		log.Printf("Could not create previews paths for %q", path)
 		return ""
@@ -28,7 +28,7 @@ func PreviewFor(ctx context.Context, path string, playtime int) string {
 			return ""
 		}
 	}
-	return fileRoute
+	return filePath
 }
 
 func createPreview(ctx context.Context, videoFile string, previewFile string, playtime int) error {

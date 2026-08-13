@@ -7,9 +7,9 @@ import (
 	"github.com/skip2/go-qrcode"
 )
 
-func QrCodeFor(videoFile, url string, border bool) (string, string) {
+func QrCodeFor(videoFile, url string, border bool) string {
 	if url == "" {
-		return "", ""
+		return ""
 	}
 
 	hash := hash.GetMD5Hash(url)
@@ -19,20 +19,20 @@ func QrCodeFor(videoFile, url string, border bool) (string, string) {
 		textBorder = "no_border_"
 	}
 
-	filePath, fileRoute, err := MediaPaths(videoFile, "qr-codes", "_"+textBorder+hash+".png")
+	filePath, err := MediaPath(videoFile, "qr-codes", "_"+textBorder+hash+".png")
 	if err != nil {
 		log.Printf("Could not create qr code paths for %q", videoFile)
-		return "", ""
+		return ""
 	}
 
 	if !Exist(filePath) {
 		err = createQrCode(url, filePath, border)
 		if err != nil {
 			log.Printf("QR failed to generate: %s\n", err)
-			return "", ""
+			return ""
 		}
 	}
-	return filePath, fileRoute
+	return filePath
 }
 
 func createQrCode(url, qrFile string, border bool) error {

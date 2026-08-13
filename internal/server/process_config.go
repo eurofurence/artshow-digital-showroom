@@ -23,10 +23,10 @@ func (s *Server) processConfig() {
 		// Attributes that always exist or have fallbacks
 		item.Thumbnail = file.ThumbnailFor(s.serverCtx, videoFile)
 
-		_, qrRouteNoBorder := file.QrCodeFor(videoFile, item.Contact, false)
-		item.ContactQR = qrRouteNoBorder
+		qrPathNoBorder := file.QrCodeFor(videoFile, item.Contact, false)
+		item.ContactQR = qrPathNoBorder
 
-		qrPath, _ := file.QrCodeFor(videoFile, item.Contact, true)
+		qrPath := file.QrCodeFor(videoFile, item.Contact, true)
 		item.PostCredit = s.cfg.MediaInterface.Address + "/" + file.PostCreditFor(
 			s.serverCtx,
 			videoFile,
@@ -42,7 +42,7 @@ func (s *Server) processConfig() {
 			// Use the route instead when serving to a remote machine.
 			absPath, _ := filepath.Abs(videoFile)
 			item.Video = absPath
-			// _, route, _ := file.MediaPaths(videoFile, "", "")
+			// route, _ := file.MediaPath(videoFile, "", "")
 			// item.Video = s.cfg.MediaInterface.Address + "/" + route
 
 			duration, _ := file.VideoDuration(s.serverCtx, videoFile)

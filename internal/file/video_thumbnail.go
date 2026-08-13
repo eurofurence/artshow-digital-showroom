@@ -16,7 +16,7 @@ func ThumbnailFor(ctx context.Context, path string) string {
 		return constants.FallbackImage
 	}
 
-	filePath, fileRoute, err := MediaPaths(path, "thumbnails", ".webp")
+	filePath, err := MediaPath(path, "thumbnails", ".webp")
 	if err != nil {
 		log.Printf("Could not create thumbnail paths for %q", path)
 		return ""
@@ -29,7 +29,7 @@ func ThumbnailFor(ctx context.Context, path string) string {
 			return constants.FallbackImage
 		}
 	}
-	return fileRoute
+	return filePath
 }
 
 func createThumbnail(ctx context.Context, videoFile string, thumbnailFile string) error {
