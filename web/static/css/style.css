@@ -477,53 +477,48 @@ main::before {
 
     &::after {
         position: absolute;
-    }
-}
-
-.dialog-actions button.play {
-    width: 116px;
-    height: 109px;
-    clip-path: path(
-        "M85.07.11C45.57-2.18-3.53,30.61.2,62.22c4.28,36.29,46.69,47.15,69.21,47.08s38.8-13.12,39.79-25.56c1.13-14.12-6.26-14.71-3.75-29.55,2.14-12.7,10.79-16.11,10.65-29.16-.16-15.86-14.24-23.95-31.03-24.92Z"
-    );
-
-    &::after {
-        content: "";
-        mask: url("/static/images/glyph-play.svg");
         background: var(--color-text);
-        width: 25px;
-        height: 24px;
-        top: 42%;
-        left: 39%;
-        font-size: 33px;
     }
 
     &:active::after {
         background: var(--button-background);
     }
-}
 
-.dialog-actions button.stop {
-    align-self: end;
-    clip-path: path(
-        "M4.42,27.44C15.31,2.47,38.89-7.55,58.86,6.19c8.46,5.82,11.69,10.32,13.42,22.73,1.84,13.18-8.27,35.41-18.53,44.8-7.58,6.94-20.99,11.7-38.25,1.09C0,65.28-4.23,47.3,4.42,27.44Z"
-    );
-    width: 73px;
-    height: 81px;
+    &.play {
+        width: 116px;
+        height: 109px;
+        clip-path: path(
+            "M85.07.11C45.57-2.18-3.53,30.61.2,62.22c4.28,36.29,46.69,47.15,69.21,47.08s38.8-13.12,39.79-25.56c1.13-14.12-6.26-14.71-3.75-29.55,2.14-12.7,10.79-16.11,10.65-29.16-.16-15.86-14.24-23.95-31.03-24.92Z"
+        );
 
-    &::after {
-        content: "";
-        mask: url("/static/images/glyph-stop.svg");
-        background-color: var(--color-text);
-        width: 21px;
-        height: 21px;
-        font-size: 35px;
-        top: 31%;
-        left: 35%;
+        &::after {
+            content: "";
+            mask: url("/static/images/glyph-play.svg");
+            width: 25px;
+            height: 24px;
+            top: 42%;
+            left: 39%;
+            font-size: 33px;
+        }
     }
 
-    &:active::after {
-        background: var(--button-background);
+    &.stop {
+        align-self: end;
+        clip-path: path(
+            "M4.42,27.44C15.31,2.47,38.89-7.55,58.86,6.19c8.46,5.82,11.69,10.32,13.42,22.73,1.84,13.18-8.27,35.41-18.53,44.8-7.58,6.94-20.99,11.7-38.25,1.09C0,65.28-4.23,47.3,4.42,27.44Z"
+        );
+        width: 73px;
+        height: 81px;
+
+        &::after {
+            content: "";
+            mask: url("/static/images/glyph-stop.svg");
+            width: 21px;
+            height: 21px;
+            font-size: 35px;
+            top: 31%;
+            left: 35%;
+        }
     }
 }
 
