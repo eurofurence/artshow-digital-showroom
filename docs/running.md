@@ -28,14 +28,6 @@ For a preconfigured setup download the folder [Media](https://cloud.eurofurence.
 > The html server reads the `config.toml` and connects to `mpv` at launch.\
 > If you make changes to the config or restart `mpv` then also restart the server.
 
-> [!IMPORTANT]
-> Thumbnails, QR-Codes and previews are placed in subfolders of `Media` / `MediaExample`
-> and only generated if they are missing
-> - You can overwrite them with different content and this will render after the next page reload.\
->   You might need to force clear the browser cache.
-> - However when updating titles or contact info in `config.toml` the images stay outdated.\
->   Delete them to have them regenerated with the correct info on the next server launch.
-
 ## Running the playback mpv server
 
 Run the following instruction.\
@@ -49,6 +41,8 @@ exactly matches the path `config.toml` at `playout -> mpv-socket`.
     --input-ipc-server=/tmp/mpv.sock
 
 For testing you can also remove the line with `--fullscreen` to instead only display as windowed.
+
+This can also be started by executing the command `bin/start_mpv` from the repo root.
 
 ## Running the server
 
@@ -94,4 +88,21 @@ If you adjust the port in the `config.toml` at `media-interface -> port` then al
 
 For the full experience, start your browser in kiosk mode, e.g.:
 
-    firefox -kiosk http://localhost:8080
+    firefox --kiosk --private-window http://localhost:8080
+
+The command can also be started by running `bin/start_kiosk` from the repo root.
+
+# Updating thumbnails and previews
+
+> [!IMPORTANT]
+> Thumbnails, QR-Codes and previews are placed in subfolders of `Media` / `MediaExample`
+> and only generated if they are missing
+> - You can overwrite them with different content and this will render after the next page reload.\
+>   You might need to force clear the browser cache.
+> - However when updating titles or contact info in `config.toml` the images stay outdated.\
+>   Delete them to have them regenerated with the correct info on the next server launch.
+
+To get previews and thumbnails with the same configuration as the server uses,
+execute the scripts `bin/make_thumbnail` or `bin/make_preview`.
+
+There you can also select a custom start point and duration.
