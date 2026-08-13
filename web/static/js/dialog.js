@@ -22,3 +22,13 @@ document.addEventListener("click", function (event) {
     dialog.close();
   }
 });
+
+// horizontal scroll on main
+document.querySelector("main").addEventListener(
+  "wheel",
+  (e) => {
+    e.preventDefault();
+    e.currentTarget.scrollLeft += e.deltaY;
+  },
+  { passive: false },
+);
