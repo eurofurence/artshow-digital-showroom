@@ -15,5 +15,13 @@ dir="$(dirname "$video")"
 name="$(basename "${video%.*}")"
 mkdir -p "$dir/thumbnails"
 
-ffmpeg -y -ss "$seek" -i "$video" -frames:v 1 -c:v libwebp -quality 90 \
+# The flags for ffmpeg:
+# -y : overwrite existing files
+# -ss <n> : seek to n seconds after start
+# -i <v> : use v as input file
+# -vf scale=<x>:-1 : scale the image to x pixels wide, keep the aspect ratio
+# -frames:v 1 : only extract 1 frame
+# -c:v libwep : encoding
+# -quality <n> : quality setting between 0 / worst and 100 / best
+ffmpeg -y -ss "$seek" -i "$video" -vf scale=480:-1 -frames:v 1 -c:v libwebp -quality 90 \
     "$dir/thumbnails/$name.webp"

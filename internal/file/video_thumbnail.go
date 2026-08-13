@@ -45,7 +45,7 @@ func createThumbnail(ctx context.Context, videoFile string, thumbnailFile string
 		"-ss", "10", // seek to x seconds
 		"-i", videoFile,
 		"-frames:v", "1",
-		// "-vf", "scale=320:-1",
+		"-vf", "scale=480:-1", // scale to 480px width and same aspect ratio
 		"-c:v", "libwebp",
 		"-quality", "90", // 0-100
 		thumbnailFile,
