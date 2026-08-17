@@ -129,14 +129,14 @@ html {
 
 .header-logo {
     position: fixed;
-    top: 31px;
-    left: 52px;
+    top: 21px;
+    left: 20px;
     z-index: 1;
     transform: rotate(-10deg);
 }
 
 .header-logo img {
-    height: 84px;
+    height: 104px;
 }
 
 .header-title {
