@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
     <title>{{block "title" .}}Digital Showroom Media Interface{{end}}</title>
 
     <script src="/static/third_party/htmx/htmx@2.0.10.min.js"></script>
@@ -23,5 +23,6 @@
     </main>
     <dialog id="media-dialog"></dialog>
   </body>
+  <script>document.addEventListener("contextmenu", (e) => {e.preventDefault()});</script>
 </html>
 {{end}}
