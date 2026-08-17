@@ -3,10 +3,14 @@ package server
 import (
 	"log"
 	"net/http"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
 
 func (s *Server) DialogHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("DialogHandler got request for %s %q", r.Method, r.URL.Path)
+	if arguments.Verbose() {
+		log.Printf("DialogHandler got request for %s %q", r.Method, r.URL.Path)
+	}
 
 	id := r.PathValue("id")
 

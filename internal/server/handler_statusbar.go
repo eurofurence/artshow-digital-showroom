@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 )
 
 func (s *Server) PublishStatus() {
@@ -33,7 +35,9 @@ func (s *Server) PublishStatus() {
 }
 
 func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("StatusHandler got request for %s %q", r.Method, r.URL.Path)
+	if arguments.Verbose() {
+		log.Printf("StatusHandler got request for %s %q", r.Method, r.URL.Path)
+	}
 
 	w.Header().Set("Content-Type", "text/event-stream")
 	w.Header().Set("Cache-Control", "no-cache")

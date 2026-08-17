@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 )
 
@@ -12,7 +13,9 @@ type HomePageData struct {
 }
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
-	log.Printf("HomeHandler got request for %s %q", r.Method, r.URL.Path)
+	if arguments.Verbose() {
+		log.Printf("HomeHandler got request for %s %q", r.Method, r.URL.Path)
+	}
 
 	data := HomePageData{
 		Entries: s.cfg.Videos,

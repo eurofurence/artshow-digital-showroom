@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/eurofurence/artshow-digital-showroom/internal/arguments"
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
 )
@@ -14,7 +15,9 @@ type PlayRequest struct {
 }
 
 func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("PlayHandler got request for %s %q", r.Method, r.URL.Path)
+	if arguments.Verbose() {
+		log.Printf("PlayHandler got request for %s %q", r.Method, r.URL.Path)
+	}
 
 	var req PlayRequest
 
