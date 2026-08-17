@@ -338,7 +338,7 @@ main::before {
     padding: 0;
     border: none;
     border-radius: 4px;
-    overflow: hidden;
+    overflow: unset;
     background: var(--color-surface);
     color: var(--color-text);
 
@@ -354,27 +354,35 @@ main::before {
 
 .dialog-close {
     position: absolute;
-    top: 0.3rem;
-    right: 0.3rem;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: -36px;
+    right: -36px;
+    width: 126px;
+    height: 115px;
     border: none;
-    border-radius: 50%;
-    background: var(--button-background);
+    background: #f4c2d3;
     color: var(--color-text);
-    font-size: 1.75rem;
-    line-height: 1;
     cursor: pointer;
     z-index: 10;
+    clip-path: path("M40.86,84.22c7.55,5.38,3.64,24.69,32.69,30.08,18.84,3.49,49.57-5.76,51.79-42.38,2.2-36.36-19.4-54.38-30.17-61.69C70.14-6.74,39.33.46,21.33,9.88-2.05,22.12-3.84,49.58,4.65,63.44s23.26,11.56,36.21,20.79Z");
 
     &:active,
     &:target,
     &:hover {
-        background: var(--color-text);
-        color: var(--button-background);
+        background: #7d2d4d;
+        &:after{
+            background: #f4c2d3;
+        }
+    }
+
+    &:after {
+        content: "";
+        mask:url("/static/images/glyph-close.svg");
+        width:28px;
+        height:28px;
+        top:35%;
+        left:44%;
+        position: absolute;
+        background: #7d2d4d;
     }
 }
 
