@@ -37,6 +37,7 @@ func Open(path string) (*Logger, error) {
 			"timestamp",
 			"video",
 			"full_duration",
+			"status",
 		}); err != nil {
 			if closeErr := file.Close(); closeErr != nil {
 				return nil, fmt.Errorf("write header: %w; close file: %v", err, closeErr)
@@ -57,7 +58,7 @@ func Open(path string) (*Logger, error) {
 	return logger, nil
 }
 
-func (l *Logger) Append(videoID, duration string) error {
+func (l *Logger) Append(videoID, duration, status string) error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
@@ -67,6 +68,7 @@ func (l *Logger) Append(videoID, duration string) error {
 		timestamp,
 		videoID,
 		duration,
+		status,
 	}); err != nil {
 		return err
 	}

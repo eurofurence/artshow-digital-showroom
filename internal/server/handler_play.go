@@ -48,7 +48,7 @@ func (s *Server) playVideo(video *config.Video) error {
 	s.playbackStatus.StartTrack(video.Title)
 	s.PublishStatus()
 
-	if err := s.logger.Append(video.Title, video.Duration); err != nil {
+	if err := s.logger.Append(video.Title, video.Duration, "started"); err != nil {
 		log.Printf("error logging to csv %v", err)
 	}
 
