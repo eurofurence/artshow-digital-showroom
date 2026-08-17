@@ -70,6 +70,25 @@ func (s *Server) startStandby() error {
 		return nil
 	}
 
+	snapshot := s.playbackStatus.Snapshot()
+	if snapshot.Title != "" {
+		// Finished videos reach "InCredits = true". Earlier aborts still have "InCredits = false".
+		var status string
+		if snapshot.InCredits {
+			status = "finished"
+		} else {
+			status = "aborted"
+		}
+
+		if err := s.logger.Append(
+			snapshot.Title,
+			formatDuration(snapshot.Duration),
+			status,
+		); err != nil {
+			log.Printf("error logging to csv %v", err)
+		}
+	}
+
 	s.playbackStatus.SetIdle()
 	s.PublishStatus()
 
