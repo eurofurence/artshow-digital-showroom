@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"sync"
+	"time"
 )
 
 type Logger struct {
@@ -56,9 +57,11 @@ func Open(path string) (*Logger, error) {
 	return logger, nil
 }
 
-func (l *Logger) Append(timestamp, videoID, duration string) error {
+func (l *Logger) Append(videoID, duration string) error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+
+	timestamp := time.Now().Format(time.RFC3339)
 
 	if err := l.csv.Write([]string{
 		timestamp,
