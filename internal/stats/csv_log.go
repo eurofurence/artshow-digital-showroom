@@ -15,6 +15,7 @@ type Logger struct {
 
 func Open(path string) (*Logger, error) {
 	_, err := os.Stat(path)
+
 	newFile := os.IsNotExist(err)
 	if err != nil && !newFile {
 		return nil, err

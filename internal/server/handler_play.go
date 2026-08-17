@@ -33,6 +33,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "video not found", http.StatusNotFound)
 			return
 		}
+
 		err = s.playVideo(video)
 	}
 

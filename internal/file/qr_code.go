@@ -45,14 +45,14 @@ func createQrCode(url, qrFile string, border bool) error {
 			256,
 			qrFile,
 		)
-	} else {
-		q, err := qrcode.New(url, qrcode.Medium)
-		if err != nil {
-			return err
-		}
-
-		q.DisableBorder = true
-
-		return q.WriteFile(256, qrFile)
 	}
+
+	qr, err := qrcode.New(url, qrcode.Medium)
+	if err != nil {
+		return err
+	}
+
+	qr.DisableBorder = true
+
+	return qr.WriteFile(256, qrFile)
 }

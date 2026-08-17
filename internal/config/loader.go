@@ -34,6 +34,7 @@ func findConfig() (string, error) {
 			log.Printf("Using config at %q", configPath)
 			return configPath, nil
 		}
+
 		log.Printf("No config found at %q", configPath)
 	}
 	return "", errors.New("no config file found")

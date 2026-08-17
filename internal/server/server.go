@@ -67,6 +67,7 @@ func NewServer(cfg *config.Config, ctx context.Context) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	s.logger = logger
 
 	if err := s.setupMpv(); err != nil {

@@ -21,6 +21,7 @@ func (s *Server) PublishStatus() {
 	if err := s.templates.ExecuteTemplate(&buf, "statusbar", snapshot); err != nil {
 		log.Printf("Error rendering statusbar in publish %v", err)
 	}
+
 	html := buf.String()
 
 	for ch := range s.clients {
@@ -75,6 +76,7 @@ func (s *Server) StatusHandler(w http.ResponseWriter, r *http.Request) {
 				log.Printf("SSE write failed: %v", err)
 				return
 			}
+
 			flusher.Flush()
 		}
 	}
@@ -100,8 +102,8 @@ func formatDuration(seconds int) string {
 	if seconds < 0 {
 		return "--:--"
 	}
-	d := time.Duration(seconds * int(time.Second))
 
+	d := time.Duration(seconds * int(time.Second))
 	h := int(d.Hours())
 	m := int(d.Minutes()) % 60
 	s := int(d.Seconds()) % 60
