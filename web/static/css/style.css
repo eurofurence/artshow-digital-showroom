@@ -167,7 +167,7 @@ main::before {
     top: 20px;
     right: 64px;
     height: 80px;
-    filter: invert(28%) sepia(41%) saturate(809%) hue-rotate(126deg) brightness(91%) contrast(98%);
+    /* filter: invert(28%) sepia(41%) saturate(809%) hue-rotate(126deg) brightness(91%) contrast(98%); */
 }
 
 /************** MEDIA CARDS **************/
