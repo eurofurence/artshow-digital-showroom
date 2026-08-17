@@ -12,7 +12,7 @@ Media/
 .direnv/
 
 # log file
-log.csv
+log*.csv
 
 ##### Go
 

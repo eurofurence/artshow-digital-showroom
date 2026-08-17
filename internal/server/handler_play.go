@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
 	"github.com/eurofurence/artshow-digital-showroom/internal/constants"
@@ -33,6 +32,7 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "video not found", http.StatusNotFound)
 			return
 		}
+
 		err = s.playVideo(video)
 	}
 
@@ -47,11 +47,6 @@ func (s *Server) PlayHandler(w http.ResponseWriter, r *http.Request) {
 func (s *Server) playVideo(video *config.Video) error {
 	s.playbackStatus.StartTrack(video.Title)
 	s.PublishStatus()
-
-	now := time.Now().Format(time.RFC3339)
-	if err := s.logger.Append(now, video.Title, video.Duration); err != nil {
-		log.Printf("error logging to csv %v", err)
-	}
 
 	return s.sendCommandsToMpv(
 		// run once

@@ -4,7 +4,9 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sync"
+	"time"
 )
 
 type Logger struct {
@@ -14,7 +16,12 @@ type Logger struct {
 }
 
 func Open(path string) (*Logger, error) {
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+		return nil, err
+	}
+
 	_, err := os.Stat(path)
+
 	newFile := os.IsNotExist(err)
 	if err != nil && !newFile {
 		return nil, err
@@ -34,7 +41,7 @@ func Open(path string) (*Logger, error) {
 		if err := logger.csv.Write([]string{
 			"timestamp",
 			"video",
-			"full_duration",
+			"status",
 		}); err != nil {
 			if closeErr := file.Close(); closeErr != nil {
 				return nil, fmt.Errorf("write header: %w; close file: %v", err, closeErr)
@@ -55,14 +62,16 @@ func Open(path string) (*Logger, error) {
 	return logger, nil
 }
 
-func (l *Logger) Append(timestamp, videoID, duration string) error {
+func (l *Logger) Append(video, status string) error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
+	timestamp := time.Now().Format(time.RFC3339)
+
 	if err := l.csv.Write([]string{
 		timestamp,
-		videoID,
-		duration,
+		video,
+		status,
 	}); err != nil {
 		return err
 	}

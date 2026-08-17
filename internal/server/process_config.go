@@ -49,6 +49,5 @@ func (s *Server) processConfig() {
 			item.Duration = formatDuration(duration)
 			item.Preview = file.PreviewFor(s.serverCtx, videoFile, duration)
 		}
-
 	}
 }

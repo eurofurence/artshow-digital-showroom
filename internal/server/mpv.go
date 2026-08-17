@@ -1,11 +1,13 @@
 package server
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"log"
 	"net"
 	"strings"
+	"time"
 )
 
 func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
@@ -27,10 +29,16 @@ func (s *Server) sendCommandsToMpv(cmds ...[]any) error {
 }
 
 func (s *Server) setupMpv() error {
-	conn, err := net.Dial("unix", s.cfg.Playout.MpvSocket)
+	timeoutCtx, cancel := context.WithTimeout(s.serverCtx, 10*time.Second)
+	defer cancel()
+
+	var d net.Dialer
+
+	conn, err := d.DialContext(timeoutCtx, "unix", s.cfg.Playout.MpvSocket)
 	if err != nil {
 		return err
 	}
+
 	s.mpvConn = conn
 	s.mpvEncoder = json.NewEncoder(conn)
 
@@ -46,6 +54,7 @@ func (s *Server) setupMpv() error {
 
 func (s *Server) processMpvOutput() {
 	dec := json.NewDecoder(s.mpvConn)
+
 	for {
 		var msg map[string]any
 		if err := dec.Decode(&msg); err != nil {
@@ -57,7 +66,6 @@ func (s *Server) processMpvOutput() {
 			// if arguments.Verbose() {
 			// log.Printf("mpv: %v", msg)
 			// }
-
 			switch msg["name"] {
 			case "idle-active":
 				idle, ok := msg["data"].(bool)
