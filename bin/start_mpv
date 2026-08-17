@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Start this before starting the Go server.
+# Ensure the ipc socket matches the value in Media/config.toml
+
+mpv \
+	--idle=yes \
+	--input-ipc-server=/tmp/mpv.sock \
+	--force-window \
+	--fullscreen

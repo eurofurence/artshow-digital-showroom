@@ -1,0 +1,111 @@
+[media-interface]
+port = ":8080"
+title = "Digital Showroom"
+columns = 3
+
+[playout]
+mpv-socket = "/tmp/mpv.sock"
+
+# Example entry, remove leading "# " from each row and configure as needed
+# [[video]]
+# file = "video.mp4"
+# artist = "Artist"
+# title = "Title"
+# info = """
+# the info text can be
+# on multiple lines"""
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 1"
+title = "cool title 1"
+info = """
+Multi line entry.
+More content. Here is more text in a really long line. This will contain line breaks.
+More lines here."""
+contact = "https://example.com/"
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 2"
+title = "My Title 2"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 3"
+title = "very original title"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 4"
+title = "my video"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 5"
+title = "Some other title 5"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 6"
+title = "Some other title 6"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 7"
+title = "Some other title 7"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 8"
+title = "Some other title 8"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 9"
+title = "Some other title 9"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 10"
+title = "Some other title 10"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 11"
+title = "Some other title 11"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 12"
+title = "Some other title 12"
+info = "Info"
+# contact =
+
+[[video]]
+file = "video1.mp4"
+artist = "Creator 13"
+title = "Some other title 13"
+info = "Info"
+# contact =
