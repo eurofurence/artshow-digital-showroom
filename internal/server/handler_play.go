@@ -48,10 +48,6 @@ func (s *Server) playVideo(video *config.Video) error {
 	s.playbackStatus.StartTrack(video.Title)
 	s.PublishStatus()
 
-	if err := s.logger.Append(video.Title, video.Duration, "started"); err != nil {
-		log.Printf("error logging to csv %v", err)
-	}
-
 	return s.sendCommandsToMpv(
 		// run once
 		[]any{"set_property", "loop-file", "no"},
@@ -68,25 +64,6 @@ func (s *Server) startStandby() error {
 	// do not set idle again
 	if s.playbackStatus.IsIdle() {
 		return nil
-	}
-
-	snapshot := s.playbackStatus.Snapshot()
-	if snapshot.Title != "" {
-		// Finished videos reach "InCredits = true". Earlier aborts still have "InCredits = false".
-		var status string
-		if snapshot.InCredits {
-			status = "finished"
-		} else {
-			status = "aborted"
-		}
-
-		if err := s.logger.Append(
-			snapshot.Title,
-			formatDuration(snapshot.Duration),
-			status,
-		); err != nil {
-			log.Printf("error logging to csv %v", err)
-		}
 	}
 
 	s.playbackStatus.SetIdle()

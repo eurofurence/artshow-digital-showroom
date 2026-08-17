@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/eurofurence/artshow-digital-showroom/internal/config"
-	"github.com/eurofurence/artshow-digital-showroom/internal/stats"
 	"github.com/eurofurence/artshow-digital-showroom/web"
 )
 
@@ -28,8 +27,6 @@ type Server struct {
 	playbackStatus *PlaybackStatus
 	clients        map[chan string]struct{}
 	clientsMu      sync.Mutex
-
-	logger *stats.Logger
 
 	httpServer *http.Server
 
@@ -54,7 +51,7 @@ func NewServer(cfg *config.Config, ctx context.Context) (*Server, error) {
 		templates:      templates,
 		cfg:            cfg,
 		videos:         make(map[string]*config.Video, len(cfg.Videos)),
-		playbackStatus: &PlaybackStatus{},
+		playbackStatus: NewPlaybackStatus(),
 		clients:        make(map[chan string]struct{}),
 		serverCtx:      serverCtx,
 		serverCancel:   serverCancel,
@@ -62,14 +59,6 @@ func NewServer(cfg *config.Config, ctx context.Context) (*Server, error) {
 
 	s.processConfig()
 	cfg.Print("Processed config")
-
-	timestamp := time.Now().Format("2006-01-02_15-04-05")
-	logger, err := stats.Open("log_" + timestamp + ".csv")
-	if err != nil {
-		return nil, err
-	}
-
-	s.logger = logger
 
 	if err := s.setupMpv(); err != nil {
 		log.Printf("Error setting up mpv. Is mpv running?\n%v", err)
@@ -112,9 +101,7 @@ func (s *Server) Close() error {
 	// Tell long-lived handlers, such as SSE, to terminate.
 	s.serverCancel()
 
-	if err := s.logger.Close(); err != nil {
-		log.Printf("csv writer failed to close %v", err)
-	}
+	s.playbackStatus.Close()
 
 	shutdownCtx, cancel := context.WithTimeout(
 		context.Background(),
