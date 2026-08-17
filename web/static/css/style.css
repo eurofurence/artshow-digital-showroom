@@ -252,6 +252,7 @@ main::before {
 
 .description {
     white-space: pre-line;
+    text-wrap:balance;
 }
 
 /************** STATUS BAR **************/
@@ -416,6 +417,7 @@ main::before {
         font-weight: var(--heading-weight);
         font-size: var(--heading-size);
         overflow-wrap: break-word;
+        text-wrap: balance;
     }
 
     .qrcode img {
@@ -446,6 +448,7 @@ main::before {
 
     .author-details .qrcode {
         grid-column: 1;
+        position: relative; /*to help with the alignment of the absolute-positioned qr coloring overlay*/
     }
 
     .author-details .author-strings {
