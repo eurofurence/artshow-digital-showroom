@@ -63,7 +63,8 @@ func NewServer(cfg *config.Config, ctx context.Context) (*Server, error) {
 	s.processConfig()
 	cfg.Print("Processed config")
 
-	logger, err := stats.Open("log.csv")
+	timestamp := time.Now().Format("2006-01-02_15-04-05")
+	logger, err := stats.Open("log_" + timestamp + ".csv")
 	if err != nil {
 		return nil, err
 	}
