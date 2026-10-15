@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Ensure the port matches the config in Media/config.toml.
+# Select the correct entry by commenting / uncommenting.
+
+firefox --kiosk --private-window 'http://localhost:8080'
+# chromium --kiosk --noerrdialogs --disable-infobars 'http://localhost:8080'

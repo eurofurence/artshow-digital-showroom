@@ -1,0 +1,28 @@
+{{define "base"}}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
+    <title>{{block "title" .}}Digital Showroom Media Interface{{end}}</title>
+
+    <script src="/static/third_party/htmx/htmx@2.0.10.min.js"></script>
+    <script src="/static/third_party/htmx/htmx-ext-sse@2.2.4.min.js"></script>
+    <script src="/static/js/dialog.js" defer></script>
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png" />
+  </head>
+  <body class="horizontal-scroll">
+    {{template "header" .}}
+    <main>
+      {{block "content" .}}{{end}}
+      <div hx-ext="sse" sse-connect="/mpvStatus" sse-swap="message" class="statusbar">
+        Connection to mpv missing. Please start mpv before go server.
+      </div>
+    </main>
+    <dialog id="media-dialog"></dialog>
+  </body>
+  <script>document.addEventListener("contextmenu", (e) => {e.preventDefault()});</script>
+</html>
+{{end}}
